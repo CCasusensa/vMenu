@@ -17,8 +17,8 @@ namespace vMenuClient
     {
         // Variables
         private Menu menu;
-        private Menu selectedVehicleMenu = new Menu("Manage Vehicle", "Manage this saved vehicle.");
-        private Menu unavailableVehiclesMenu = new Menu("Missing Vehicles", "Unavailable Saved Vehicles");
+        private Menu selectedVehicleMenu = new Menu("管理載具", "管理此保存的載具.");
+        private Menu unavailableVehiclesMenu = new Menu("載具遺失", "無法保存的載具");
         private Dictionary<string, VehicleInfo> savedVehicles = new Dictionary<string, VehicleInfo>();
         private List<Menu> subMenus = new List<Menu>();
         private Dictionary<MenuItem, KeyValuePair<string, VehicleInfo>> svMenuItems = new Dictionary<MenuItem, KeyValuePair<string, VehicleInfo>>();
@@ -31,12 +31,12 @@ namespace vMenuClient
         /// </summary>
         private void CreateMenu()
         {
-            string menuTitle = "Saved Vehicles";
+            string menuTitle = "儲存載具";
             #region Create menus and submenus
             // Create the menu.
-            menu = new Menu(menuTitle, "Manage Saved Vehicles");
+            menu = new Menu(menuTitle, "管理已保存的載具");
 
-            MenuItem saveVehicle = new MenuItem("Save Current Vehicle", "Save the vehicle you are currently sitting in.");
+            MenuItem saveVehicle = new MenuItem("保存當前載具", "保存您當前坐入之載具.");
             menu.AddMenuItem(saveVehicle);
             saveVehicle.LeftIcon = MenuItem.Icon.CAR;
 
@@ -50,16 +50,16 @@ namespace vMenuClient
                     }
                     else
                     {
-                        Notify.Error("You are currently not in any vehicle. Please enter a vehicle before trying to save it.");
+                        Notify.Error("您目前不在任何車輛中。 請先輸入車輛再嘗試保存.");
                     }
                 }
             };
 
             for (int i = 0; i < 22; i++)
             {
-                Menu categoryMenu = new Menu("Saved Vehicles", GetLabelText($"VEH_CLASS_{i}"));
+                Menu categoryMenu = new Menu("儲存車輛", GetLabelText($"VEH_CLASS_{i}"));
 
-                MenuItem categoryButton = new MenuItem(GetLabelText($"VEH_CLASS_{i}"), $"All saved vehicles from the {(GetLabelText($"VEH_CLASS_{i}"))} category.");
+                MenuItem categoryButton = new MenuItem(GetLabelText($"VEH_CLASS_{i}"), $"從中保存的所有車輛 {(GetLabelText($"VEH_CLASS_{i}"))} 類型.");
                 subMenus.Add(categoryMenu);
                 MenuController.AddSubmenu(menu, categoryMenu);
                 menu.AddMenuItem(categoryButton);
@@ -77,7 +77,7 @@ namespace vMenuClient
                 };
             }
 
-            MenuItem unavailableModels = new MenuItem("Unavailable Saved Vehicles", "These vehicles are currently unavailable because the models are not present in the game. These vehicles are most likely not being streamed from the server.")
+            MenuItem unavailableModels = new MenuItem("車輛遺失", "在遊戲文件中找不到該模組。可能原因這是一個附加載具，並且伺服器當前未對其進行處理.")
             {
                 Label = "→→→"
             };
@@ -88,10 +88,10 @@ namespace vMenuClient
 
 
             MenuController.AddMenu(selectedVehicleMenu);
-            MenuItem spawnVehicle = new MenuItem("Spawn Vehicle", "Spawn this saved vehicle.");
-            MenuItem renameVehicle = new MenuItem("Rename Vehicle", "Rename your saved vehicle.");
-            MenuItem replaceVehicle = new MenuItem("~r~Replace Vehicle", "Your saved vehicle will be replaced with the vehicle you are currently sitting in. ~r~Warning: this can NOT be undone!");
-            MenuItem deleteVehicle = new MenuItem("~r~Delete Vehicle", "~r~This will delete your saved vehicle. Warning: this can NOT be undone!");
+		    MenuItem spawnVehicle = new MenuItem("生成車輛", "生成此已保存的車輛.");
+	    	MenuItem renameVehicle = new MenuItem("重命名車輛", "重命名您保存的車輛.");
+	    	MenuItem replaceVehicle = new MenuItem("~r~更換車輛", "您保存的車輛將被您當前所坐的車輛代替。~r~警告：這無法撤消！");
+	    	MenuItem deleteVehicle = new MenuItem("~r~刪除車輛", "~r~這將刪除您保存的車輛。警告：這不能撤消！");
             selectedVehicleMenu.AddMenuItem(spawnVehicle);
             selectedVehicleMenu.AddMenuItem(renameVehicle);
             selectedVehicleMenu.AddMenuItem(replaceVehicle);
@@ -124,7 +124,7 @@ namespace vMenuClient
                 }
                 else if (item == renameVehicle)
                 {
-                    string newName = await GetUserInput(windowTitle: "Enter a new name for this vehicle.", maxInputLength: 30);
+                    string newName = await GetUserInput(windowTitle: "輸入此車輛的新名稱.", maxInputLength: 30);
                     if (string.IsNullOrEmpty(newName))
                     {
                         Notify.Error(CommonErrors.InvalidInput);
@@ -138,14 +138,14 @@ namespace vMenuClient
                             {
                                 await BaseScript.Delay(0);
                             }
-                            Notify.Success("Your vehicle has successfully been renamed.");
+                            Notify.Success("您的車輛已成功重命名.");
                             UpdateMenuAvailableCategories();
                             selectedVehicleMenu.GoBack();
                             currentlySelectedVehicle = new KeyValuePair<string, VehicleInfo>(); // clear the old info
                         }
                         else
                         {
-                            Notify.Error("This name is already in use or something unknown failed. Contact the server owner if you believe something is wrong.");
+                            Notify.Error("此名稱已被使用或未知失敗。 如果您認為有問題，請與服務器所有者聯繫。");
                         }
                     }
                 }
@@ -155,11 +155,11 @@ namespace vMenuClient
                     {
                         SaveVehicle(currentlySelectedVehicle.Key.Substring(4));
                         selectedVehicleMenu.GoBack();
-                        Notify.Success("Your saved vehicle has been replaced with your current vehicle.");
+                        Notify.Success("您保存的車輛已替換為當前車輛.");
                     }
                     else
                     {
-                        Notify.Error("You need to be in a vehicle before you can relplace your old vehicle.");
+                        Notify.Error("您需要先上車才能更換舊車.");
                     }
                 }
                 else if (item == deleteVehicle)
@@ -167,8 +167,8 @@ namespace vMenuClient
                     if (deleteButtonPressedCount == 0)
                     {
                         deleteButtonPressedCount = 1;
-                        item.Label = "Press again to confirm.";
-                        Notify.Alert("Are you sure you want to delete this vehicle? Press the button again to confirm.");
+                        item.Label = "再按一次確認.";
+                        Notify.Alert("您確定要刪除這輛車嗎？ 再按一次按鈕確認.");
                     }
                     else
                     {
@@ -177,7 +177,7 @@ namespace vMenuClient
                         DeleteResourceKvp(currentlySelectedVehicle.Key);
                         UpdateMenuAvailableCategories();
                         selectedVehicleMenu.GoBack();
-                        Notify.Success("Your saved vehicle has been deleted.");
+                        Notify.Success("您保存的車輛已被刪除.");
                     }
                 }
                 if (item != deleteVehicle) // if any other button is pressed, restore the delete vehicle button pressed count.
@@ -186,7 +186,7 @@ namespace vMenuClient
                     deleteVehicle.Label = "";
                 }
             };
-            unavailableVehiclesMenu.InstructionalButtons.Add(Control.FrontendDelete, "Delete Vehicle!");
+            unavailableVehiclesMenu.InstructionalButtons.Add(Control.FrontendDelete, "刪除載具!");
 
             unavailableVehiclesMenu.ButtonPressHandlers.Add(new Menu.ButtonPressHandler(Control.FrontendDelete, Menu.ControlPressCheckType.JUST_RELEASED, new Action<Menu, Control>((m, c) =>
             {
@@ -198,7 +198,7 @@ namespace vMenuClient
                         MenuItem item = m.GetMenuItems().Find(i => i.Index == index);
                         if (item != null && (item.ItemData is KeyValuePair<string, VehicleInfo> sd))
                         {
-                            if (item.Label == "~r~Are you sure?")
+                            if (item.Label == "~r~您確定嗎?")
                             {
                                 Log("Unavailable saved vehicle deleted, data: " + JsonConvert.SerializeObject(sd));
                                 DeleteResourceKvp(sd.Key);
@@ -207,22 +207,22 @@ namespace vMenuClient
                             }
                             else
                             {
-                                item.Label = "~r~Are you sure?";
+                                item.Label = "~r~您確定嗎?";
                             }
                         }
                         else
                         {
-                            Notify.Error("Somehow this vehicle could not be found.");
+                            Notify.Error("不知何故找不到這輛車.");
                         }
                     }
                     else
                     {
-                        Notify.Error("You somehow managed to trigger deletion of a menu item that doesn't exist, how...?");
+                        Notify.Error("您以某種方式設法觸發了一個不存在的菜單項的刪除...?");
                     }
                 }
                 else
                 {
-                    Notify.Error("There are currrently no unavailable vehicles to delete!");
+                    Notify.Error("當前沒有可刪除的車輛!");
                 }
             }), true));
 
@@ -252,7 +252,7 @@ namespace vMenuClient
         {
             if (!svMenuItems.ContainsKey(selectedItem))
             {
-                Notify.Error("In some very strange way, you've managed to select a button, that does not exist according to this list. So your vehicle could not be loaded. :( Maybe your save files are broken?");
+                Notify.Error("以某種非常奇怪的方式，您設法選擇了一個按鈕，該按鈕根據此列表不存在。 因此您的車輛無法裝載. :( 也許您的保存文件已損壞?");
                 return false;
             }
             var vehInfo = svMenuItems[selectedItem];
@@ -283,14 +283,14 @@ namespace vMenuClient
                     GetMenu().GetMenuItems()[i].RightIcon = MenuItem.Icon.NONE;
                     GetMenu().GetMenuItems()[i].Label = "→→→";
                     GetMenu().GetMenuItems()[i].Enabled = true;
-                    GetMenu().GetMenuItems()[i].Description = $"All saved vehicles from the {GetMenu().GetMenuItems()[i].Text} category.";
+                    GetMenu().GetMenuItems()[i].Description = $"從中保存的所有車輛 {GetMenu().GetMenuItems()[i].Text} 類別.";
                 }
                 else
                 {
                     GetMenu().GetMenuItems()[i].Label = "";
                     GetMenu().GetMenuItems()[i].RightIcon = MenuItem.Icon.LOCK;
                     GetMenu().GetMenuItems()[i].Enabled = false;
-                    GetMenu().GetMenuItems()[i].Description = $"You do not have any saved vehicles that belong to the {GetMenu().GetMenuItems()[i].Text} category.";
+                    GetMenu().GetMenuItems()[i].Description = $"您沒有任何屬於的已保存車輛 {GetMenu().GetMenuItems()[i].Text} 類別.";
                 }
             }
 
@@ -326,7 +326,7 @@ namespace vMenuClient
                     int vclass = GetVehicleClassFromName(sv.Value.model);
                     Menu menu = subMenus[vclass];
 
-                    MenuItem savedVehicleBtn = new MenuItem(sv.Key.Substring(4), $"Manage this saved vehicle.")
+                    MenuItem savedVehicleBtn = new MenuItem(sv.Key.Substring(4), $"管理此保存的車輛.")
                     {
                         Label = $"({sv.Value.name}) →→→"
                     };
@@ -336,7 +336,7 @@ namespace vMenuClient
                 }
                 else
                 {
-                    MenuItem missingVehItem = new MenuItem(sv.Key.Substring(4), "This model could not be found in the game files. Most likely because this is an addon vehicle and it's currently not streamed by the server.")
+                    MenuItem missingVehItem = new MenuItem(sv.Key.Substring(4), "在遊戲文件中找不到該模組。可能原因這是一個附加載具，並且伺服器當前未對其進行處理.")
                     {
                         Label = "(" + sv.Value.name + ")",
                         Enabled = false,

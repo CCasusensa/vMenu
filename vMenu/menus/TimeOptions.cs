@@ -25,39 +25,39 @@ namespace vMenuClient
         private void CreateMenu()
         {
             // Create the menu.
-            menu = new Menu(Game.Player.Name, "Time Options");
+            menu = new Menu(Game.Player.Name, "時間選項");
 
             // Create all menu items.
-            freezeTimeToggle = new MenuItem("Freeze/Unfreeze Time", "Enable or disable time freezing.");
-            MenuItem earlymorning = new MenuItem("Early Morning", "Set the time to 06:00.")
+            freezeTimeToggle = new MenuItem("凍結/解凍 時間", "啟用/禁用 凍結時間");
+            MenuItem earlymorning = new MenuItem("清晨6點", "將時間設定為清晨 06:00.")
             {
                 Label = "06:00"
             };
-            MenuItem morning = new MenuItem("Morning", "Set the time to 09:00.")
+            MenuItem morning = new MenuItem("早晨", "將時間設定為早上 09:00.")
             {
                 Label = "09:00"
             };
-            MenuItem noon = new MenuItem("Noon", "Set the time to 12:00.")
+            MenuItem noon = new MenuItem("中午", "將時間設定為中午 12:00.")
             {
                 Label = "12:00"
             };
-            MenuItem earlyafternoon = new MenuItem("Early Afternoon", "Set the time to 15:00.")
+            MenuItem earlyafternoon = new MenuItem("下午", "將時間設定為下午 15:00.")
             {
                 Label = "15:00"
             };
-            MenuItem afternoon = new MenuItem("Afternoon", "Set the time to 18:00.")
+            MenuItem afternoon = new MenuItem("晚上", "將時間設定為晚上 18:00.")
             {
                 Label = "18:00"
             };
-            MenuItem evening = new MenuItem("Evening", "Set the time to 21:00.")
+            MenuItem evening = new MenuItem("晚間", "將時間設定為晚間 21:00.")
             {
                 Label = "21:00"
             };
-            MenuItem midnight = new MenuItem("Midnight", "Set the time to 00:00.")
+            MenuItem midnight = new MenuItem("午夜", "將時間設定為午夜 00:00.")
             {
                 Label = "00:00"
             };
-            MenuItem night = new MenuItem("Night", "Set the time to 03:00.")
+            MenuItem night = new MenuItem("凌晨", "將時間設定為凌晨 03:00.")
             {
                 Label = "03:00"
             };
@@ -72,8 +72,8 @@ namespace vMenuClient
                 }
                 minutes.Add(i.ToString());
             }
-            MenuListItem manualHour = new MenuListItem("Set Custom Hour", hours, 0);
-            MenuListItem manualMinute = new MenuListItem("Set Custom Minute", minutes, 0);
+            MenuListItem manualHour = new MenuListItem("自訂小時", hours, 0);
+            MenuListItem manualMinute = new MenuListItem("自訂分鐘", minutes, 0);
 
             // Add all menu items to the menu.
             if (IsAllowed(Permission.TOFreezeTime))
@@ -100,7 +100,7 @@ namespace vMenuClient
                 // If it's the freeze time button.
                 if (item == freezeTimeToggle)
                 {
-                    Subtitle.Info($"Time will now {(EventManager.freezeTime ? "~y~continue" : "~o~freeze")}~s~.", prefix: "Info:");
+                    Subtitle.Info($"目前時間已經 {(EventManager.freezeTime ? "~y~繼續" : "~o~凍結")}~s~.", prefix: "Info:");
                     UpdateServerTime(EventManager.currentHours, EventManager.currentMinutes, !EventManager.freezeTime);
                 }
                 else
@@ -119,7 +119,7 @@ namespace vMenuClient
                     }
 
                     var newMinute = 0;
-                    Subtitle.Info($"Time set to ~y~{(newHour < 10 ? $"0{newHour.ToString()}" : newHour.ToString())}~s~:~y~" +
+                    Subtitle.Info($"目前時間已經設定為 ~y~{(newHour < 10 ? $"0{newHour.ToString()}" : newHour.ToString())}~s~:~y~" +
                         $"{(newMinute < 10 ? $"0{newMinute.ToString()}" : newMinute.ToString())}~s~.", prefix: "Info:");
                     UpdateServerTime(newHour, newMinute, EventManager.freezeTime);
                 }
@@ -139,7 +139,7 @@ namespace vMenuClient
                     newMinute = item.ListIndex;
                 }
 
-                Subtitle.Info($"Time set to ~y~{(newHour < 10 ? $"0{newHour.ToString()}" : newHour.ToString())}~s~:~y~" +
+                Subtitle.Info($"目前時間已經設定為 ~y~{(newHour < 10 ? $"0{newHour.ToString()}" : newHour.ToString())}~s~:~y~" +
                         $"{(newMinute < 10 ? $"0{newMinute.ToString()}" : newMinute.ToString())}~s~.", prefix: "Info:");
                 UpdateServerTime(newHour, newMinute, EventManager.freezeTime);
             };

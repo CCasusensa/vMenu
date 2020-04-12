@@ -30,7 +30,7 @@ namespace vMenuClient
         public bool PlayerIsIgnored { get; private set; } = UserDefaults.EveryoneIgnorePlayer;
         public bool PlayerStayInVehicle { get; private set; } = UserDefaults.PlayerStayInVehicle;
         public bool PlayerFrozen { get; private set; } = false;
-        private Menu CustomDrivingStyleMenu = new Menu("Driving Style", "Custom Driving Style");
+        private Menu CustomDrivingStyleMenu = new Menu("駕駛風格", "自訂駕駛風格");
 
         /// <summary>
         /// Creates the menu.
@@ -39,49 +39,49 @@ namespace vMenuClient
         {
             #region create menu and menu items
             // Create the menu.
-            menu = new Menu(Game.Player.Name, "Player Options");
+            menu = new Menu(Game.Player.Name, "玩家選單");
 
             // Create all checkboxes.
-            MenuCheckboxItem playerGodModeCheckbox = new MenuCheckboxItem("Godmode", "Makes you invincible.", PlayerGodMode);
-            MenuCheckboxItem invisibleCheckbox = new MenuCheckboxItem("Invisible", "Makes you invisible to yourself and others.", PlayerInvisible);
-            MenuCheckboxItem unlimitedStaminaCheckbox = new MenuCheckboxItem("Unlimited Stamina", "Allows you to run forever without slowing down or taking damage.", PlayerStamina);
-            MenuCheckboxItem fastRunCheckbox = new MenuCheckboxItem("Fast Run", "Get ~g~Snail~s~ powers and run very fast!", PlayerFastRun);
+            MenuCheckboxItem playerGodModeCheckbox = new MenuCheckboxItem("無敵", "使您變無敵.", PlayerGodMode);
+            MenuCheckboxItem invisibleCheckbox = new MenuCheckboxItem("隱身", "使您隱身，其他人看不見.", PlayerInvisible);
+            MenuCheckboxItem unlimitedStaminaCheckbox = new MenuCheckboxItem("無限體力", "使您可以永遠的跑步，而不會疲勞造成減速.", PlayerStamina);
+            MenuCheckboxItem fastRunCheckbox = new MenuCheckboxItem("快速跑步", "獲得 ~g~超級~s~ 的力量快速游泳!", PlayerFastRun);
             SetRunSprintMultiplierForPlayer(Game.Player.Handle, (PlayerFastRun && IsAllowed(Permission.POFastRun) ? 1.49f : 1f));
-            MenuCheckboxItem fastSwimCheckbox = new MenuCheckboxItem("Fast Swim", "Get ~g~Snail 2.0~s~ powers and swim super fast!", PlayerFastSwim);
+            MenuCheckboxItem fastSwimCheckbox = new MenuCheckboxItem("快速游泳", "獲得 ~g~超級 2.0~s~ 的游泳速度!", PlayerFastSwim);
             SetSwimMultiplierForPlayer(Game.Player.Handle, (PlayerFastSwim && IsAllowed(Permission.POFastSwim) ? 1.49f : 1f));
-            MenuCheckboxItem superJumpCheckbox = new MenuCheckboxItem("Super Jump", "Get ~g~Snail 3.0~s~ powers and jump like a champ!", PlayerSuperJump);
-            MenuCheckboxItem noRagdollCheckbox = new MenuCheckboxItem("No Ragdoll", "Disables player ragdoll, makes you not fall off your bike anymore.", PlayerNoRagdoll);
-            MenuCheckboxItem neverWantedCheckbox = new MenuCheckboxItem("Never Wanted", "Disables all wanted levels.", PlayerNeverWanted);
-            MenuCheckboxItem everyoneIgnoresPlayerCheckbox = new MenuCheckboxItem("Everyone Ignore Player", "Everyone will leave you alone.", PlayerIsIgnored);
-            MenuCheckboxItem playerStayInVehicleCheckbox = new MenuCheckboxItem("Stay In Vehicle", "When this is enabled, NPCs will not be able to drag you out of your vehicle if they get angry at you.", PlayerStayInVehicle);
-            MenuCheckboxItem playerFrozenCheckbox = new MenuCheckboxItem("Freeze Player", "Freezes your current location.", PlayerFrozen);
+            MenuCheckboxItem superJumpCheckbox = new MenuCheckboxItem("超級跳躍", "獲得 ~g~超級 3.0~s~ 的力量跳躍!", PlayerSuperJump);
+            MenuCheckboxItem noRagdollCheckbox = new MenuCheckboxItem("停止摔車", "發生車禍時不會再摔車.", PlayerNoRagdoll);
+            MenuCheckboxItem neverWantedCheckbox = new MenuCheckboxItem("永不通輯", "永遠都不會有通緝.", PlayerNeverWanted);
+            MenuCheckboxItem everyoneIgnoresPlayerCheckbox = new MenuCheckboxItem("無視所有玩家", "所有人遠離此玩家.", PlayerIsIgnored);
+            MenuCheckboxItem playerStayInVehicleCheckbox = new MenuCheckboxItem("待在車內", "啟用功能後，如果NPC對您發火，無法將您拖出車外.", PlayerStayInVehicle);
+            MenuCheckboxItem playerFrozenCheckbox = new MenuCheckboxItem("凍結玩家", "把該玩家定住在原地.", PlayerFrozen);
 
             // Wanted level options
-            List<string> wantedLevelList = new List<string> { "No Wanted Level", "1", "2", "3", "4", "5" };
-            MenuListItem setWantedLevel = new MenuListItem("Set Wanted Level", wantedLevelList, GetPlayerWantedLevel(Game.Player.Handle), "Set your wanted level by selecting a value, and pressing enter.");
-            MenuListItem setArmorItem = new MenuListItem("Set Armor Type", new List<string> { "No Armor", GetLabelText("WT_BA_0"), GetLabelText("WT_BA_1"), GetLabelText("WT_BA_2"), GetLabelText("WT_BA_3"), GetLabelText("WT_BA_4"), }, 0, "Set the armor level/type for your player.");
+            List<string> wantedLevelList = new List<string> { "0", "1", "2", "3", "4", "5" };
+            MenuListItem setWantedLevel = new MenuListItem("設置通緝等級", wantedLevelList, GetPlayerWantedLevel(Game.Player.Handle), "選擇一個值來設置目前通緝等輯");
+            MenuListItem setArmorItem = new MenuListItem("設置護甲", new List<string> { "無護甲", GetLabelText("WT_BA_0"), GetLabelText("WT_BA_1"), GetLabelText("WT_BA_2"), GetLabelText("WT_BA_3"), GetLabelText("WT_BA_4"), }, 0, "Set the armor level/type for your player.");
 
-            MenuItem healPlayerBtn = new MenuItem("Heal Player", "Give the player max health.");
-            MenuItem cleanPlayerBtn = new MenuItem("Clean Player Clothes", "Clean your player clothes.");
-            MenuItem dryPlayerBtn = new MenuItem("Dry Player Clothes", "Make your player clothes dry.");
-            MenuItem wetPlayerBtn = new MenuItem("Wet Player Clothes", "Make your player clothes wet.");
-            MenuItem suicidePlayerBtn = new MenuItem("~r~Commit Suicide", "Kill yourself by taking the pill. Or by using a pistol if you have one.");
+            MenuItem healPlayerBtn = new MenuItem("治癒玩家", "給予玩家最大生命值.");
+            MenuItem cleanPlayerBtn = new MenuItem("清潔衣服", "清潔衣服.");
+            MenuItem dryPlayerBtn = new MenuItem("烘乾衣服", "烘乾衣服.");
+            MenuItem wetPlayerBtn = new MenuItem("撥濕衣服", "撥濕衣服.");
+            MenuItem suicidePlayerBtn = new MenuItem("~r~自殺", "服用藥物殺死自己，或者如過手上有手槍將會開槍自盡.");
 
-            Menu vehicleAutoPilot = new Menu("Auto Pilot", "Vehicle auto pilot options.");
+            Menu vehicleAutoPilot = new Menu("自動駕駛", "管理載具自動駕駛選項.");
 
             MenuController.AddSubmenu(menu, vehicleAutoPilot);
 
-            MenuItem vehicleAutoPilotBtn = new MenuItem("Vehicle Auto Pilot Menu", "Manage vehicle auto pilot options.")
+            MenuItem vehicleAutoPilotBtn = new MenuItem("自動駕駛選單", "管理載具自動駕駛選項.")
             {
                 Label = "→→→"
             };
 
-            List<string> drivingStyles = new List<string>() { "Normal", "Rushed", "Avoid highways", "Drive in reverse", "Custom" };
-            MenuListItem drivingStyle = new MenuListItem("Driving Style", drivingStyles, 0, "Set the driving style that is used for the Drive to Waypoint and Drive Around Randomly functions.");
+            List<string> drivingStyles = new List<string>() { "正常", "衝刺", "避開高速公路", "倒車", "自訂" };
+            MenuListItem drivingStyle = new MenuListItem("駕駛風格", drivingStyles, 0, "將用於'駕駛' 的駕駛方式設置為'導航點'和'隨機駕駛'");
 
             // Scenarios (list can be found in the PedScenarios class)
-            MenuListItem playerScenarios = new MenuListItem("Player Scenarios", PedScenarios.Scenarios, 0, "Select a scenario and hit enter to start it. Selecting another scenario will override the current scenario. If you're already playing the selected scenario, selecting it again will stop the scenario.");
-            MenuItem stopScenario = new MenuItem("Force Stop Scenario", "This will force a playing scenario to stop immediately, without waiting for it to finish it's 'stopping' animation.");
+            MenuListItem playerScenarios = new MenuListItem("玩家場景", PedScenarios.Scenarios, 0, "選擇一個場景，然後按Enter鍵以啟動它。 選擇另一個方案將覆蓋當前方案。 如果您已經在玩家選定的場景，再次選擇它將會停止該場景.");
+            MenuItem stopScenario = new MenuItem("強制停止場景", "這將迫使正在播放的場景立即停止，而無需等待其完成“停止”動畫.");
             #endregion
 
             #region add items to menu based on permissions
@@ -160,58 +160,58 @@ namespace vMenuClient
 
                 vehicleAutoPilot.AddMenuItem(drivingStyle);
 
-                MenuItem startDrivingWaypoint = new MenuItem("Drive To Waypoint", "Make your player ped drive your vehicle to your waypoint.");
-                MenuItem startDrivingRandomly = new MenuItem("Drive Around Randomly", "Make your player ped drive your vehicle randomly around the map.");
-                MenuItem stopDriving = new MenuItem("Stop Driving", "The player ped will find a suitable place to stop the vehicle. The task will be stopped once the vehicle has reached the suitable stop location.");
-                MenuItem forceStopDriving = new MenuItem("Force Stop Driving", "This will stop the driving task immediately without finding a suitable place to stop.");
-                MenuItem customDrivingStyle = new MenuItem("Custom Driving Style", "Select a custom driving style. Make sure to also enable it by selecting the 'Custom' driving style in the driving styles list.") { Label = "→→→" };
+                MenuItem startDrivingWaypoint = new MenuItem("開至導航點", "開到地圖上的標記點.");
+                MenuItem startDrivingRandomly = new MenuItem("隨機行駛", "在地圖上隨便亂開.");
+                MenuItem stopDriving = new MenuItem("停止行駛", "會先找到一個停靠點在停止行使.");
+                MenuItem forceStopDriving = new MenuItem("強制停止行駛", "立即停在駕駛");
+                MenuItem customDrivingStyle = new MenuItem("自訂駕駛風格", "選擇自訂駕駛風格.") { Label = "→→→" };
                 MenuController.AddSubmenu(vehicleAutoPilot, CustomDrivingStyleMenu);
                 vehicleAutoPilot.AddMenuItem(customDrivingStyle);
                 MenuController.BindMenuItem(vehicleAutoPilot, CustomDrivingStyleMenu, customDrivingStyle);
                 Dictionary<int, string> knownNames = new Dictionary<int, string>()
                 {
-                    { 0, "Stop before vehicles" },
-                    { 1, "Stop before peds" },
-                    { 2, "Avoid vehicles" },
-                    { 3, "Avoid empty vehicles" },
-                    { 4, "Avoid peds" },
-                    { 5, "Avoid objects" },
+                    { 0, "在車輛前停車" },
+                    { 1, "在人之前停車" },
+                    { 2, "避開車輛" },
+                    { 3, "避開空車" },
+                    { 4, "避開人" },
+                    { 5, "避開物體" },
 
-                    { 7, "Stop at traffic lights" },
-                    { 8, "Use blinkers" },
-                    { 9, "Allow going wrong way" },
-                    { 10, "Go in reverse gear" },
+                    { 7, "在紅綠燈處停下" },
+                    { 8, "使用紅綠燈" },
+                    { 9, "允行開錯路" },
+                    { 10, "倒檔" },
 
-                    { 18, "Use shortest path" },
+                    { 18, "使用最短程的捷徑" },
 
-                    { 22, "Ignore roads" },
+                    { 22, "無視道路" },
 
-                    { 24, "Ignore all pathing" },
+                    { 24, "無視所有捷徑" },
 
-                    { 29, "Avoid highways (if possible)" },
+                    { 29, "避免行駛高速公路 (如果可能的話)" },
                 };
                 for (var i = 0; i < 31; i++)
                 {
-                    string name = "~r~Unknown Flag";
+                    string name = "~r~未知選項";
                     if (knownNames.ContainsKey(i))
                     {
                         name = knownNames[i];
                     }
-                    MenuCheckboxItem checkbox = new MenuCheckboxItem(name, "Toggle this driving style flag.", false);
+                    MenuCheckboxItem checkbox = new MenuCheckboxItem(name, "開關駕駛風格選項", false);
                     CustomDrivingStyleMenu.AddMenuItem(checkbox);
                 }
                 CustomDrivingStyleMenu.OnCheckboxChange += (sender, item, index, _checked) =>
                 {
                     int style = GetStyleFromIndex(drivingStyle.ListIndex);
-                    CustomDrivingStyleMenu.MenuSubtitle = $"custom style: {style}";
+                    CustomDrivingStyleMenu.MenuSubtitle = $"自訂駕駛風格: {style}";
                     if (drivingStyle.ListIndex == 4)
                     {
-                        Notify.Custom("Driving style updated.");
+                        Notify.Custom("駕駛風格已更新");
                         SetDriveTaskDrivingStyle(Game.PlayerPed.Handle, style);
                     }
                     else
                     {
-                        Notify.Custom("Driving style NOT updated because you haven't enabled the Custom driving style in the previous menu.");
+                        Notify.Custom("駕駛風格未更新，因為您沒有在上一個選單中啟用自定義駕駛風格.");
                     }
                 };
 
@@ -236,11 +236,11 @@ namespace vMenuClient
                                     {
                                         int style = GetStyleFromIndex(drivingStyle.ListIndex);
                                         DriveToWp(style);
-                                        Notify.Info("Your player ped is now driving the vehicle for you. You can cancel any time by pressing the Stop Driving button. The vehicle will stop when it has reached the destination.");
+                                        Notify.Info("您的司機現在正在為您駕駛車輛。 您可以隨時按“停止駕駛”按鈕取消。 車輛到達目的地後將停止.");
                                     }
                                     else
                                     {
-                                        Notify.Error("You need a waypoint before you can drive to it!");
+                                        Notify.Error("您需要先上車!");
                                     }
 
                                 }
@@ -248,22 +248,22 @@ namespace vMenuClient
                                 {
                                     int style = GetStyleFromIndex(drivingStyle.ListIndex);
                                     DriveWander(style);
-                                    Notify.Info("Your player ped is now driving the vehicle for you. You can cancel any time by pressing the Stop Driving button.");
+                                    Notify.Info("您的司機現在正在為您駕駛車輛。 您可以隨時按“停止駕駛”按鈕取消.");
                                 }
                             }
                             else
                             {
-                                Notify.Error("You must be the driver of this vehicle!");
+                                Notify.Error("您必須是這輛車的駕駛員!");
                             }
                         }
                         else
                         {
-                            Notify.Error("Your vehicle is broken or it does not exist!");
+                            Notify.Error("您的車輛損壞或不存在!");
                         }
                     }
                     else if (item != stopDriving && item != forceStopDriving)
                     {
-                        Notify.Error("You need to be in a vehicle first!");
+                        Notify.Error("您需要先上車!");
                     }
                     if (item == stopDriving)
                     {
@@ -275,7 +275,7 @@ namespace vMenuClient
                                 Vector3 outPos = new Vector3();
                                 if (GetNthClosestVehicleNode(Game.PlayerPed.Position.X, Game.PlayerPed.Position.Y, Game.PlayerPed.Position.Z, 3, ref outPos, 0, 0, 0))
                                 {
-                                    Notify.Info("The player ped will find a suitable place to park the car and will then stop driving. Please wait.");
+                                    Notify.Info("司機將找到合適的停車位，然後停止駕駛。 請耐心等待.");
                                     ClearPedTasks(Game.PlayerPed.Handle);
                                     TaskVehiclePark(Game.PlayerPed.Handle, veh.Handle, outPos.X, outPos.Y, outPos.Z, Game.PlayerPed.Heading, 3, 60f, true);
                                     while (Game.PlayerPed.Position.DistanceToSquared2D(outPos) > 3f)
@@ -284,20 +284,20 @@ namespace vMenuClient
                                     }
                                     SetVehicleHalt(veh.Handle, 3f, 0, false);
                                     ClearPedTasks(Game.PlayerPed.Handle);
-                                    Notify.Info("The player ped has stopped driving.");
+                                    Notify.Info("您的司機已經停止駕駛.");
                                 }
                             }
                         }
                         else
                         {
                             ClearPedTasks(Game.PlayerPed.Handle);
-                            Notify.Alert("Your ped is not in any vehicle.");
+                            Notify.Alert("您的司機不在任何車輛上.");
                         }
                     }
                     else if (item == forceStopDriving)
                     {
                         ClearPedTasks(Game.PlayerPed.Handle);
-                        Notify.Info("Driving task cancelled.");
+                        Notify.Info("駕駛任務已取消.");
                     }
                 };
 
@@ -307,7 +307,7 @@ namespace vMenuClient
                     {
                         int style = GetStyleFromIndex(listIndex);
                         SetDriveTaskDrivingStyle(Game.PlayerPed.Handle, style);
-                        Notify.Info($"Driving task style is now set to: ~r~{drivingStyles[listIndex]}~s~.");
+                        Notify.Info($"駕駛風格現在設置為： ~r~{drivingStyles[listIndex]}~s~.");
                     }
                 };
             }
@@ -442,22 +442,22 @@ namespace vMenuClient
                 else if (item == healPlayerBtn)
                 {
                     Game.PlayerPed.Health = Game.PlayerPed.MaxHealth;
-                    Notify.Success("Player healed.");
+                    Notify.Success("已經治療.");
                 }
                 else if (item == cleanPlayerBtn)
                 {
                     Game.PlayerPed.ClearBloodDamage();
-                    Notify.Success("Player clothes have been cleaned.");
+                    Notify.Success("衣服已經洗乾淨了.");
                 }
                 else if (item == dryPlayerBtn)
                 {
                     Game.PlayerPed.WetnessHeight = 0f;
-                    Notify.Success("Player is now dry.");
+                    Notify.Success("衣服已經烘乾了.");
                 }
                 else if (item == wetPlayerBtn)
                 {
                     Game.PlayerPed.WetnessHeight = 2f;
-                    Notify.Success("Player is now wet.");
+                    Notify.Success("衣服現在濕了.");
                 }
                 else if (item == suicidePlayerBtn)
                 {

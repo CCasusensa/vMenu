@@ -33,26 +33,26 @@ namespace vMenuClient
         private void CreateMenu()
         {
             // Menu
-            menu = new Menu(GetSafePlayerName(Game.Player.Name), "Personal Vehicle Options");
+            menu = new Menu(GetSafePlayerName(Game.Player.Name), "個人載具選項");
 
             // menu items
-            MenuItem setVehice = new MenuItem("Set Vehicle", "Sets your current vehicle as your personal vehicle. If you already have a personal vehicle set then this will override your selection.") { Label = "Current Vehicle: None" };
-            MenuItem toggleEngine = new MenuItem("Toggle Engine", "Toggles the engine on or off, even when you're not inside of the vehicle. This does not work if someone else is currently using your vehicle.");
-            MenuListItem toggleLights = new MenuListItem("Set Vehicle Lights", new List<string>() { "Force On", "Force Off", "Reset" }, 0, "This will enable or disable your vehicle headlights, the engine of your vehicle needs to be running for this to work.");
-            MenuItem kickAllPassengers = new MenuItem("Kick Passengers", "This will remove all passengers from your personal vehicle.");
+            MenuItem setVehice = new MenuItem("設定載具", "將您當前的載具設置為您的個人載具。 如果您已經有個人交通工具，那麼它將覆蓋您的選擇.") { Label = "目前載具: 無" };
+            MenuItem toggleEngine = new MenuItem("開關引擎", "即使您不在載具內，也可以打開或關閉引擎。 如果其他人當前正在使用您的載具，這將不起作用.");
+            MenuListItem toggleLights = new MenuListItem("開關載具燈", new List<string>() { "強制開啟", "強制關閉", "重置" }, 0, "這將啟用或禁用您的載具前燈(但是必須先發動載具才能使用此功能).");
+            MenuItem kickAllPassengers = new MenuItem("踢出乘客", "把所有乘車踢出載具外.");
             //MenuItem
-            MenuItem lockDoors = new MenuItem("Lock Vehicle Doors", "This will lock all your vehicle doors for all players. Anyone already inside will always be able to leave the vehicle, even if the doors are locked.");
-            MenuItem unlockDoors = new MenuItem("Unlock Vehicle Doors", "This will unlock all your vehicle doors for all players.");
-            MenuItem doorsMenuBtn = new MenuItem("Vehicle Doors", "Open, close, remove and restore vehicle doors here.")
+            MenuItem lockDoors = new MenuItem("鎖門", "鎖載具門，即使有鎖門，在載具裡面的人依然還是能夠離開車輛.");
+            MenuItem unlockDoors = new MenuItem("解鎖門", "解鎖載具的門.");
+            MenuItem doorsMenuBtn = new MenuItem("載具門", "編輯載具門")
             {
                 Label = "→→→"
             };
-            MenuItem soundHorn = new MenuItem("Sound Horn", "Sounds the horn of the vehicle.");
-            MenuItem toggleAlarm = new MenuItem("Toggle Alarm Sound", "Toggles the vehicle alarm sound on or off. This does not set an alarm. It only toggles the current sounding status of the alarm.");
-            MenuCheckboxItem enableBlip = new MenuCheckboxItem("Add Blip For Personal Vehicle", "Enables or disables the blip that gets added when you mark a vehicle as your personal vehicle.", EnableVehicleBlip) { Style = MenuCheckboxItem.CheckboxStyle.Cross };
-            MenuCheckboxItem exclusiveDriver = new MenuCheckboxItem("Exclusive Driver", "If enabled, then you will be the only one that can enter the drivers seat. Other players will not be able to drive the car. They can still be passengers.", false) { Style = MenuCheckboxItem.CheckboxStyle.Cross };
+            MenuItem soundHorn = new MenuItem("喇叭聲音", "發出載具的喇叭聲音");
+            MenuItem toggleAlarm = new MenuItem("開關警報器", "開關載具警報聲音。 這不會設置警報。 它僅發出當前警報聲音的狀態.");
+            MenuCheckboxItem enableBlip = new MenuCheckboxItem("個人載具光點", "開啟或關閉 個人載具標記光點.", EnableVehicleBlip) { Style = MenuCheckboxItem.CheckboxStyle.Cross };
+            MenuCheckboxItem exclusiveDriver = new MenuCheckboxItem("私人載具", "如果開啟的話其他玩家不能開您的載具.", false) { Style = MenuCheckboxItem.CheckboxStyle.Cross };
             //submenu
-            VehicleDoorsMenu = new Menu("Vehicle Doors", "Vehicle Doors Management");
+            VehicleDoorsMenu = new Menu("載具門", "載具門管理");
             MenuController.AddSubmenu(menu, VehicleDoorsMenu);
             MenuController.BindMenuItem(menu, VehicleDoorsMenu, doorsMenuBtn);
 
@@ -125,7 +125,7 @@ namespace vMenuClient
                     {
                         if (!NetworkRequestControlOfEntity(CurrentPersonalVehicle.Handle))
                         {
-                            Notify.Error("You currently can't control this vehicle. Is someone else currently driving your car? Please try again after making sure other players are not controlling your vehicle.");
+                            Notify.Error("您目前無法控制這輛載具。可能有其他玩家控制您的載具，請重試.");
                             return;
                         }
                     }
@@ -149,7 +149,7 @@ namespace vMenuClient
                 }
                 else
                 {
-                    Notify.Error("You have not yet selected a personal vehicle, or your vehicle has been deleted. Set a personal vehicle before you can use these options.");
+                    Notify.Error("您尚未選擇個人載具，或者您的載具已被刪除。 在使用這些選項之前，請先設置個人交通工具.");
                 }
             };
 
@@ -168,11 +168,11 @@ namespace vMenuClient
                                 CurrentPersonalVehicle.AttachBlip();
                             }
                             CurrentPersonalVehicle.AttachedBlip.Sprite = BlipSprite.PersonalVehicleCar;
-                            CurrentPersonalVehicle.AttachedBlip.Name = "Personal Vehicle";
+                            CurrentPersonalVehicle.AttachedBlip.Name = "私人載具";
                         }
                         else
                         {
-                            Notify.Error("You have not yet selected a personal vehicle, or your vehicle has been deleted. Set a personal vehicle before you can use these options.");
+                            Notify.Error("您尚未選擇個人載具，或者您的載具已被刪除。 在使用這些選項之前，請先設置個人交通工具.");
                         }
 
                     }
@@ -204,7 +204,7 @@ namespace vMenuClient
                         else
                         {
                             item.Checked = !_checked;
-                            Notify.Error("You currently can't control this vehicle. Is someone else currently driving your car? Please try again after making sure other players are not controlling your vehicle.");
+                            Notify.Error("您目前無法控制這輛載具。可能有其他玩家控制您的載具，請重試.");
                         }
                     }
                 }
@@ -232,14 +232,14 @@ namespace vMenuClient
                                         veh.AttachBlip();
                                     }
                                     veh.AttachedBlip.Sprite = BlipSprite.PersonalVehicleCar;
-                                    veh.AttachedBlip.Name = "Personal Vehicle";
+                                    veh.AttachedBlip.Name = "私人載具";
                                 }
                                 var name = GetLabelText(veh.DisplayName);
                                 if (string.IsNullOrEmpty(name) || name.ToLower() == "null")
                                 {
                                     name = veh.DisplayName;
                                 }
-                                item.Label = $"Current Vehicle: {name}";
+                                item.Label = $"目前載具: {name}";
                             }
                             else
                             {
@@ -267,7 +267,7 @@ namespace vMenuClient
                         }
                         else
                         {
-                            Notify.Info("There are no other players in your vehicle that need to be kicked out.");
+                            Notify.Info("您的載具目前沒有乘客無法使用該功能.");
                         }
                     }
                     else
@@ -276,7 +276,7 @@ namespace vMenuClient
                         {
                             if (!NetworkRequestControlOfEntity(CurrentPersonalVehicle.Handle))
                             {
-                                Notify.Error("You currently can't control this vehicle. Is someone else currently driving your car? Please try again after making sure other players are not controlling your vehicle.");
+                                Notify.Error("您目前無法控制這輛載具。可能有其他玩家控制您的載具，請重試.");
                                 return;
                             }
                         }
@@ -309,25 +309,25 @@ namespace vMenuClient
                 }
                 else
                 {
-                    Notify.Error("You have not yet selected a personal vehicle, or your vehicle has been deleted. Set a personal vehicle before you can use these options.");
+                    Notify.Error("您尚未選擇個人載具，或者您的載具已被刪除。 在使用這些選項之前，請先設置個人交通工具.");
                 }
             };
 
             #region Doors submenu 
-            MenuItem openAll = new MenuItem("Open All Doors", "Open all vehicle doors.");
-            MenuItem closeAll = new MenuItem("Close All Doors", "Close all vehicle doors.");
-            MenuItem LF = new MenuItem("Left Front Door", "Open/close the left front door.");
-            MenuItem RF = new MenuItem("Right Front Door", "Open/close the right front door.");
-            MenuItem LR = new MenuItem("Left Rear Door", "Open/close the left rear door.");
-            MenuItem RR = new MenuItem("Right Rear Door", "Open/close the right rear door.");
-            MenuItem HD = new MenuItem("Hood", "Open/close the hood.");
-            MenuItem TR = new MenuItem("Trunk", "Open/close the trunk.");
-            MenuItem E1 = new MenuItem("Extra 1", "Open/close the extra door (#1). Note this door is not present on most vehicles.");
-            MenuItem E2 = new MenuItem("Extra 2", "Open/close the extra door (#2). Note this door is not present on most vehicles.");
-            MenuItem BB = new MenuItem("Bomb Bay", "Open/close the bomb bay. Only available on some planes.");
+            MenuItem openAll = new MenuItem("打開所有載具門", "打開所有載具門.");
+            MenuItem closeAll = new MenuItem("關閉所有載具門", "關閉所有載具門.");
+            MenuItem LF = new MenuItem("左前門", "開啟/關閉 左前門.");
+            MenuItem RF = new MenuItem("右前門", "開啟/關閉 右前門.");
+            MenuItem LR = new MenuItem("左後門", "開啟/關閉 左後門.");
+            MenuItem RR = new MenuItem("右後門", "開啟/關閉 右後門.");
+            MenuItem HD = new MenuItem("引擎蓋", "開啟/關閉 引擎蓋.");
+            MenuItem TR = new MenuItem("後車廂", "開啟/關閉 後車廂.");
+            MenuItem E1 = new MenuItem("附加 1", "開啟/關閉 附加 (#1). 請注意:大多數的載具沒有此功能.");
+            MenuItem E2 = new MenuItem("附加 2", "開啟/關閉 附加 (#2). 請注意:大多數的載具沒有此功能.");
+            MenuItem BB = new MenuItem("炸彈艙", "開啟/關閉 炸彈艙。僅能在某些飛機上使用.");
             var doors = new List<string>() { "Front Left", "Front Right", "Rear Left", "Rear Right", "Hood", "Trunk", "Extra 1", "Extra 2", "Bomb Bay" };
-            MenuListItem removeDoorList = new MenuListItem("Remove Door", doors, 0, "Remove a specific vehicle door completely.");
-            MenuCheckboxItem deleteDoors = new MenuCheckboxItem("Delete Removed Doors", "When enabled, doors that you remove using the list above will be deleted from the world. If disabled, then the doors will just fall on the ground.", false);
+            MenuListItem removeDoorList = new MenuListItem("移除門", doors, 0, "完成卸下特定的載具門.");
+            MenuCheckboxItem deleteDoors = new MenuCheckboxItem("刪除已拆除的門", "啟用後上述列表的門將被刪除。如果是禁用的話門只會掉在地上.", false);
 
             VehicleDoorsMenu.AddMenuItem(LF);
             VehicleDoorsMenu.AddMenuItem(RF);
@@ -352,7 +352,7 @@ namespace vMenuClient
                     {
                         if (!NetworkRequestControlOfEntity(CurrentPersonalVehicle.Handle))
                         {
-                            Notify.Error("You currently can't control this vehicle. Is someone else currently driving your car? Please try again after making sure other players are not controlling your vehicle.");
+                            Notify.Error("您目前無法控制這輛載具。可能有其他玩家控制您的載具，請重試.");
                             return;
                         }
                     }
@@ -374,7 +374,7 @@ namespace vMenuClient
                     {
                         if (!NetworkRequestControlOfEntity(CurrentPersonalVehicle.Handle))
                         {
-                            Notify.Error("You currently can't control this vehicle. Is someone else currently driving your car? Please try again after making sure other players are not controlling your vehicle.");
+                            Notify.Error("您目前無法控制這輛載具。可能有其他玩家控制您的載具，請重試.");
                             return;
                         }
                     }
@@ -417,7 +417,7 @@ namespace vMenuClient
                         }
                     } else
                     {
-                        Notify.Error("You have not yet selected a personal vehicle, or your vehicle has been deleted. Set a personal vehicle before you can use these options.");
+                        Notify.Error("您尚未選擇個人載具，或者您的載具已被刪除。 在使用這些選項之前，請先設置個人交通工具.");
                     }
                 }
             };

@@ -240,7 +240,7 @@ namespace vMenuClient
                 if (DriveToWpTaskActive && !Game.IsWaypointActive)
                 {
                     ClearPedTasks(Game.PlayerPed.Handle);
-                    Notify.Custom("Destination reached, the car will now stop driving!");
+                    Notify.Custom("已經清除了!");
                     DriveToWpTaskActive = false;
                 }
             }
@@ -506,7 +506,7 @@ namespace vMenuClient
                         if (m.Visible)
                         {
                             m.GoBack();
-                            Notify.Error(CommonErrors.NoVehicle, placeholderValue: "to access this menu");
+                            Notify.Error(CommonErrors.NoVehicle, placeholderValue: "使用這個選單");
                         }
                     }
                 }
@@ -1202,7 +1202,7 @@ namespace vMenuClient
                         {
                             if (!playerList.Contains(player))
                             {
-                                Notify.Custom($"~g~<C>{GetSafePlayerName(player.Value)}</C>~s~ joined the server.");
+                                Notify.Custom($"~g~{GetSafePlayerName(player.Value)}~s~ 加入了伺服器.");
                                 await Delay(0);
                             }
                         }
@@ -1214,7 +1214,7 @@ namespace vMenuClient
                         {
                             if (!pl.Contains(player))
                             {
-                                Notify.Custom($"~r~<C>{GetSafePlayerName(player.Value)}</C>~s~ left the server.");
+                                Notify.Custom($"~r~{GetSafePlayerName(player.Value)}~s~ 離開了伺服器.");
                                 await Delay(0);
                             }
                         }
@@ -1260,14 +1260,14 @@ namespace vMenuClient
                                             {
                                                 if (playerKiller.Character.Handle == killer.Handle)
                                                 {
-                                                    Notify.Custom($"~o~<C>{GetSafePlayerName(p.Name)}</C> ~s~has been murdered by ~y~<C>{GetSafePlayerName(playerKiller.Name)}</C>~s~.");
+                                                    Notify.Custom($"~o~{GetSafePlayerName(p.Name)} ~s~被 ~y~{GetSafePlayerName(playerKiller.Name)}殺了~s~.");
                                                     found = true;
                                                     break;
                                                 }
                                             }
                                             if (!found)
                                             {
-                                                Notify.Custom($"~o~<C>{GetSafePlayerName(p.Name)}</C> ~s~has been murdered.");
+                                                Notify.Custom($"~o~{GetSafePlayerName(p.Name)} ~s~被謀殺了.");
                                             }
                                         }
                                         else if (killer.Model.IsVehicle)
@@ -1279,7 +1279,7 @@ namespace vMenuClient
                                                 {
                                                     if (playerKiller.Character.CurrentVehicle.Handle == killer.Handle)
                                                     {
-                                                        Notify.Custom($"~o~<C>{GetSafePlayerName(p.Name)}</C> ~s~has been murdered by ~y~<C>{GetSafePlayerName(playerKiller.Name)}</C>~s~.");
+                                                        Notify.Custom($"~o~{GetSafePlayerName(p.Name)} ~s~被 ~y~{GetSafePlayerName(playerKiller.Name)}殺了~s~.");
                                                         found = true;
                                                         break;
                                                     }
@@ -1287,27 +1287,27 @@ namespace vMenuClient
                                             }
                                             if (!found)
                                             {
-                                                Notify.Custom($"~o~<C>{GetSafePlayerName(p.Name)}</C> ~s~has been murdered.");
+                                                Notify.Custom($"~o~{GetSafePlayerName(p.Name)} ~s~被謀殺了.");
                                             }
                                         }
                                         else
                                         {
-                                            Notify.Custom($"~o~<C>{GetSafePlayerName(p.Name)}</C> ~s~has been murdered.");
+                                            Notify.Custom($"~o~{GetSafePlayerName(p.Name)} ~s~被謀殺了.");
                                         }
                                     }
                                     else
                                     {
-                                        Notify.Custom($"~o~<C>{GetSafePlayerName(p.Name)}</C> ~s~has been murdered.");
+                                        Notify.Custom($"~o~{GetSafePlayerName(p.Name)} ~s~被謀殺了.");
                                     }
                                 }
                                 else
                                 {
-                                    Notify.Custom($"~o~<C>{GetSafePlayerName(p.Name)}</C> ~s~committed suicide.");
+                                    Notify.Custom($"~o~{GetSafePlayerName(p.Name)} ~s~自殺.");
                                 }
                             }
                             else
                             {
-                                Notify.Custom($"~o~<C>{GetSafePlayerName(p.Name)}</C> ~s~died.");
+                                Notify.Custom($"~o~{GetSafePlayerName(p.Name)} ~s~死亡.");
                             }
                             deadPlayers.Add(p.Handle);
                         }
@@ -1359,7 +1359,7 @@ namespace vMenuClient
                             {
                                 if (!currentlyTalking)
                                 {
-                                    DrawTextOnScreen("~s~Currently Talking", 0.5f, 0.00f, 0.5f, Alignment.Center, 6);
+                                    DrawTextOnScreen("~s~目前正在說話的是:", 0.5f, 0.00f, 0.5f, Alignment.Center, 6);
                                     currentlyTalking = true;
                                 }
                                 DrawTextOnScreen($"~b~{p.Name}", 0.5f, 0.00f + (i * 0.03f), 0.5f, Alignment.Center, 6);
@@ -1433,7 +1433,7 @@ namespace vMenuClient
                     var minutes = GetClockMinutes();
                     var hoursString = hours < 10 ? "0" + hours.ToString() : hours.ToString();
                     var minutesString = minutes < 10 ? "0" + minutes.ToString() : minutes.ToString();
-                    MainMenu.TimeOptionsMenu.freezeTimeToggle.Label = $"(Current Time {hoursString}:{minutesString})";
+                    MainMenu.TimeOptionsMenu.freezeTimeToggle.Label = $"(目前時間 {hoursString}:{minutesString})";
                 }
             }
             // This only needs to be updated once every 2 seconds so we can delay it.
@@ -2460,7 +2460,7 @@ namespace vMenuClient
                                 SetBlipRoute(blip, false);
                                 RemoveBlip(ref blip);
                                 waypointPlayerIdsToRemove.Add(playerId);
-                                Notify.Custom($"~g~You've reached ~s~<C>{GetPlayerName(playerId)}</C>'s~g~ location, disabling GPS route.");
+                                Notify.Custom($"~g~您已經到達 ~s~{GetPlayerName(playerId)}~g~ 的位置，目前GPS導航路線已關閉.");
                             }
                         }
                     }

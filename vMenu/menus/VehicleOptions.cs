@@ -63,112 +63,110 @@ namespace vMenuClient
         private void CreateMenu()
         {
             // Create the menu.
-            menu = new Menu(Game.Player.Name, "Vehicle Options");
+            menu = new Menu(Game.Player.Name, "載具選單");
 
             #region menu items variables
             // vehicle god mode menu
-            Menu vehGodMenu = new Menu("Vehicle Godmode", "Vehicle Godmode Options");
-            MenuItem vehGodMenuBtn = new MenuItem("God Mode Options", "Enable or disable specific damage types.") { Label = "→→→" };
+            Menu vehGodMenu = new Menu("載具無敵", "載具無敵選單");
+            MenuItem vehGodMenuBtn = new MenuItem("無敵選單", "啟用或禁用特定的損壞類型.") { Label = "→→→" };
             MenuController.AddSubmenu(menu, vehGodMenu);
 
             // Create Checkboxes.
-            MenuCheckboxItem vehicleGod = new MenuCheckboxItem("Vehicle God Mode", "Makes your vehicle not take any damage. Note, you need to go into the god menu options below to select what kind of damage you want to disable.", VehicleGodMode);
-            MenuCheckboxItem vehicleNeverDirty = new MenuCheckboxItem("Keep Vehicle Clean", "This will constantly clean your car if the vehicle dirt level goes above 0. Note that this only cleans ~o~dust~s~ or ~o~dirt~s~. This does not clean mud, snow or other ~r~damage decals~s~. Repair your vehicle to remove them.", VehicleNeverDirty);
-            MenuCheckboxItem vehicleBikeSeatbelt = new MenuCheckboxItem("Bike Seatbelt", "Prevents you from being knocked off your bike, bicyle, ATV or similar.", VehicleBikeSeatbelt);
-            MenuCheckboxItem vehicleEngineAO = new MenuCheckboxItem("Engine Always On", "Keeps your vehicle engine on when you exit your vehicle.", VehicleEngineAlwaysOn);
-            MenuCheckboxItem vehicleNoTurbulence = new MenuCheckboxItem("Disable Plane Turbulence", "Disables the turbulence for all planes. Note only works for planes. Helicopters and other flying vehicles are not supported.", DisablePlaneTurbulence);
-            MenuCheckboxItem vehicleNoSiren = new MenuCheckboxItem("Disable Siren", "Disables your vehicle's siren. Only works if your vehicle actually has a siren.", VehicleNoSiren);
-            MenuCheckboxItem vehicleNoBikeHelmet = new MenuCheckboxItem("No Bike Helmet", "No longer auto-equip a helmet when getting on a bike or quad.", VehicleNoBikeHelemet);
-            MenuCheckboxItem vehicleFreeze = new MenuCheckboxItem("Freeze Vehicle", "Freeze your vehicle's position.", VehicleFrozen);
-            MenuCheckboxItem torqueEnabled = new MenuCheckboxItem("Enable Torque Multiplier", "Enables the torque multiplier selected from the list below.", VehicleTorqueMultiplier);
-            MenuCheckboxItem powerEnabled = new MenuCheckboxItem("Enable Power Multiplier", "Enables the power multiplier selected from the list below.", VehiclePowerMultiplier);
-            MenuCheckboxItem highbeamsOnHonk = new MenuCheckboxItem("Flash Highbeams On Honk", "Turn on your highbeams on your vehicle when honking your horn. Does not work during the day when you have your lights turned off.", FlashHighbeamsOnHonk);
-            MenuCheckboxItem showHealth = new MenuCheckboxItem("Show Vehicle Health", "Shows the vehicle health on the screen.", VehicleShowHealth);
-            MenuCheckboxItem infiniteFuel = new MenuCheckboxItem("Infinite Fuel", "Enables or disables infinite fuel for this vehicle, only works if FRFuel is installed.", VehicleInfiniteFuel);
+		    MenuCheckboxItem vehicleGod = new MenuCheckboxItem("載具無敵模式", "使您的載具不受任何損壞。請注意，您需要進入下面的無敵選項，以選擇要禁用的損害類型.", VehicleGodMode);
+	    	MenuCheckboxItem vehicleNeverDirty = new MenuCheckboxItem("保持載具清潔", "如果載具的灰塵水平超過0，這將不斷清潔您的汽車。請注意，這只會清潔~o~灰塵~s~或~o~污垢~s~。這不能清潔泥土，雪或其他損壞貼花。修理您的車輛以將其卸下.", VehicleNeverDirty);
+	    	MenuCheckboxItem vehicleBikeSeatbelt = new MenuCheckboxItem("自行車防摔", "防止您從自行車上撞下來.", VehicleBikeSeatbelt);
+	    	MenuCheckboxItem vehicleEngineAO = new MenuCheckboxItem("引擎常開", "退出載具時，保持載具引擎運轉.", VehicleEngineAlwaysOn);
+	    	MenuCheckboxItem vehicleNoTurbulence = new MenuCheckboxItem("飛機湍流", "禁用所有飛機的湍流。注意僅適用於飛機。不支持直升機和其他飛行器.", DisablePlaneTurbulence);
+	    	MenuCheckboxItem vehicleNoSiren = new MenuCheckboxItem("禁用警笛", "禁用載具的警報器。僅在您的載具上有警笛時才起作用.", VehicleNoSiren);
+	    	MenuCheckboxItem vehicleNoBikeHelmet = new MenuCheckboxItem("停用自行車頭盔", "騎自行車或四輪摩托時不再自動裝備頭盔.", VehicleNoBikeHelemet);
+	    	MenuCheckboxItem vehicleFreeze = new MenuCheckboxItem("凍結載具", "凍結載具的位置.", VehicleFrozen);
+	    	MenuCheckboxItem torqueEnabled = new MenuCheckboxItem("啟用扭矩倍增器", "啟用從以下列表中選擇的扭矩倍增器.", VehicleTorqueMultiplier);
+	    	MenuCheckboxItem powerEnabled = new MenuCheckboxItem("啟用功率倍增器", "啟用從以下列表中選擇的功率倍增器.", VehiclePowerMultiplier);
+	    	MenuCheckboxItem highbeamsOnHonk = new MenuCheckboxItem("鳴笛閃光遠光", "鳴喇叭時，打開載具上的遠光燈。在白天關閉燈光時不起作用.", FlashHighbeamsOnHonk);
+	    	MenuCheckboxItem showHealth = new MenuCheckboxItem("顯示車載具久度", "顯示載具耐久度.", VehicleShowHealth);
+	    	MenuCheckboxItem infiniteFuel = new MenuCheckboxItem("無限燃料", "啟用或禁用此載具的無限燃料，僅在安裝了FRFuel的情況下有效.", VehicleInfiniteFuel);
 
             // Create buttons.
-            MenuItem fixVehicle = new MenuItem("Repair Vehicle", "Repair any visual and physical damage present on your vehicle.");
-            MenuItem cleanVehicle = new MenuItem("Wash Vehicle", "Clean your vehicle.");
-            MenuItem toggleEngine = new MenuItem("Toggle Engine On/Off", "Turn your engine on/off.");
-            MenuItem setLicensePlateText = new MenuItem("Set License Plate Text", "Enter a custom license plate for your vehicle.");
-            MenuItem modMenuBtn = new MenuItem("Mod Menu", "Tune and customize your vehicle here.")
+		    MenuItem fixVehicle = new MenuItem("維修載具", "修理載具上出現的任何視覺和物理損壞.");
+		    MenuItem cleanVehicle = new MenuItem("洗車", "清洗您的載具.");
+		    MenuItem toggleEngine = new MenuItem("切換引擎開/關", "打開/關閉引擎.");
+		    MenuItem setLicensePlateText = new MenuItem("設置車牌文字", "輸入載具的自定義車牌.");
+		    MenuItem modMenuBtn = new MenuItem("載具定義選項", "這裡調整和自定義您的載具.")
             {
                 Label = "→→→"
             };
-            MenuItem doorsMenuBtn = new MenuItem("Vehicle Doors", "Open, close, remove and restore vehicle doors here.")
+            MenuItem doorsMenuBtn = new MenuItem("載具門", "在這裡打開，關閉，拆除和恢復載具門.")
             {
                 Label = "→→→"
             };
-            MenuItem windowsMenuBtn = new MenuItem("Vehicle Windows", "Roll your windows up/down or remove/restore your vehicle windows here.")
+            MenuItem windowsMenuBtn = new MenuItem("載具窗戶", "上下搖動窗戶或在此處刪除/恢復載具窗戶.")
             {
                 Label = "→→→"
             };
-            MenuItem componentsMenuBtn = new MenuItem("Vehicle Extras", "Add/remove vehicle components/extras.")
+            MenuItem componentsMenuBtn = new MenuItem("載具附件", "添加/刪除車輛部件/附件.")
             {
                 Label = "→→→"
             };
-            MenuItem liveriesMenuBtn = new MenuItem("Vehicle Liveries", "Style your vehicle with fancy liveries!")
+            MenuItem liveriesMenuBtn = new MenuItem("載具配件", "用奇特的配件來裝飾您的載具!")
             {
                 Label = "→→→"
             };
-            MenuItem colorsMenuBtn = new MenuItem("Vehicle Colors", "Style your vehicle even further by giving it some ~g~Snailsome ~s~colors!")
+            MenuItem colorsMenuBtn = new MenuItem("載具顏色", "給載具添加一些 ~g~ 令人陶醉的 ~s~ 顏色，為您的汽車增添風格！")
             {
                 Label = "→→→"
             };
-            MenuItem underglowMenuBtn = new MenuItem("Vehicle Neon Kits", "Make your vehicle shine with some fancy neon underglow!")
+            MenuItem underglowMenuBtn = new MenuItem("載具霓虹燈套件", "讓您的載具熠熠生輝，充滿霓虹色彩！")
             {
                 Label = "→→→"
             };
-            MenuItem vehicleInvisible = new MenuItem("Toggle Vehicle Visibility", "Makes your vehicle visible/invisible. ~r~Your vehicle will be made visible again as soon as you leave the vehicle. Otherwise you would not be able to get back in.");
-            MenuItem flipVehicle = new MenuItem("Flip Vehicle", "Sets your current vehicle on all 4 wheels.");
-            MenuItem vehicleAlarm = new MenuItem("Toggle Vehicle Alarm", "Starts/stops your vehicle's alarm.");
-            MenuItem cycleSeats = new MenuItem("Cycle Through Vehicle Seats", "Cycle through the available vehicle seats.");
+            MenuItem vehicleInvisible = new MenuItem("切換載具可見性", "使您的車輛可見/不可見。 ~r~您若離開車輛將再次顯示，否則您將無法重新進入.");
+            MenuItem flipVehicle = new MenuItem("車輪設定", "將您當前的載具設置在所有四個車輪上.");
+            MenuItem vehicleAlarm = new MenuItem("切換車輛警報", "啟動/停止車輛警報.");
+            MenuItem cycleSeats = new MenuItem("選擇汽車座椅", "選擇可用的汽車座椅.");
             List<string> lights = new List<string>()
             {
-                "Hazard Lights",
-                "Left Indicator",
-                "Right Indicator",
-                "Interior Lights",
+			    "警示燈",
+			    "左轉燈",
+		    	"右轉燈",
+                "室內燈",
                 //"Taxi Light", // this doesn't seem to work no matter what.
-                "Helicopter Spotlight",
+                "直升機聚光燈",
             };
-            MenuListItem vehicleLights = new MenuListItem("Vehicle Lights", lights, 0, "Turn vehicle lights on/off.");
+            MenuListItem vehicleLights = new MenuListItem("載具燈", lights, 0, "打開/關閉載具燈");
 
 
-            var tiresList = new List<string>() { "All Tires", "Tire #1", "Tire #2", "Tire #3", "Tire #4", "Tire #5", "Tire #6", "Tire #7", "Tire #8" };
-            MenuListItem vehicleTiresList = new MenuListItem("Fix / Destroy Tires", tiresList, 0, "Fix or destroy a specific vehicle tire, or all of them at once. Note, not all indexes are valid for all vehicles, some might not do anything on certain vehicles.");
+            var tiresList = new List<string>() { "所有輪胎", "輪胎 #1", "輪胎 #2", "輪胎 #3", "輪胎 #4", "輪胎 #5", "輪胎 #6", "輪胎 #7", "輪胎 #8" };
+            MenuListItem vehicleTiresList = new MenuListItem("修理/銷毀輪胎", tiresList, 0, "修理或銷毀特定的汽車輪胎，或一次修復所有輪胎。請注意，並非所有指令都對所有車輛都有效.");
 
-            MenuItem deleteBtn = new MenuItem("~r~Delete Vehicle", "Delete your vehicle, this ~r~can NOT be undone~s~!")
+            MenuItem deleteBtn = new MenuItem("~r~刪除車輛", "刪除您的車輛，這個~r~無法撤消~s~！")
             {
                 LeftIcon = MenuItem.Icon.WARNING,
                 Label = "→→→"
             };
-            MenuItem deleteNoBtn = new MenuItem("NO, CANCEL", "NO, do NOT delete my vehicle and go back!");
-            MenuItem deleteYesBtn = new MenuItem("~r~YES, DELETE", "Yes I'm sure, delete my vehicle please, I understand that this cannot be undone.")
+            MenuItem deleteNoBtn = new MenuItem("不，取消", "不，請勿刪除我的車輛並返回！");
+            MenuItem deleteYesBtn = new MenuItem("~r~是的，刪除", "是的，我確定，請刪除我的車輛，我知道這無法撤消.")
             {
                 LeftIcon = MenuItem.Icon.WARNING
             };
 
             // Create lists.
-            var dirtlevel = new List<string> { "No Dirt", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" };
-            MenuListItem setDirtLevel = new MenuListItem("Set Dirt Level", dirtlevel, 0, "Select how much dirt should be visible on your vehicle, press ~r~enter~s~ " +
-                "to apply the selected level.");
+            var dirtlevel = new List<string> { "沒有污垢", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" };
+            MenuListItem setDirtLevel = new MenuListItem("設定汙垢等級", dirtlevel, 0, "選擇您的車輛上應該看到多少污垢，按~r~enter~s~ “應用所選級別");
             var licensePlates = new List<string> { GetLabelText("CMOD_PLA_0"), GetLabelText("CMOD_PLA_1"), GetLabelText("CMOD_PLA_2"), GetLabelText("CMOD_PLA_3"),
                 GetLabelText("CMOD_PLA_4"), "North Yankton" };
-            MenuListItem setLicensePlateType = new MenuListItem("License Plate Type", licensePlates, 0, "Choose a license plate type and press ~r~enter ~s~to apply " +
-                "it to your vehicle.");
+            MenuListItem setLicensePlateType = new MenuListItem("車牌類型", licensePlates, 0, "選擇車牌類型在您的載具上按~r~輸入~s~進行申請");
             var torqueMultiplierList = new List<string> { "x2", "x4", "x8", "x16", "x32", "x64", "x128", "x256", "x512", "x1024" };
-            MenuListItem torqueMultiplier = new MenuListItem("Set Engine Torque Multiplier", torqueMultiplierList, 0, "Set the engine torque multiplier.");
+            MenuListItem torqueMultiplier = new MenuListItem("設置引擎扭矩倍增器", torqueMultiplierList, 0, "設置引擎扭矩倍增器.");
             var powerMultiplierList = new List<string> { "x2", "x4", "x8", "x16", "x32", "x64", "x128", "x256", "x512", "x1024" };
-            MenuListItem powerMultiplier = new MenuListItem("Set Engine Power Multiplier", powerMultiplierList, 0, "Set the engine power multiplier.");
-            List<string> speedLimiterOptions = new List<string>() { "Set", "Reset", "Custom Speed Limit" };
-            MenuListItem speedLimiter = new MenuListItem("Speed Limiter", speedLimiterOptions, 0, "Set your vehicles max speed to your ~y~current speed~s~. Resetting your vehicles max speed will set the max speed of your current vehicle back to default. Only your current vehicle is affected by this option.");
+            MenuListItem powerMultiplier = new MenuListItem("設定引擎功率倍增器", powerMultiplierList, 0, "設定引擎功率倍增器.");
+            List<string> speedLimiterOptions = new List<string>() { "設定", "重設", "自定義速度限制" };
+            MenuListItem speedLimiter = new MenuListItem("限速", speedLimiterOptions, 0, "將車輛的最高速度設置為~y~當前速度~s~。若重置車輛最大速度，則恢復為預設值。此選項僅影響您當前的車輛.");
             #endregion
 
             #region Submenus
             // Submenu's
-            VehicleModMenu = new Menu("Mod Menu", "Vehicle Mods");
-            VehicleModMenu.InstructionalButtons.Add(Control.Jump, "Toggle Vehicle Doors");
+            VehicleModMenu = new Menu("模組選單", "載具模組");
+            VehicleModMenu.InstructionalButtons.Add(Control.Jump, "開關載具門");
             VehicleModMenu.ButtonPressHandlers.Add(new Menu.ButtonPressHandler(Control.Jump, Menu.ControlPressCheckType.JUST_PRESSED, new Action<Menu, Control>((m, c) =>
             {
                 Vehicle veh = GetVehicle();
@@ -188,13 +186,13 @@ namespace vMenuClient
                     }
                 }
             }), false));
-            VehicleDoorsMenu = new Menu("Vehicle Doors", "Vehicle Doors Management");
-            VehicleWindowsMenu = new Menu("Vehicle Windows", "Vehicle Windows Management");
-            VehicleComponentsMenu = new Menu("Vehicle Extras", "Vehicle Extras/Components");
-            VehicleLiveriesMenu = new Menu("Vehicle Liveries", "Vehicle Liveries");
-            VehicleColorsMenu = new Menu("Vehicle Colors", "Vehicle Colors");
-            DeleteConfirmMenu = new Menu("Confirm Action", "Delete Vehicle, Are You Sure?");
-            VehicleUnderglowMenu = new Menu("Vehicle Neon Kits", "Vehicle Neon Underglow Options");
+            VehicleDoorsMenu = new Menu("載具門", "載具門設定");
+            VehicleWindowsMenu = new Menu("載去窗戶", "載具窗戶設定");
+            VehicleComponentsMenu = new Menu("載具附加", "載具附加件/組件");
+            VehicleLiveriesMenu = new Menu("載具配件", "載具配件");
+            VehicleColorsMenu = new Menu("載具顏色", "載具顏色");
+            DeleteConfirmMenu = new Menu("確認動作", "您確定刪除該載具?");
+            VehicleUnderglowMenu = new Menu("霓載具虹燈套件", "載具霓虹燈下發光選項");
 
             MenuController.AddSubmenu(menu, VehicleModMenu);
             MenuController.AddSubmenu(menu, VehicleDoorsMenu);
@@ -214,12 +212,12 @@ namespace vMenuClient
                 menu.AddMenuItem(vehGodMenuBtn);
                 MenuController.BindMenuItem(menu, vehGodMenu, vehGodMenuBtn);
 
-                MenuCheckboxItem godInvincible = new MenuCheckboxItem("Invincible", "Makes the car invincible. Includes fire damage, explosion damage, collision damage and more.", VehicleGodInvincible);
-                MenuCheckboxItem godEngine = new MenuCheckboxItem("Engine Damage", "Disables your engine from taking any damage.", VehicleGodEngine);
-                MenuCheckboxItem godVisual = new MenuCheckboxItem("Visual Damage", "This prevents scratches and other damage decals from being applied to your vehicle. It does not prevent (body) deformation damage.", VehicleGodVisual);
-                MenuCheckboxItem godStrongWheels = new MenuCheckboxItem("Strong Wheels", "Disables your wheels from being deformed and causing reduced handling. This does not make tires bulletproof.", VehicleGodStrongWheels);
-                MenuCheckboxItem godRamp = new MenuCheckboxItem("Ramp Damage", "Disables vehicles such as the Ramp Buggy from taking damage when using the ramp.", VehicleGodRamp);
-                MenuCheckboxItem godAutoRepair = new MenuCheckboxItem("~r~Auto Repair", "Automatically repairs your vehicle when it has ANY type of damage. It's recommended to keep this turned off to prevent glitchyness.", VehicleGodAutoRepair);
+                MenuCheckboxItem godInvincible = new MenuCheckboxItem("無敵", "使載具立於無敵。不會受到任何傷害，包括火災破壞，爆炸破壞，碰撞破壞等.", VehicleGodInvincible);
+                MenuCheckboxItem godEngine = new MenuCheckboxItem("引擎損壞", "使您的引擎免受損壞.", VehicleGodEngine);
+                MenuCheckboxItem godVisual = new MenuCheckboxItem("視覺傷害", "這樣可以防止划痕和其他損壞貼紙貼在您的車輛上。 它不能防止（身體）變形損壞.", VehicleGodVisual);
+                MenuCheckboxItem godStrongWheels = new MenuCheckboxItem("強力車輪", "防止車輪變形並減少操縱。 這不會使輪胎防彈.", VehicleGodStrongWheels);
+                MenuCheckboxItem godRamp = new MenuCheckboxItem("斜坡傷害", "坡道越野車等殘疾人車輛在使用坡道時不會受到損壞.", VehicleGodRamp);
+                MenuCheckboxItem godAutoRepair = new MenuCheckboxItem("~r~自動修復", "有任何類型的損壞時，自動修復您的車輛。 建議關閉此功能以防止出現故障.", VehicleGodAutoRepair);
 
                 vehGodMenu.AddMenuItem(godInvincible);
                 vehGodMenu.AddMenuItem(godEngine);
@@ -415,7 +413,7 @@ namespace vMenuClient
                         }
                         else
                         {
-                            Notify.Alert("You need to be in the driver's seat if you want to delete a vehicle.");
+                            Notify.Alert("如果要刪除載具，您需要坐在駕駛員座位上。");
                         }
 
                     }
@@ -513,7 +511,7 @@ namespace vMenuClient
                     // If the player is not the driver seat and a button other than the option below (cycle seats) was pressed, notify them.
                     else if (item != cycleSeats)
                     {
-                        Notify.Error("You have to be the driver of a vehicle to access this menu!", true, false);
+                        Notify.Error("您必須是載具的駕駛員才能訪問此選項！", true, false);
                     }
 
                     // Cycle vehicle seats
@@ -785,18 +783,18 @@ namespace vMenuClient
 
                                 if (ShouldUseMetricMeasurements()) // kph
                                 {
-                                    Notify.Info($"Vehicle speed is now limited to ~b~{Math.Round(vehicle.Speed * 3.6f, 1)} KPH~s~.");
+                                    Notify.Info($"載具速度現在限制為 ~b~{Math.Round(vehicle.Speed * 3.6f, 1)} KPH~s~.");
                                 }
                                 else // mph
                                 {
-                                    Notify.Info($"Vehicle speed is now limited to ~b~{Math.Round(vehicle.Speed * 2.237f, 1)} MPH~s~.");
+                                    Notify.Info($"載具速度現在限制為~b~{Math.Round(vehicle.Speed * 2.237f, 1)} MPH~s~.");
                                 }
 
                             }
                             else if (listIndex == 1) // Reset
                             {
                                 SetEntityMaxSpeed(vehicle.Handle, 500.01f); // Default max speed seemingly for all vehicles.
-                                Notify.Info("Vehicle speed is now no longer limited.");
+                                Notify.Info("載具現在不再限制速度.");
                             }
                             else if (listIndex == 2) // custom speed
                             {
@@ -811,11 +809,11 @@ namespace vMenuClient
                                         SetEntityMaxSpeed(vehicle.Handle, outFloat + 0.01f);
                                         if (ShouldUseMetricMeasurements()) // kph
                                         {
-                                            Notify.Info($"Vehicle speed is now limited to ~b~{Math.Round(outFloat * 3.6f, 1)} KPH~s~.");
+                                            Notify.Info($"載具速度現在限制為 ~b~{Math.Round(outFloat * 3.6f, 1)} KPH~s~.");
                                         }
                                         else // mph
                                         {
-                                            Notify.Info($"Vehicle speed is now limited to ~b~{Math.Round(outFloat * 2.237f, 1)} MPH~s~.");
+                                            Notify.Info($"載具速度現在限制為 ~b~{Math.Round(outFloat * 2.237f, 1)} MPH~s~.");
                                         }
                                     }
                                     else if (int.TryParse(inputSpeed, out int outInt))
@@ -825,16 +823,16 @@ namespace vMenuClient
                                         SetEntityMaxSpeed(vehicle.Handle, outInt + 0.01f);
                                         if (ShouldUseMetricMeasurements()) // kph
                                         {
-                                            Notify.Info($"Vehicle speed is now limited to ~b~{Math.Round((float)outInt * 3.6f, 1)} KPH~s~.");
+                                            Notify.Info($"載具速度現在限制為 ~b~{Math.Round((float)outInt * 3.6f, 1)} KPH~s~.");
                                         }
                                         else // mph
                                         {
-                                            Notify.Info($"Vehicle speed is now limited to ~b~{Math.Round((float)outInt * 2.237f, 1)} MPH~s~.");
+                                            Notify.Info($"載具速度現在限制為 ~b~{Math.Round((float)outInt * 2.237f, 1)} MPH~s~.");
                                         }
                                     }
                                     else
                                     {
-                                        Notify.Error("This is not a valid number. Please enter a valid speed in meters per second.");
+                                        Notify.Error("這不是有效數字。 請以米/秒為單位輸入有效速度.");
                                     }
                                 }
                                 else
@@ -862,7 +860,7 @@ namespace vMenuClient
                                     {
                                         SetVehicleTyreFixed(veh.Handle, i);
                                     }
-                                    Notify.Success("All vehicle tyres have been fixed.");
+                                    Notify.Success("所有車輛輪胎均已修復.");
                                 }
                                 else
                                 {
@@ -870,7 +868,7 @@ namespace vMenuClient
                                     {
                                         SetVehicleTyreBurst(veh.Handle, i, false, 1f);
                                     }
-                                    Notify.Success("All vehicle tyres have been destroyed.");
+                                    Notify.Success("所有汽車輪胎均已銷毀.");
                                 }
                             }
                             else
@@ -879,12 +877,12 @@ namespace vMenuClient
                                 if (IsVehicleTyreBurst(veh.Handle, index, false))
                                 {
                                     SetVehicleTyreFixed(veh.Handle, index);
-                                    Notify.Success($"Vehicle tyre #{listIndex} has been fixed.");
+                                    Notify.Success($"載具輪胎 #{listIndex} 已修復.");
                                 }
                                 else
                                 {
                                     SetVehicleTyreBurst(veh.Handle, index, false, 1f);
-                                    Notify.Success($"Vehicle tyre #{listIndex} has been destroyed.");
+                                    Notify.Success($"載具輪胎 #{listIndex} 已摧毀.");
                                 }
                             }
                         }
@@ -903,18 +901,18 @@ namespace vMenuClient
 
             #region Vehicle Colors Submenu Stuff
             // primary menu
-            Menu primaryColorsMenu = new Menu("Vehicle Colors", "Primary Colors");
+            Menu primaryColorsMenu = new Menu("載具顏色", "原色");
             MenuController.AddSubmenu(VehicleColorsMenu, primaryColorsMenu);
 
-            MenuItem primaryColorsBtn = new MenuItem("Primary Color") { Label = "→→→" };
+            MenuItem primaryColorsBtn = new MenuItem("原色") { Label = "→→→" };
             VehicleColorsMenu.AddMenuItem(primaryColorsBtn);
             MenuController.BindMenuItem(VehicleColorsMenu, primaryColorsMenu, primaryColorsBtn);
 
             // secondary menu
-            Menu secondaryColorsMenu = new Menu("Vehicle Colors", "Secondary Colors");
+            Menu secondaryColorsMenu = new Menu("載具顏色", "副顏色");
             MenuController.AddSubmenu(VehicleColorsMenu, secondaryColorsMenu);
 
-            MenuItem secondaryColorsBtn = new MenuItem("Secondary Color") { Label = "→→→" };
+            MenuItem secondaryColorsBtn = new MenuItem("副顏色") { Label = "→→→" };
             VehicleColorsMenu.AddMenuItem(secondaryColorsBtn);
             MenuController.BindMenuItem(VehicleColorsMenu, secondaryColorsMenu, secondaryColorsBtn);
 
@@ -924,7 +922,7 @@ namespace vMenuClient
             List<string> metals = new List<string>();
             List<string> util = new List<string>();
             List<string> worn = new List<string>();
-            List<string> wheelColors = new List<string>() { "Default Alloy" };
+            List<string> wheelColors = new List<string>() { "默認合金" };
 
             // Just quick and dirty solution to put this in a new enclosed section so that we can still use 'i' as a counter in the other code parts.
             {
@@ -966,11 +964,11 @@ namespace vMenuClient
                 wheelColors.AddRange(classic);
             }
 
-            MenuListItem wheelColorsList = new MenuListItem("Wheel Color", wheelColors, 0);
-            MenuListItem dashColorList = new MenuListItem("Dashboard Color", classic, 0);
-            MenuListItem intColorList = new MenuListItem("Interior / Trim Color", classic, 0);
+            MenuListItem wheelColorsList = new MenuListItem("輪胎顏色", wheelColors, 0);
+            MenuListItem dashColorList = new MenuListItem("儀表板顏色", classic, 0);
+            MenuListItem intColorList = new MenuListItem("內部 / 修剪顏色", classic, 0);
 
-            MenuItem chrome = new MenuItem("Chrome");
+            MenuItem chrome = new MenuItem("鉻和金");
             VehicleColorsMenu.AddMenuItem(chrome);
 
             VehicleColorsMenu.OnItemSelect += (sender, item, index) =>
@@ -985,7 +983,7 @@ namespace vMenuClient
                 }
                 else
                 {
-                    Notify.Error("You need to be the driver of a vehicle in order to change the vehicle colors.");
+                    Notify.Error("您需要成為載具的駕駛員才能更改載具的顏色.");
                 }
             };
 
@@ -1099,20 +1097,20 @@ namespace vMenuClient
                 }
                 else
                 {
-                    Notify.Error("You need to be the driver of a vehicle in order to change the vehicle colors.");
+                    Notify.Error("您需要成為載具的駕駛員才能更改載具的顏色.");
                 }
             }
 
 
             for (int i = 0; i < 2; i++)
             {
-                var pearlescentList = new MenuListItem("Pearlescent", classic, 0);
-                var classicList = new MenuListItem("Classic", classic, 0);
-                var metallicList = new MenuListItem("Metallic", classic, 0);
-                var matteList = new MenuListItem("Matte", matte, 0);
-                var metalList = new MenuListItem("Metals", metals, 0);
+                var pearlescentList = new MenuListItem("珠光", classic, 0);
+                var classicList = new MenuListItem("經典", classic, 0);
+                var metallicList = new MenuListItem("金屬", classic, 0);
+                var matteList = new MenuListItem("消光", matte, 0);
+                var metalList = new MenuListItem("合金", metals, 0);
                 var utilList = new MenuListItem("Util", util, 0);
-                var wornList = new MenuListItem("Worn", worn, 0);
+                var wornList = new MenuListItem("破舊", worn, 0);
 
                 if (i == 0)
                 {
@@ -1141,20 +1139,20 @@ namespace vMenuClient
             #endregion
 
             #region Vehicle Doors Submenu Stuff
-            MenuItem openAll = new MenuItem("Open All Doors", "Open all vehicle doors.");
-            MenuItem closeAll = new MenuItem("Close All Doors", "Close all vehicle doors.");
-            MenuItem LF = new MenuItem("Left Front Door", "Open/close the left front door.");
-            MenuItem RF = new MenuItem("Right Front Door", "Open/close the right front door.");
-            MenuItem LR = new MenuItem("Left Rear Door", "Open/close the left rear door.");
-            MenuItem RR = new MenuItem("Right Rear Door", "Open/close the right rear door.");
-            MenuItem HD = new MenuItem("Hood", "Open/close the hood.");
-            MenuItem TR = new MenuItem("Trunk", "Open/close the trunk.");
-            MenuItem E1 = new MenuItem("Extra 1", "Open/close the extra door (#1). Note this door is not present on most vehicles.");
-            MenuItem E2 = new MenuItem("Extra 2", "Open/close the extra door (#2). Note this door is not present on most vehicles.");
-            MenuItem BB = new MenuItem("Bomb Bay", "Open/close the bomb bay. Only available on some planes.");
+            MenuItem openAll = new MenuItem("開啟所有車門", "開啟所有車門.");
+            MenuItem closeAll = new MenuItem("關閉所有車門", "關閉所有車門.");
+            MenuItem LF = new MenuItem("右前門", "開啟/關閉 右前門.");
+            MenuItem RF = new MenuItem("左前門", "開啟/關閉 左前門.");
+            MenuItem LR = new MenuItem("左後門", "開啟/關閉 右後門.");
+            MenuItem RR = new MenuItem("右後門", "開啟/關閉 左後門.");
+            MenuItem HD = new MenuItem("引擎蓋", "開啟/關閉 引擎蓋.");
+            MenuItem TR = new MenuItem("後車箱", "開啟/關閉 後車箱.");
+            MenuItem E1 = new MenuItem("附加 1", "開啟/關閉 附加 (#1). 請注意，大多數的載具上都此功能");
+            MenuItem E2 = new MenuItem("附加 2", "開啟/關閉 附加 (#2). 請注意，大多數的載具上都此功能.");
+            MenuItem BB = new MenuItem("炸彈艙", "開啟/關閉 炸彈艙。僅能在某些飛機上使用");
             var doors = new List<string>() { "Front Left", "Front Right", "Rear Left", "Rear Right", "Hood", "Trunk", "Extra 1", "Extra 2" };
-            MenuListItem removeDoorList = new MenuListItem("Remove Door", doors, 0, "Remove a specific vehicle door completely.");
-            MenuCheckboxItem deleteDoors = new MenuCheckboxItem("Delete Removed Doors", "When enabled, doors that you remove using the list above will be deleted from the world. If disabled, then the doors will just fall on the ground.", false);
+            MenuListItem removeDoorList = new MenuListItem("移除門", doors, 0, "完成卸下特定的載具門.");
+            MenuCheckboxItem deleteDoors = new MenuCheckboxItem("刪除已拆除的門", "啟用後上述列表的門將被刪除。如果是禁用的話門只會掉在地上.", false);
 
             VehicleDoorsMenu.AddMenuItem(LF);
             VehicleDoorsMenu.AddMenuItem(RF);
@@ -1249,17 +1247,17 @@ namespace vMenuClient
                 }
                 else
                 {
-                    Notify.Alert(CommonErrors.NoVehicle, placeholderValue: "to open/close a vehicle door");
+                    Notify.Alert(CommonErrors.NoVehicle, placeholderValue: "打開/關閉載具");
                 }
             };
 
             #endregion
 
             #region Vehicle Windows Submenu Stuff
-            MenuItem fwu = new MenuItem("~y~↑~s~ Roll Front Windows Up", "Roll both front windows up.");
-            MenuItem fwd = new MenuItem("~o~↓~s~ Roll Front Windows Down", "Roll both front windows down.");
-            MenuItem rwu = new MenuItem("~y~↑~s~ Roll Rear Windows Up", "Roll both rear windows up.");
-            MenuItem rwd = new MenuItem("~o~↓~s~ Roll Rear Windows Down", "Roll both rear windows down.");
+            MenuItem fwu = new MenuItem("~y~↑~s~ 搖上前車窗", "搖上後車窗.");
+            MenuItem fwd = new MenuItem("~o~↓~s~ 搖下前車窗", "搖下後車窗.");
+            MenuItem rwu = new MenuItem("~y~↑~s~ 搖上後車窗", "搖上後車窗.");
+            MenuItem rwd = new MenuItem("~o~↓~s~ 搖下後車窗", "搖下後車窗.");
             VehicleWindowsMenu.AddMenuItem(fwu);
             VehicleWindowsMenu.AddMenuItem(fwd);
             VehicleWindowsMenu.AddMenuItem(rwu);
@@ -1319,7 +1317,7 @@ namespace vMenuClient
                                     livery = GetLabelText(livery) != "NULL" ? GetLabelText(livery) : $"Livery #{i}";
                                     liveryList.Add(livery);
                                 }
-                                MenuListItem liveryListItem = new MenuListItem("Set Livery", liveryList, GetVehicleLivery(veh.Handle), "Choose a livery for this vehicle.");
+                                MenuListItem liveryListItem = new MenuListItem("塗裝", liveryList, GetVehicleLivery(veh.Handle), "選擇載具的塗裝");
                                 VehicleLiveriesMenu.AddMenuItem(liveryListItem);
                                 VehicleLiveriesMenu.OnListIndexChange += (_menu, listItem, oldIndex, newIndex, itemIndex) =>
                                 {
@@ -1334,10 +1332,10 @@ namespace vMenuClient
                             }
                             else
                             {
-                                Notify.Error("This vehicle does not have any liveries.");
+                                Notify.Error("這輛載具沒有任何的塗裝.");
                                 VehicleLiveriesMenu.CloseMenu();
                                 menu.OpenMenu();
-                                MenuItem backBtn = new MenuItem("No Liveries Available :(", "Click me to go back.")
+                                MenuItem backBtn = new MenuItem("沒有可用的塗裝 :(", "點擊我返回.")
                                 {
                                     Label = "Go Back"
                                 };
@@ -1356,12 +1354,12 @@ namespace vMenuClient
                         }
                         else
                         {
-                            Notify.Error("You have to be the driver of a vehicle to access this menu.");
+                            Notify.Error("您必須是載具駕駛員才能訪問此選單.");
                         }
                     }
                     else
                     {
-                        Notify.Error("You have to be the driver of a vehicle to access this menu.");
+                        Notify.Error("您必須是載具駕駛員才能訪問此選單.");
                     }
                 }
             };
@@ -1433,7 +1431,7 @@ namespace vMenuClient
 
                         if (vehicleExtras.Count > 0)
                         {
-                            MenuItem backBtn = new MenuItem("Go Back", "Go back to the Vehicle Options menu.");
+                            MenuItem backBtn = new MenuItem("返回", "返回載具選項菜單.");
                             VehicleComponentsMenu.AddMenuItem(backBtn);
                             VehicleComponentsMenu.OnItemSelect += (sender3, item3, index3) =>
                             {
@@ -1442,7 +1440,7 @@ namespace vMenuClient
                         }
                         else
                         {
-                            MenuItem backBtn = new MenuItem("No Extras Available :(", "Go back to the Vehicle Options menu.")
+                            MenuItem backBtn = new MenuItem("沒有可用的額外功能 :(", "返回載具選項菜單.")
                             {
                                 Label = "Go Back"
                             };
@@ -1473,10 +1471,10 @@ namespace vMenuClient
             #endregion
 
             #region Underglow Submenu
-            MenuCheckboxItem underglowFront = new MenuCheckboxItem("Enable Front Light", "Enable or disable the underglow on the front side of the vehicle. Note not all vehicles have lights.", false);
-            MenuCheckboxItem underglowBack = new MenuCheckboxItem("Enable Rear Light", "Enable or disable the underglow on the left side of the vehicle. Note not all vehicles have lights.", false);
-            MenuCheckboxItem underglowLeft = new MenuCheckboxItem("Enable Left Light", "Enable or disable the underglow on the right side of the vehicle. Note not all vehicles have lights.", false);
-            MenuCheckboxItem underglowRight = new MenuCheckboxItem("Enable Right Light", "Enable or disable the underglow on the back side of the vehicle. Note not all vehicles have lights.", false);
+            MenuCheckboxItem underglowFront = new MenuCheckboxItem("啟用前燈", "啟用或禁用載具前燈。 注意並非所有載具都有燈.", false);
+            MenuCheckboxItem underglowBack = new MenuCheckboxItem("啟用尾燈", "啟用或禁用載具尾燈。 注意並非所有載具都有燈.", false);
+            MenuCheckboxItem underglowLeft = new MenuCheckboxItem("啟用左燈", "啟用或禁用載具左燈。 注意並非所有載具都有燈.", false);
+            MenuCheckboxItem underglowRight = new MenuCheckboxItem("啟用右燈", "啟用或禁用載具右燈。 注意並非所有載具都有燈.", false);
             var underglowColorsList = new List<string>();
             for (int i = 0; i < 13; i++)
             {
@@ -1707,7 +1705,7 @@ namespace vMenuClient
                     var currentItem = $"[1/{ mod.ModCount + 1}]";
 
                     // Add the stock value for this mod.
-                    var name = $"Stock {typeName} {currentItem}";
+                    var name = $"stock {typeName} {currentItem}";
                     modlist.Add(name);
 
                     // Loop through all available upgrades for this specific mod type.
@@ -1723,7 +1721,7 @@ namespace vMenuClient
 
                     // Create the MenuListItem for this mod type.
                     var currIndex = GetVehicleMod(veh.Handle, (int)mod.ModType) + 1;
-                    MenuListItem modTypeListItem = new MenuListItem(typeName, modlist, currIndex, $"Choose a ~y~{typeName}~s~ upgrade, it will be automatically applied to your vehicle.");
+                    MenuListItem modTypeListItem = new MenuListItem(typeName, modlist, currIndex, $"選擇一個 ~y~{typeName}~s~ 升級, 它將會自動套用到您的載具上.");
 
                     // Add the list item to the menu.
                     VehicleModMenu.AddMenuItem(modTypeListItem);
@@ -1734,14 +1732,14 @@ namespace vMenuClient
                 veh = GetVehicle();
                 // Create the wheel types list & listitem and add it to the menu.
                 List<string> wheelTypes = new List<string>() { "Sports", "Muscle", "Lowrider", "SUV", "Offroad", "Tuner", "Bike Wheels", "High End" };
-                MenuListItem vehicleWheelType = new MenuListItem("Wheel Type", wheelTypes, GetVehicleWheelType(veh.Handle), $"Choose a ~y~wheel type~s~ for your vehicle.");
+                MenuListItem vehicleWheelType = new MenuListItem("輪胎", wheelTypes, GetVehicleWheelType(veh.Handle), $"為您的載具選擇 ~y~輪胎~s~");
                 VehicleModMenu.AddMenuItem(vehicleWheelType);
 
                 // Create the checkboxes for some options.
-                MenuCheckboxItem toggleCustomWheels = new MenuCheckboxItem("Toggle Custom Wheels", "Press this to add or remove ~y~custom~s~ wheels.", GetVehicleModVariation(veh.Handle, 23));
-                MenuCheckboxItem xenonHeadlights = new MenuCheckboxItem("Xenon Headlights", "Enable or disable ~b~xenon ~s~headlights.", IsToggleModOn(veh.Handle, 22));
-                MenuCheckboxItem turbo = new MenuCheckboxItem("Turbo", "Enable or disable the ~y~turbo~s~ for this vehicle.", IsToggleModOn(veh.Handle, 18));
-                MenuCheckboxItem bulletProofTires = new MenuCheckboxItem("Bullet Proof Tires", "Enable or disable ~y~bullet proof tires~s~ for this vehicle.", !GetVehicleTyresCanBurst(veh.Handle));
+                MenuCheckboxItem toggleCustomWheels = new MenuCheckboxItem("自定義輪胎", "可以對您的載具管理 ~y~自定義輪胎~s~.", GetVehicleModVariation(veh.Handle, 23));
+                MenuCheckboxItem xenonHeadlights = new MenuCheckboxItem("氙氣大燈", "開關 ~b~氙氣大燈 ~s~.", IsToggleModOn(veh.Handle, 22));
+                MenuCheckboxItem turbo = new MenuCheckboxItem("渦輪", "開關 ~y~渦輪~s~.", IsToggleModOn(veh.Handle, 18));
+                MenuCheckboxItem bulletProofTires = new MenuCheckboxItem("防彈輪胎", "開關 ~y~防彈輪胎~s~.", !GetVehicleTyresCanBurst(veh.Handle));
 
                 // Add the checkboxes to the menu.
                 VehicleModMenu.AddMenuItem(toggleCustomWheels);
@@ -1751,7 +1749,7 @@ namespace vMenuClient
                 {
                     currentHeadlightColor = 13;
                 }
-                MenuListItem headlightColor = new MenuListItem("Headlight Color", new List<string>() { "White", "Blue", "Electric Blue", "Mint Green", "Lime Green", "Yellow", "Golden Shower", "Orange", "Red", "Pony Pink", "Hot Pink", "Purple", "Blacklight", "Default Xenon" }, currentHeadlightColor, "New in the Arena Wars GTA V update: Colored headlights. Note you must enable Xenon Headlights first.");
+                MenuListItem headlightColor = new MenuListItem("大燈顏色", new List<string>() { "White", "Blue", "Electric Blue", "Mint Green", "Lime Green", "Yellow", "Golden Shower", "Orange", "Red", "Pony Pink", "Hot Pink", "Purple", "Blacklight", "Default Xenon" }, currentHeadlightColor, "《俠盜列車手5》更新中的新功能：彩色大燈。 請注意，您必須先啟用氙氣大燈.");
                 VehicleModMenu.AddMenuItem(headlightColor);
                 VehicleModMenu.AddMenuItem(turbo);
                 VehicleModMenu.AddMenuItem(bulletProofTires);
@@ -1780,11 +1778,11 @@ namespace vMenuClient
                     index = 0;
                 }
 
-                MenuListItem tireSmoke = new MenuListItem("Tire Smoke Color", tireSmokes, index, $"Choose a ~y~tire smoke color~s~ for your vehicle.");
+                MenuListItem tireSmoke = new MenuListItem("燒胎煙霧顏色", tireSmokes, index, $"對載具選擇一個 ~y~燒胎顏色~s~.");
                 VehicleModMenu.AddMenuItem(tireSmoke);
 
                 // Create the checkbox to enable/disable the tiresmoke.
-                MenuCheckboxItem tireSmokeEnabled = new MenuCheckboxItem("Tire Smoke", "Enable or disable ~y~tire smoke~s~ for your vehicle. ~h~~r~Important:~s~ When disabling tire smoke, you'll need to drive around before it takes affect.", IsToggleModOn(veh.Handle, 20));
+                MenuCheckboxItem tireSmokeEnabled = new MenuCheckboxItem("燒胎煙霧", "對載具 開關 ~y~燒胎煙霧~s~. ~h~~r~注意:~s~ 禁用輪胎煙霧時，您需要四處行駛，以免產生問題.", IsToggleModOn(veh.Handle, 20));
                 VehicleModMenu.AddMenuItem(tireSmokeEnabled);
 
                 // Create list for window tint
@@ -1823,7 +1821,7 @@ namespace vMenuClient
                         break;
                 }
 
-                MenuListItem windowTint = new MenuListItem("Window Tint", windowTints, currentTint, "Apply tint to your windows.");
+                MenuListItem windowTint = new MenuListItem("窗口色調", windowTints, currentTint, "給窗戶塗上顏色");
                 VehicleModMenu.AddMenuItem(windowTint);
 
                 #endregion

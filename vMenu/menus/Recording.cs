@@ -22,11 +22,11 @@ namespace vMenuClient
         private void CreateMenu()
         {
             // Create the menu.
-            menu = new Menu("Recording", "Recording Options");
+            menu = new Menu("錄製", "錄製選項");
 
-            MenuItem startRec = new MenuItem("Start Recording", "Start a new game recording using GTA V's built in recording.");
-            MenuItem stopRec = new MenuItem("Stop Recording", "Stop and save your current recording.");
-            MenuItem openEditor = new MenuItem("Rockstar Editor", "Open the rockstar editor, note you might want to quit the session first before doing this to prevent some issues.");
+            MenuItem startRec = new MenuItem("開始錄製", "使用GTA V的內置錄影.");
+            MenuItem stopRec = new MenuItem("停止錄製", "停止錄製並保存您當前的錄製");
+            MenuItem openEditor = new MenuItem("Rockstar 編輯器", "打開Rockstar編輯器，注意您可能要先退出戰局，然後再執行此操作以防止出現某些問題.");
             menu.AddMenuItem(startRec);
             menu.AddMenuItem(stopRec);
             menu.AddMenuItem(openEditor);
@@ -37,7 +37,7 @@ namespace vMenuClient
                 {
                     if (IsRecording())
                     {
-                        Notify.Alert("You are already recording a clip, you need to stop recording first before you can start recording again!");
+                        Notify.Alert("您已經在錄製剪輯，您需要先停止錄製，然後才能再次開始錄製!");
                     }
                     else
                     {
@@ -48,7 +48,7 @@ namespace vMenuClient
                 {
                     if (!IsRecording())
                     {
-                        Notify.Alert("You are currently NOT recording a clip, you need to start recording first before you can stop and save a clip.");
+                        Notify.Alert("您當前尚未錄製剪輯，需要先開始錄製，然後才能停止和保存剪輯.");
                     }
                     else
                     {
@@ -69,7 +69,7 @@ namespace vMenuClient
                     }
                     // then fade in the screen.
                     DoScreenFadeIn(1);
-                    Notify.Alert("You left your previous session before entering the Rockstar Editor. Restart the game to be able to rejoin the server's main session.", true, true);
+                    Notify.Alert("在進入Rockstar編輯器之前，請先退出上一個連線重新啟動遊戲，以便能夠重新加入服務器.", true, true);
                 }
             };
 

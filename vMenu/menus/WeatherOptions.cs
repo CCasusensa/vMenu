@@ -24,27 +24,27 @@ namespace vMenuClient
         private void CreateMenu()
         {
             // Create the menu.
-            menu = new Menu(Game.Player.Name, "Weather Options");
+            menu = new Menu(Game.Player.Name, "天氣選項");
 
-            dynamicWeatherEnabled = new MenuCheckboxItem("Toggle Dynamic Weather", "Enable or disable dynamic weather changes.", EventManager.dynamicWeather);
-            blackout = new MenuCheckboxItem("Toggle Blackout", "This disables or enables all lights across the map.", EventManager.blackoutMode);
-            MenuItem extrasunny = new MenuItem("Extra Sunny", "Set the weather to ~y~extra sunny~s~!");
-            MenuItem clear = new MenuItem("Clear", "Set the weather to ~y~clear~s~!");
-            MenuItem neutral = new MenuItem("Neutral", "Set the weather to ~y~neutral~s~!");
-            MenuItem smog = new MenuItem("Smog", "Set the weather to ~y~smog~s~!");
-            MenuItem foggy = new MenuItem("Foggy", "Set the weather to ~y~foggy~s~!");
-            MenuItem clouds = new MenuItem("Cloudy", "Set the weather to ~y~clouds~s~!");
-            MenuItem overcast = new MenuItem("Overcast", "Set the weather to ~y~overcast~s~!");
-            MenuItem clearing = new MenuItem("Clearing", "Set the weather to ~y~clearing~s~!");
-            MenuItem rain = new MenuItem("Rainy", "Set the weather to ~y~rain~s~!");
-            MenuItem thunder = new MenuItem("Thunder", "Set the weather to ~y~thunder~s~!");
-            MenuItem blizzard = new MenuItem("Blizzard", "Set the weather to ~y~blizzard~s~!");
-            MenuItem snow = new MenuItem("Snow", "Set the weather to ~y~snow~s~!");
-            MenuItem snowlight = new MenuItem("Light Snow", "Set the weather to ~y~light snow~s~!");
-            MenuItem xmas = new MenuItem("X-MAS Snow", "Set the weather to ~y~x-mas~s~!");
-            MenuItem halloween = new MenuItem("Halloween", "Set the weather to ~y~halloween~s~!");
-            MenuItem removeclouds = new MenuItem("Remove All Clouds", "Remove all clouds from the sky!");
-            MenuItem randomizeclouds = new MenuItem("Randomize Clouds", "Add random clouds to the sky!");
+            dynamicWeatherEnabled = new MenuCheckboxItem("開關動態天氣", "啟用或禁用動態天氣變化.", EventManager.dynamicWeather);
+            blackout = new MenuCheckboxItem("開關燈光", "這會禁用或啟用地圖上的所有燈光.", EventManager.blackoutMode);
+            MenuItem extrasunny = new MenuItem("大太陽", "將天氣設置為 ~y~更加陽光明媚~s~!");
+            MenuItem clear = new MenuItem("明確", "將天氣設置為 ~y~明確~s~!");
+            MenuItem neutral = new MenuItem("普通天氣", "將天氣設置為 ~y~普通天氣~s~!");
+            MenuItem smog = new MenuItem("煙霧", "將天氣設置為 ~y~煙霧~s~!");
+            MenuItem foggy = new MenuItem("霧霾", "將天氣設置為 ~y~霧霾~s~!");
+            MenuItem clouds = new MenuItem("多雲的", "將天氣設置為  ~y~多雲的~s~!");
+            MenuItem overcast = new MenuItem("灰濛蒙", "將天氣設置為  ~y~灰濛蒙~s~!");
+            MenuItem clearing = new MenuItem("樹林中中氣息", "將天氣設置為 ~y~樹林中中氣息~s~!");
+            MenuItem rain = new MenuItem("多雨", "將天氣設置為~y~多雨~s~!");
+            MenuItem thunder = new MenuItem("雷電雨", "將天氣設置為 ~y~雷電雨~s~!");
+            MenuItem blizzard = new MenuItem("暴風雪", "將天氣設置為 ~y~暴風雪~s~!");
+            MenuItem snow = new MenuItem("雪", "將天氣設置為 ~y~雪~s~!");
+            MenuItem snowlight = new MenuItem("小雪", "將天氣設置為 ~y~小雪~s~!");
+            MenuItem xmas = new MenuItem("聖誕節的雪", "將天氣設置為 ~y~聖誕節的雪~s~!");
+            MenuItem halloween = new MenuItem("萬聖節", "將天氣設置為 ~y~萬聖節~s~!");
+            MenuItem removeclouds = new MenuItem("移除所有的雲", "移除天空中的所有的雲!");
+            MenuItem randomizeclouds = new MenuItem("隨機產生雲", "向天空隨機新增雲!");
 
             var indexOffset = 2;
             if (IsAllowed(Permission.WODynamic))
@@ -126,7 +126,7 @@ namespace vMenuClient
                 // A weather type is selected.
                 if (index >= 2 && index <= 16)
                 {
-                    Notify.Custom($"The weather will be changed to ~y~{weatherTypes[index - 2]}~s~ in the next 30 seconds.");
+                    Notify.Custom($"天氣將再30秒後更改為 ~y~{weatherTypes[index - 2]}~s~");
                     UpdateServerWeather(weatherTypes[index - 2], EventManager.blackoutMode, EventManager.dynamicWeather);
                 }
                 if (item == removeclouds)
@@ -144,13 +144,13 @@ namespace vMenuClient
                 if (item == dynamicWeatherEnabled)
                 {
                     EventManager.dynamicWeather = _checked;
-                    Notify.Custom($"Dynamic weather changes are now {(_checked ? "~g~enabled" : "~r~disabled")}~s~.");
+                    Notify.Custom($"現在天氣動態變化 {(_checked ? "~g~開啟" : "~r~關閉")}~s~.");
                     UpdateServerWeather(EventManager.currentWeatherType, EventManager.blackoutMode, _checked);
                 }
                 else if (item == blackout)
                 {
                     EventManager.blackoutMode = _checked;
-                    Notify.Custom($"Blackout mode is now {(_checked ? "~g~enabled" : "~r~disabled")}~s~.");
+                    Notify.Custom($"現在是停電模式 {(_checked ? "~g~開啟" : "~r~關閉")}~s~.");
                     UpdateServerWeather(EventManager.currentWeatherType, _checked, EventManager.dynamicWeather);
                 }
             };

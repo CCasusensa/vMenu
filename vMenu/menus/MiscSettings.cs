@@ -80,68 +80,68 @@ namespace vMenuClient
             }
 
             // Create the menu.
-            menu = new Menu(Game.Player.Name, "Misc Settings");
-            teleportOptionsMenu = new Menu(Game.Player.Name, "Teleport Options");
-            developerToolsMenu = new Menu(Game.Player.Name, "Development Tools");
+            menu = new Menu(Game.Player.Name, "其它設定選單");
+            teleportOptionsMenu = new Menu(Game.Player.Name, "瞬移設定");
+            developerToolsMenu = new Menu(Game.Player.Name, "開發者工具");
 
             // teleport menu
-            Menu teleportMenu = new Menu(Game.Player.Name, "Teleport Locations");
-            MenuItem teleportMenuBtn = new MenuItem("Teleport Locations", "Teleport to pre-configured locations, added by the server owner.");
+            Menu teleportMenu = new Menu(Game.Player.Name, "傳送地點");
+            MenuItem teleportMenuBtn = new MenuItem("傳送地點", "傳送到伺服器添加的預配位置");
             MenuController.AddSubmenu(menu, teleportMenu);
             MenuController.BindMenuItem(menu, teleportMenu, teleportMenuBtn);
 
             // keybind settings menu
-            Menu keybindMenu = new Menu(Game.Player.Name, "Keybind Settings");
-            MenuItem keybindMenuBtn = new MenuItem("Keybind Settings", "Enable or disable keybinds for some options.");
+            Menu keybindMenu = new Menu(Game.Player.Name, "按鍵設定");
+            MenuItem keybindMenuBtn = new MenuItem("按鍵設定", "開啟或關閉鍵盤綁定");
             MenuController.AddSubmenu(menu, keybindMenu);
             MenuController.BindMenuItem(menu, keybindMenu, keybindMenuBtn);
 
             // keybind settings menu items
-            MenuCheckboxItem kbTpToWaypoint = new MenuCheckboxItem("Teleport To Waypoint", "Teleport to your waypoint when pressing the keybind. By default, this keybind is set to ~r~F7~s~, server owners are able to change this however so ask them if you don't know what it is.", KbTpToWaypoint);
-            MenuCheckboxItem kbDriftMode = new MenuCheckboxItem("Drift Mode", "Makes your vehicle have almost no traction while holding left shift on keyboard, or X on controller.", KbDriftMode);
-            MenuCheckboxItem kbRecordKeys = new MenuCheckboxItem("Recording Controls", "Enables or disables the recording (gameplay recording for the Rockstar editor) hotkeys on both keyboard and controller.", KbRecordKeys);
-            MenuCheckboxItem kbRadarKeys = new MenuCheckboxItem("Minimap Controls", "Press the Multiplayer Info (z on keyboard, down arrow on controller) key to switch between expanded radar and normal radar.", KbRadarKeys);
-            MenuCheckboxItem kbPointKeysCheckbox = new MenuCheckboxItem("Finger Point Controls", "Enables the finger point toggle key. The default QWERTY keyboard mapping for this is 'B', or for controller quickly double tap the right analog stick.", KbPointKeys);
-            MenuItem backBtn = new MenuItem("Back");
+            MenuCheckboxItem kbTpToWaypoint = new MenuCheckboxItem("傳送到導航點", "", KbTpToWaypoint);
+            MenuCheckboxItem kbDriftMode = new MenuCheckboxItem("飄移模式", "按住鍵盤上的左移或者搖趕上的X鍵，能使車輛甩尾.", KbDriftMode);
+            MenuCheckboxItem kbRecordKeys = new MenuCheckboxItem("錄影控制", "開啟或關閉用鍵盤和搖桿控制 (Rockstar 編輯器) 熱鍵.", KbRecordKeys);
+            MenuCheckboxItem kbRadarKeys = new MenuCheckboxItem("小地圖控件", "按鍵盤上的z，控制器上的向下箭頭鍵在擴展雷達和普通雷達之間切換.", KbRadarKeys);
+            MenuCheckboxItem kbPointKeysCheckbox = new MenuCheckboxItem("手指點控件", "", KbPointKeys);
+            MenuItem backBtn = new MenuItem("返回");
 
             // Create the menu items.
-            MenuCheckboxItem rightAlignMenu = new MenuCheckboxItem("Right Align Menu", "If you want vMenu to appear on the left side of your screen, disable this option. This option will be saved immediately. You don't need to click save preferences.", MiscRightAlignMenu);
-            MenuCheckboxItem disablePms = new MenuCheckboxItem("Disable Private Messages", "Prevent others from sending you a private message via the Online Players menu. This also prevents you from sending messages to other players.", MiscDisablePrivateMessages);
-            MenuCheckboxItem disableControllerKey = new MenuCheckboxItem("Disable Controller Support", "This disables the controller menu toggle key. This does NOT disable the navigation buttons.", MiscDisableControllerSupport);
-            MenuCheckboxItem speedKmh = new MenuCheckboxItem("Show Speed KM/H", "Show a speedometer on your screen indicating your speed in KM/h.", ShowSpeedoKmh);
-            MenuCheckboxItem speedMph = new MenuCheckboxItem("Show Speed MPH", "Show a speedometer on your screen indicating your speed in MPH.", ShowSpeedoMph);
-            MenuCheckboxItem coords = new MenuCheckboxItem("Show Coordinates", "Show your current coordinates at the top of your screen.", ShowCoordinates);
-            MenuCheckboxItem hideRadar = new MenuCheckboxItem("Hide Radar", "Hide the radar/minimap.", HideRadar);
-            MenuCheckboxItem hideHud = new MenuCheckboxItem("Hide Hud", "Hide all hud elements.", HideHud);
-            MenuCheckboxItem showLocation = new MenuCheckboxItem("Location Display", "Shows your current location and heading, as well as the nearest cross road. Similar like PLD. ~r~Warning: This feature (can) take(s) up to -4.6 FPS when running at 60 Hz.", ShowLocation) { LeftIcon = MenuItem.Icon.WARNING };
-            MenuCheckboxItem drawTime = new MenuCheckboxItem("Show Time On Screen", "Shows you the current time on screen.", DrawTimeOnScreen);
-            MenuItem saveSettings = new MenuItem("Save Personal Settings", "Save your current settings. All saving is done on the client side, if you re-install windows you will lose your settings. Settings are shared across all servers using vMenu.")
+            MenuCheckboxItem rightAlignMenu = new MenuCheckboxItem("像右對齊選單", "", MiscRightAlignMenu);
+            MenuCheckboxItem disablePms = new MenuCheckboxItem("禁用私人訊息", "阻止其它人通過 '線上模式'選單像您發送私人訊息.", MiscDisablePrivateMessages);
+            MenuCheckboxItem disableControllerKey = new MenuCheckboxItem("禁止控制器選單", "這將禁用控制器選單切換鍵不會禁用導航按鈕.", MiscDisableControllerSupport);
+            MenuCheckboxItem speedKmh = new MenuCheckboxItem("顯示儀表板KM/H", "視窗上顯示一個計速器，以KM/h為單位顯示速度", ShowSpeedoKmh);
+            MenuCheckboxItem speedMph = new MenuCheckboxItem("顯示速度MPH", "視窗上顯示一個計速器，以MPH為單位顯示速度", ShowSpeedoMph);
+            MenuCheckboxItem coords = new MenuCheckboxItem("顯示坐標", "視窗頂部顯示當前座標.", ShowCoordinates);
+            MenuCheckboxItem hideRadar = new MenuCheckboxItem("隱藏雷達", "隱藏雷達/小地圖", HideRadar);
+            MenuCheckboxItem hideHud = new MenuCheckboxItem("隱藏 Hud", "隱藏所有HUD元素.", HideHud);
+            MenuCheckboxItem showLocation = new MenuCheckboxItem("位置顯示", "顯示您當前的位置和方向，以最近的交叉路口類似PLD. ~r~警告: 可能會降低FPS", ShowLocation) { LeftIcon = MenuItem.Icon.WARNING };
+            MenuCheckboxItem drawTime = new MenuCheckboxItem("顯示時間", "在視窗上顯示當前遊戲時間.", DrawTimeOnScreen);
+            MenuItem saveSettings = new MenuItem("保存個人設置", "保存當前設置。 所有保存都在客戶端完成，如果重新安裝Windows，則會丟失設置。 使用vMenu在所有服務器之間共享設置.")
             {
                 RightIcon = MenuItem.Icon.TICK
             };
-            MenuCheckboxItem joinQuitNotifs = new MenuCheckboxItem("Join / Quit Notifications", "Receive notifications when someone joins or leaves the server.", JoinQuitNotifications);
-            MenuCheckboxItem deathNotifs = new MenuCheckboxItem("Death Notifications", "Receive notifications when someone dies or gets killed.", DeathNotifications);
-            MenuCheckboxItem nightVision = new MenuCheckboxItem("Toggle Night Vision", "Enable or disable night vision.", false);
-            MenuCheckboxItem thermalVision = new MenuCheckboxItem("Toggle Thermal Vision", "Enable or disable thermal vision.", false);
-            MenuCheckboxItem vehModelDimensions = new MenuCheckboxItem("Show Vehicle Dimensions", "Draws the model outlines for every vehicle that's currently close to you.", ShowVehicleModelDimensions);
-            MenuCheckboxItem propModelDimensions = new MenuCheckboxItem("Show Prop Dimensions", "Draws the model outlines for every prop that's currently close to you.", ShowPropModelDimensions);
-            MenuCheckboxItem pedModelDimensions = new MenuCheckboxItem("Show Ped Dimensions", "Draws the model outlines for every ped that's currently close to you.", ShowPedModelDimensions);
-            MenuCheckboxItem showEntityHandles = new MenuCheckboxItem("Show Entity Handles", "Draws the the entity handles for all close entities (you must enable the outline functions above for this to work).", ShowEntityHandles);
-            MenuCheckboxItem showEntityModels = new MenuCheckboxItem("Show Entity Models", "Draws the the entity models for all close entities (you must enable the outline functions above for this to work).", ShowEntityModels);
-            MenuSliderItem dimensionsDistanceSlider = new MenuSliderItem("Show Dimensions Radius", "Show entity model/handle/dimension draw range.", 0, 20, 20, false);
+            MenuCheckboxItem joinQuitNotifs = new MenuCheckboxItem("加入/離開通知", "有人加入或者離開伺服器都會收到通知.", JoinQuitNotifications);
+            MenuCheckboxItem deathNotifs = new MenuCheckboxItem("死亡通知", "有人死亡或者被殺都會收到通知.", DeathNotifications);
+            MenuCheckboxItem nightVision = new MenuCheckboxItem("開關夜視鏡", "開啟或關閉夜視鏡功能.", false);
+            MenuCheckboxItem thermalVision = new MenuCheckboxItem("開關熱感應", "開啟或關閉熱感應功能.", false);
+            MenuCheckboxItem vehModelDimensions = new MenuCheckboxItem("顯示載具尺寸", "當前靠近您的每輛載具都會有模型輪廓", ShowVehicleModelDimensions);
+            MenuCheckboxItem propModelDimensions = new MenuCheckboxItem("顯示道具尺寸", "當前靠近您的每個武器都會有道具輪廓", ShowPropModelDimensions);
+            MenuCheckboxItem pedModelDimensions = new MenuCheckboxItem("顯示人物尺寸", "當前靠近您的每個人都會有人物輪廓.", ShowPedModelDimensions);
+            MenuCheckboxItem showEntityHandles = new MenuCheckboxItem("顯示實體句炳", "繪製所有關閉實體的句炳 (必須啟用上面的功能，該功能才會有用).", ShowEntityHandles);
+            MenuCheckboxItem showEntityModels = new MenuCheckboxItem("顯示實體模型", "繪製所有閉合實體的模型(必須啟用上面的功能，該功能才會有用).", ShowEntityModels);
+            MenuSliderItem dimensionsDistanceSlider = new MenuSliderItem("顯示尺寸半徑", "顯示實體模型/手柄/尺寸繪製範圍.", 0, 20, 20, false);
 
-            MenuItem clearArea = new MenuItem("Clear Area", "Clears the area around your player (100 meters). Damage, dirt, peds, props, vehicles, etc. Everything gets cleaned up, fixed and reset to the default world state.");
-            MenuCheckboxItem lockCamX = new MenuCheckboxItem("Lock Camera Horizontal Rotation", "Locks your camera horizontal rotation. Could be useful in helicopters I guess.", false);
-            MenuCheckboxItem lockCamY = new MenuCheckboxItem("Lock Camera Vertical Rotation", "Locks your camera vertical rotation. Could be useful in helicopters I guess.", false);
+            MenuItem clearArea = new MenuItem("清空地區", "清除你周圍區域(100米)所有物件除了人");
+            MenuCheckboxItem lockCamX = new MenuCheckboxItem("鎖定相機水平翻轉", "鎖定相機水平翻轉.", false);
+            MenuCheckboxItem lockCamY = new MenuCheckboxItem("鎖定相機垂直翻轉", "鎖定相機垂直翻轉.", false);
 
 
-            Menu connectionSubmenu = new Menu(Game.Player.Name, "Connection Options");
-            MenuItem connectionSubmenuBtn = new MenuItem("Connection Options", "Server connection/game quit options.");
+            Menu connectionSubmenu = new Menu(Game.Player.Name, "連線選項");
+            MenuItem connectionSubmenuBtn = new MenuItem("連線選項", "伺服器連接/遊戲退出選項");
 
-            MenuItem quitSession = new MenuItem("Quit Session", "Leaves you connected to the server, but quits the network session. ~r~Can not be used when you are the host.");
-            MenuItem rejoinSession = new MenuItem("Re-join Session", "This may not work in all cases, but you can try to use this if you want to re-join the previous session after clicking 'Quit Session'.");
-            MenuItem quitGame = new MenuItem("Quit Game", "Exits the game after 5 seconds.");
-            MenuItem disconnectFromServer = new MenuItem("Disconnect From Server", "Disconnects you from the server and returns you to the serverlist. ~r~This feature is not recommended, quit the game completely instead and restart it for a better experience.");
+            MenuItem quitSession = new MenuItem("退出連線", "");
+            MenuItem rejoinSession = new MenuItem("重新加入連線", "");
+            MenuItem quitGame = new MenuItem("退出遊戲", "五秒後退出遊戲");
+            MenuItem disconnectFromServer = new MenuItem("與伺服器段開連接", "");
             connectionSubmenu.AddMenuItem(quitSession);
             connectionSubmenu.AddMenuItem(rejoinSession);
             connectionSubmenu.AddMenuItem(quitGame);
@@ -153,15 +153,15 @@ namespace vMenuClient
             {
                 timeCycleModifiersListData[i] += $" ({i + 1}/{timeCycleModifiersListData.Count})";
             }
-            MenuListItem timeCycles = new MenuListItem("TM", timeCycleModifiersListData, MathUtil.Clamp(LastTimeCycleModifierIndex, 0, Math.Max(0, timeCycleModifiersListData.Count - 1)), "Select a timecycle modifier and enable the checkbox above.");
-            MenuSliderItem timeCycleIntensity = new MenuSliderItem("Timecycle Modifier Intensity", "Set the timecycle modifier intensity.", 0, 20, LastTimeCycleModifierStrength, true);
+            MenuListItem timeCycles = new MenuListItem("TM", timeCycleModifiersListData, MathUtil.Clamp(LastTimeCycleModifierIndex, 0, Math.Max(0, timeCycleModifiersListData.Count - 1)), "選擇一個倒數計時啟用上面的複選框.");
+            MenuSliderItem timeCycleIntensity = new MenuSliderItem("時間週期修改器強度", "設置時間週期修改器強度.", 0, 20, LastTimeCycleModifierStrength, true);
 
-            MenuCheckboxItem locationBlips = new MenuCheckboxItem("Location Blips", "Shows blips on the map for some common locations.", ShowLocationBlips);
-            MenuCheckboxItem playerBlips = new MenuCheckboxItem("Show Player Blips", "Shows blips on the map for all players.", ShowPlayerBlips);
-            MenuCheckboxItem playerNames = new MenuCheckboxItem("Show Player Names", "Enables or disables player overhead names.", MiscShowOverheadNames);
-            MenuCheckboxItem respawnDefaultCharacter = new MenuCheckboxItem("Respawn As Default MP Character", "If you enable this, then you will (re)spawn as your default saved MP character. Note the server owner can globally disable this option. To set your default character, go to one of your saved MP Characters and click the 'Set As Default Character' button.", MiscRespawnDefaultCharacter);
-            MenuCheckboxItem restorePlayerAppearance = new MenuCheckboxItem("Restore Player Appearance", "Restore your player's skin whenever you respawn after being dead. Re-joining a server will not restore your previous skin.", RestorePlayerAppearance);
-            MenuCheckboxItem restorePlayerWeapons = new MenuCheckboxItem("Restore Player Weapons", "Restore your weapons whenever you respawn after being dead. Re-joining a server will not restore your previous weapons.", RestorePlayerWeapons);
+            MenuCheckboxItem locationBlips = new MenuCheckboxItem("位置提示", "在地圖上顯示位置提示.", ShowLocationBlips);
+            MenuCheckboxItem playerBlips = new MenuCheckboxItem("顯示玩家提示", "在地圖上顯示玩家提示.", ShowPlayerBlips);
+            MenuCheckboxItem playerNames = new MenuCheckboxItem("顯示玩家名字", "開啟或關閉玩家名字", MiscShowOverheadNames);
+            MenuCheckboxItem respawnDefaultCharacter = new MenuCheckboxItem("重新生成為預設創建", "", MiscRespawnDefaultCharacter);
+            MenuCheckboxItem restorePlayerAppearance = new MenuCheckboxItem("恢復玩家外觀", "死亡重生時恢復玩家的皮膚，重新加速伺服器時將不會恢復您以前的造型.", RestorePlayerAppearance);
+            MenuCheckboxItem restorePlayerWeapons = new MenuCheckboxItem("恢復玩家武器", "死亡重生時恢復玩家的武器，重新加速伺服器時將不會恢復您以前的武器.", RestorePlayerWeapons);
 
             MenuController.AddSubmenu(menu, connectionSubmenu);
             MenuController.BindMenuItem(menu, connectionSubmenu, connectionSubmenuBtn);
@@ -209,7 +209,7 @@ namespace vMenuClient
                     {
                         if (NetworkIsHost())
                         {
-                            Notify.Error("Sorry, you cannot leave the session when you are the host. This would prevent other players from joining/staying on the server.");
+                            Notify.Error("抱歉，您不能在主持人後退出戰局。 這將阻止其他玩家加入/停留在服務器上。");
                         }
                         else
                         {
@@ -218,18 +218,18 @@ namespace vMenuClient
                     }
                     else
                     {
-                        Notify.Error("You are currently not in any session.");
+                        Notify.Error("您目前沒有參加任何戰局.");
                     }
                 }
                 else if (item == rejoinSession)
                 {
                     if (NetworkIsSessionActive())
                     {
-                        Notify.Error("You are already connected to a session.");
+                        Notify.Error("您已經連接到戰局.");
                     }
                     else
                     {
-                        Notify.Info("Attempting to re-join the session.");
+                        Notify.Info("嘗試重新加入戰局.");
                         NetworkSessionHost(-1, 32, false);
                     }
                 }
@@ -244,13 +244,13 @@ namespace vMenuClient
             // Teleportation options
             if (IsAllowed(Permission.MSTeleportToWp) || IsAllowed(Permission.MSTeleportLocations) || IsAllowed(Permission.MSTeleportToCoord))
             {
-                MenuItem teleportOptionsMenuBtn = new MenuItem("Teleport Options", "Various teleport options.") { Label = "→→→" };
+                MenuItem teleportOptionsMenuBtn = new MenuItem("傳送選項", "各種傳送選擇.") { Label = "→→→" };
                 menu.AddMenuItem(teleportOptionsMenuBtn);
                 MenuController.BindMenuItem(menu, teleportOptionsMenu, teleportOptionsMenuBtn);
 
-                MenuItem tptowp = new MenuItem("Teleport To Waypoint", "Teleport to the waypoint on your map.");
-                MenuItem tpToCoord = new MenuItem("Teleport To Coords", "Enter x, y, z coordinates and you will be teleported to that location.");
-                MenuItem saveLocationBtn = new MenuItem("Save Teleport Location", "Adds your current location to the teleport locations menu and saves it on the server.");
+                MenuItem tptowp = new MenuItem("傳送到導航點", "傳送到地圖上的導航點");
+                MenuItem tpToCoord = new MenuItem("傳送到座標", "輸入 x, y, z 座標 您將被傳誦到該位置");
+                MenuItem saveLocationBtn = new MenuItem("保存傳送位置", "將您當前的位置添加倒傳送位置選單中，並且保存到伺服器中");
                 teleportOptionsMenu.OnItemSelect += async (sender, item, index) =>
                 {
                     // Teleport to waypoint.
@@ -260,19 +260,19 @@ namespace vMenuClient
                     }
                     else if (item == tpToCoord)
                     {
-                        string x = await GetUserInput("Enter X coordinate.");
+                        string x = await GetUserInput("輸入 X 座標.");
                         if (string.IsNullOrEmpty(x))
                         {
                             Notify.Error(CommonErrors.InvalidInput);
                             return;
                         }
-                        string y = await GetUserInput("Enter Y coordinate.");
+                        string y = await GetUserInput("輸入 Y 座標.");
                         if (string.IsNullOrEmpty(y))
                         {
                             Notify.Error(CommonErrors.InvalidInput);
                             return;
                         }
-                        string z = await GetUserInput("Enter Z coordinate.");
+                        string z = await GetUserInput("輸入 Z 座標.");
                         if (string.IsNullOrEmpty(z))
                         {
                             Notify.Error(CommonErrors.InvalidInput);
@@ -291,7 +291,7 @@ namespace vMenuClient
                             }
                             else
                             {
-                                Notify.Error("You did not enter a valid X coordinate.");
+                                Notify.Error("您輸入的不是一個有效的 X 座標.");
                                 return;
                             }
                         }
@@ -303,7 +303,7 @@ namespace vMenuClient
                             }
                             else
                             {
-                                Notify.Error("You did not enter a valid Y coordinate.");
+                                Notify.Error("您輸入的不是一個有效的 Y 座標.");
                                 return;
                             }
                         }
@@ -315,7 +315,7 @@ namespace vMenuClient
                             }
                             else
                             {
-                                Notify.Error("You did not enter a valid Z coordinate.");
+                                Notify.Error("您輸入的不是一個有效的 Z 座標.");
                                 return;
                             }
                         }
@@ -356,7 +356,7 @@ namespace vMenuClient
                                 var y = Math.Round(location.coordinates.Y, 2);
                                 var z = Math.Round(location.coordinates.Z, 2);
                                 var heading = Math.Round(location.heading, 2);
-                                MenuItem tpBtn = new MenuItem(location.name, $"Teleport to ~y~{location.name}~n~~s~x: ~y~{x}~n~~s~y: ~y~{y}~n~~s~z: ~y~{z}~n~~s~heading: ~y~{heading}") { ItemData = location };
+                                MenuItem tpBtn = new MenuItem(location.name, $"已經傳送到 ~y~{location.name}~n~~s~x: ~y~{x}~n~~s~y: ~y~{y}~n~~s~z: ~y~{z}~n~~s~heading: ~y~{heading}") { ItemData = location };
                                 teleportMenu.AddMenuItem(tpBtn);
                             }
                         }
@@ -382,7 +382,7 @@ namespace vMenuClient
 
             #region dev tools menu
 
-            MenuItem devToolsBtn = new MenuItem("Developer Tools", "Various development/debug tools.") { Label = "→→→" };
+            MenuItem devToolsBtn = new MenuItem("開發者選項", "各種開發/調試工具.") { Label = "→→→" };
             menu.AddMenuItem(devToolsBtn);
             MenuController.AddSubmenu(menu, developerToolsMenu);
             MenuController.BindMenuItem(menu, developerToolsMenu, devToolsBtn);
@@ -758,7 +758,7 @@ namespace vMenuClient
                 }
                 catch (JsonReaderException ex)
                 {
-                    Debug.Write($"\n\n[vMenu] An error occurred while loading the locations.json file. Please contact the server owner to resolve this.\nWhen contacting the owner, provide the following error details:\n{ex.Message}.\n\n\n");
+                    Debug.Write($"\n\n[vMenu] 加載locations.json文件時發生錯誤。 請與服務器服主聯繫以解決此問題。請提供以下錯誤詳細信息:\n{ex.Message}.\n\n\n");
                 }
             }
             else

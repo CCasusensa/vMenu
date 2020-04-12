@@ -53,22 +53,22 @@ namespace vMenuClient
             switch (errorType)
             {
                 case CommonErrors.NeedToBeTheDriver:
-                    outputMessage = "You need to be the driver of this vehicle.";
+                    outputMessage = "您不是這輛載具的駕駛者";
                     break;
                 case CommonErrors.NoVehicle:
-                    outputMessage = $"You need to be inside a vehicle{placeholder}.";
+                    outputMessage = $"您需要在載具內才有辦法使用{placeholder}.";
                     break;
                 case CommonErrors.NotAllowed:
-                    outputMessage = $"You are not allowed to{placeholder}, sorry.";
+                    outputMessage = $"您不可以{placeholder}, 很抱歉.";
                     break;
                 case CommonErrors.InvalidModel:
-                    outputMessage = $"This model~r~{placeholder} ~s~could not be found, are you sure it's valid?";
+                    outputMessage = $"這個模型~r~{placeholder} ~s~找不到，您確定它是有效的?";
                     break;
                 case CommonErrors.InvalidInput:
-                    outputMessage = $"The input~r~{placeholder} ~s~is invalid or you cancelled the action, please try again.";
+                    outputMessage = $"這個輸入~r~{placeholder} ~s~無效或您取消了該操作，請重試。";
                     break;
                 case CommonErrors.InvalidSaveName:
-                    outputMessage = $"Saving failed because the provided save name~r~{placeholder} ~s~is invalid.";
+                    outputMessage = $"保存失敗，因為提供的~r~{placeholder} ~s~名稱無效。";
                     break;
                 case CommonErrors.SaveNameAlreadyExists:
                     outputMessage = $"Saving failed because the provided save name~r~{placeholder} ~s~already exists.";
@@ -97,7 +97,7 @@ namespace vMenuClient
 
                 case CommonErrors.UnknownError:
                 default:
-                    outputMessage = $"An unknown error occurred, sorry!{placeholder}";
+                    outputMessage = $"發生未知的錯誤，抱歉!{placeholder}";
                     break;
             }
             return outputMessage;

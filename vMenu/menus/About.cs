@@ -21,19 +21,19 @@ namespace vMenuClient
         private void CreateMenu()
         {
             // Create the menu.
-            menu = new Menu("vMenu", "About vMenu");
+            menu = new Menu("vMenu", "關於 vMenu 相關資訊");
 
             // Create menu items.
-            MenuItem version = new MenuItem("vMenu Version", $"This server is using vMenu ~b~~h~{MainMenu.Version}~h~~s~.")
+            MenuItem version = new MenuItem("vMenu 版本", $"這個伺服器使用的 vMenu版本是 ~b~~h~{MainMenu.Version}~h~~s~.")
             {
                 Label = $"~h~{MainMenu.Version}~h~"
             };
-            MenuItem credits = new MenuItem("About vMenu / Credits", "vMenu is made by ~b~Vespura~s~. For more info, checkout ~b~www.vespura.com/vmenu~s~. Thank you to: Deltanic, Brigliar, IllusiveTea, Shayan Doust and zr0iq for your contributions.");
+            MenuItem credits = new MenuItem("關於 vMenu / 創作者", "vMenu 是由 ~b~Vespura~s~. 所製作的, 可以到 ~b~www.vespura.com/vmenu~s~. 網站查看在這特別感謝：Deltanic，Brigliar，IllusiveTea，Shayan Doust和zr0iq的貢獻.");
 
             string serverInfoMessage = vMenuShared.ConfigManager.GetSettingsString(vMenuShared.ConfigManager.Setting.vmenu_server_info_message);
             if (!string.IsNullOrEmpty(serverInfoMessage))
             {
-                MenuItem serverInfo = new MenuItem("Server Info", serverInfoMessage);
+                MenuItem serverInfo = new MenuItem("伺服器資訊", serverInfoMessage);
                 string siteUrl = vMenuShared.ConfigManager.GetSettingsString(vMenuShared.ConfigManager.Setting.vmenu_server_info_website_url);
                 if (!string.IsNullOrEmpty(siteUrl))
                 {

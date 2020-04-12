@@ -18,20 +18,20 @@ namespace vMenuClient
     {
         // Variables
         private Menu menu;
-        public Menu createCharacterMenu = new Menu("Create Character", "Create A New Character");
-        public Menu savedCharactersMenu = new Menu("vMenu", "Manage Saved Characters");
-        public Menu inheritanceMenu = new Menu("vMenu", "Character Inheritance Options");
-        public Menu appearanceMenu = new Menu("vMenu", "Character Appearance Options");
-        public Menu faceShapeMenu = new Menu("vMenu", "Character Face Shape Options");
-        public Menu tattoosMenu = new Menu("vMenu", "Character Tattoo Options");
-        public Menu clothesMenu = new Menu("vMenu", "Character Clothing Options");
-        public Menu propsMenu = new Menu("vMenu", "Character Props Options");
-        private Menu manageSavedCharacterMenu = new Menu("vMenu", "Manage MP Character");
+        public Menu createCharacterMenu = new Menu("創建角色", "創建一個新角色");
+        public Menu savedCharactersMenu = new Menu("vMenu", "管理保存的角色");
+        public Menu inheritanceMenu = new Menu("vMenu", "角色繼承選項");
+        public Menu appearanceMenu = new Menu("vMenu", "角色外觀選項");
+        public Menu faceShapeMenu = new Menu("vMenu", "角色面部形狀選項");
+        public Menu tattoosMenu = new Menu("vMenu", "角色紋身選項");
+        public Menu clothesMenu = new Menu("vMenu", "角色服裝選項");
+        public Menu propsMenu = new Menu("vMenu", "角色道具選項");
+        private Menu manageSavedCharacterMenu = new Menu("vMenu", "管理角色");
 
         // Need to be able to disable/enable these buttons from another class.
-        internal MenuItem createMaleBtn = new MenuItem("Create Male Character", "Create a new male character.") { Label = "→→→" };
-        internal MenuItem createFemaleBtn = new MenuItem("Create Female Character", "Create a new female character.") { Label = "→→→" };
-        internal MenuItem editPedBtn = new MenuItem("Edit Saved Character", "This allows you to edit everything about your saved character. The changes will be saved to this character's save file entry once you hit the save button.");
+        internal MenuItem createMaleBtn = new MenuItem("創建男性角色", "創建男性角色.") { Label = "→→→" };
+        internal MenuItem createFemaleBtn = new MenuItem("創建女性角色", "創建女性角色.") { Label = "→→→" };
+        internal MenuItem editPedBtn = new MenuItem("編輯已經儲存的角色", "這使您可以編輯有關已保存角色的所有內容。 按下保存按鈕後，更改將保存到此角色的保存文件條目中.");
 
         public static bool DontCloseMenus { get { return MenuController.PreventExitingMenu; } set { MenuController.PreventExitingMenu = value; } }
         public static bool DisableBackButton { get { return MenuController.DisableBackButton; } set { MenuController.DisableBackButton = value; } }
@@ -735,13 +735,13 @@ namespace vMenuClient
 
                     if (StorageManager.SaveJsonData("mp_ped_" + name, json, false))
                     {
-                        Notify.Success($"Your character (~g~<C>{name}</C>~s~) has been saved.");
+                        Notify.Success($"您的角色 (~g~{name}~s~) 已經儲存.");
                         Log($"Saved Character {name}. Data: {json}");
                         return true;
                     }
                     else
                     {
-                        Notify.Error($"Saving failed, most likely because this name (~y~<C>{name}</C>~s~) is already in use.");
+                        Notify.Error($"保存失敗，很可能是因為此名稱 (~y~{name}~s~) 已經存在.");
                         return false;
                     }
                 }
@@ -755,9 +755,9 @@ namespace vMenuClient
         private void CreateMenu()
         {
             // Create the menu.
-            menu = new Menu(Game.Player.Name, "MP Ped Customization");
+            menu = new Menu(Game.Player.Name, "自訂角色");
 
-            MenuItem savedCharacters = new MenuItem("Saved Characters", "Spawn, edit or delete your existing saved multiplayer characters.")
+            MenuItem savedCharacters = new MenuItem("管理角色", "管理角色")
             {
                 Label = "→→→"
             };
@@ -1351,7 +1351,7 @@ namespace vMenuClient
 
             for (int i = 0; i < 20; i++)
             {
-                MenuSliderItem faceFeature = new MenuSliderItem(faceFeaturesNamesList[i], $"Set the {faceFeaturesNamesList[i]} face feature value.", 0, 20, 10, true);
+                MenuSliderItem faceFeature = new MenuSliderItem(faceFeaturesNamesList[i], $"設置 {faceFeaturesNamesList[i]} 人臉特徵值.", 0, 20, 10, true);
                 faceShapeMenu.AddMenuItem(faceFeature);
             }
 
@@ -1603,12 +1603,12 @@ namespace vMenuClient
                     KeyValuePair<string, string> tat = new KeyValuePair<string, string>(Tattoo.collectionName, Tattoo.name);
                     if (currentCharacter.PedTatttoos.RightLegTattoos.Contains(tat))
                     {
-                        Subtitle.Custom($"Tattoo #{tattooIndex + 1} has been ~r~removed~s~.");
+                        Subtitle.Custom($"刺青 #{tattooIndex + 1} 已經被 ~r~移除~s~.");
                         currentCharacter.PedTatttoos.RightLegTattoos.Remove(tat);
                     }
                     else
                     {
-                        Subtitle.Custom($"Tattoo #{tattooIndex + 1} has been ~g~added~s~.");
+                        Subtitle.Custom($"刺青 #{tattooIndex + 1} 已經被 ~g~添加~s~.");
                         currentCharacter.PedTatttoos.RightLegTattoos.Add(tat);
                     }
                 }
@@ -1618,12 +1618,12 @@ namespace vMenuClient
                     KeyValuePair<string, string> tat = new KeyValuePair<string, string>(Tattoo.collectionName, Tattoo.name);
                     if (currentCharacter.PedTatttoos.BadgeTattoos.Contains(tat))
                     {
-                        Subtitle.Custom($"Badge #{tattooIndex + 1} has been ~r~removed~s~.");
+                        Subtitle.Custom($"徽章 #{tattooIndex + 1} 已經被 ~r~移除~s~.");
                         currentCharacter.PedTatttoos.BadgeTattoos.Remove(tat);
                     }
                     else
                     {
-                        Subtitle.Custom($"Badge #{tattooIndex + 1} has been ~g~added~s~.");
+                        Subtitle.Custom($"徽章 #{tattooIndex + 1} 已經被  ~g~添加~s~.");
                         currentCharacter.PedTatttoos.BadgeTattoos.Add(tat);
                     }
                 }
@@ -1682,8 +1682,8 @@ namespace vMenuClient
                 else if (item == exitNoSave) // exit without saving
                 {
                     bool confirm = false;
-                    AddTextEntry("vmenu_warning_message_first_line", "Are you sure you want to exit the character creator?");
-                    AddTextEntry("vmenu_warning_message_second_line", "You will lose all (unsaved) customization!");
+                    AddTextEntry("vmenu_warning_message_first_line", "您確定要退出創建角色嗎？?");
+                    AddTextEntry("vmenu_warning_message_second_line", "您將失去所有未保存的角色！");
                     createCharacterMenu.CloseMenu();
 
                     // wait for confirmation or cancel input.
@@ -2033,12 +2033,12 @@ namespace vMenuClient
 
             MenuController.AddMenu(manageSavedCharacterMenu);
 
-            MenuItem spawnPed = new MenuItem("Spawn Saved Character", "Spawns the selected saved character.");
-            editPedBtn = new MenuItem("Edit Saved Character", "This allows you to edit everything about your saved character. The changes will be saved to this character's save file entry once you hit the save button.");
-            MenuItem clonePed = new MenuItem("Clone Saved Character", "This will make a clone of your saved character. It will ask you to provide a name for that character. If that name is already taken the action will be canceled.");
-            MenuItem setAsDefaultPed = new MenuItem("Set As Default Character", "If you set this character as your default character, and you enable the 'Respawn As Default MP Character' option in the Misc Settings menu, then you will be set as this character whenever you (re)spawn.");
-            MenuItem renameCharacter = new MenuItem("Rename Saved Character", "You can rename this saved character. If the name is already taken then the action will be canceled.");
-            MenuItem delPed = new MenuItem("Delete Saved Character", "Deletes the selected saved character. This can not be undone!")
+            MenuItem spawnPed = new MenuItem("召喚儲存的角色", "召喚已保存角色.");
+            editPedBtn = new MenuItem("編輯儲存的角色列表", "這使您可以編輯有關已保存角色的所有內容。 按下保存按鈕後，更改將保存到該角色的保存文件條目中。");
+            MenuItem clonePed = new MenuItem("複製儲存的角色", "這將複製您保存的角色。 它將要求您提供該角色的名稱。 如果已經使用該名稱，則該操作將被取消.");
+            MenuItem setAsDefaultPed = new MenuItem("設定一個默認的角色", "如果將此字符設置為默認字符，並且在“雜項設置”選單中啟用了“作為默認MP角色重生”選項，則無論何時（重新）生成，都將被設置為此角色。");
+            MenuItem renameCharacter = new MenuItem("重新命名儲存的角色", "您可以重命名此保存的角色。 如果名稱已被使用，則該操作將被取消.");
+            MenuItem delPed = new MenuItem("刪除儲存的角色", "刪除所選的已保存角色。 這不能被撤消!")
             {
                 LeftIcon = MenuItem.Icon.WARNING
             };
@@ -2070,7 +2070,7 @@ namespace vMenuClient
                 else if (item == clonePed)
                 {
                     var tmpCharacter = StorageManager.GetSavedMpCharacterData("mp_ped_" + selectedSavedCharacterManageName);
-                    string name = await GetUserInput(windowTitle: "Enter a name for the cloned character", defaultText: tmpCharacter.SaveName.Substring(7), maxInputLength: 30);
+                    string name = await GetUserInput(windowTitle: "輸入要複製的角色名字", defaultText: tmpCharacter.SaveName.Substring(7), maxInputLength: 30);
                     if (string.IsNullOrEmpty(name))
                     {
                         Notify.Error(CommonErrors.InvalidSaveName);
@@ -2086,12 +2086,12 @@ namespace vMenuClient
                             tmpCharacter.SaveName = "mp_ped_" + name;
                             if (StorageManager.SaveJsonData("mp_ped_" + name, JsonConvert.SerializeObject(tmpCharacter), false))
                             {
-                                Notify.Success($"Your character has been cloned. The name of the cloned character is: ~g~<C>{name}</C>~s~.");
+                                Notify.Success($"您的角色已被複製。 複製角色的名字是: ~g~{name}~s~.");
                                 UpdateSavedPedsMenu();
                             }
                             else
                             {
-                                Notify.Error("The clone could not be created, reason unknown. Does a character already exist with that name? :(");
+                                Notify.Error("無法創建角色，原因未知。 該名稱是否已經存在一個角色？ :(");
                             }
                         }
                     }
@@ -2099,7 +2099,7 @@ namespace vMenuClient
                 else if (item == renameCharacter)
                 {
                     var tmpCharacter = StorageManager.GetSavedMpCharacterData("mp_ped_" + selectedSavedCharacterManageName);
-                    string name = await GetUserInput(windowTitle: "Enter a new character name", defaultText: tmpCharacter.SaveName.Substring(7), maxInputLength: 30);
+                    string name = await GetUserInput(windowTitle: "輸入新的角色名稱", defaultText: tmpCharacter.SaveName.Substring(7), maxInputLength: 30);
                     if (string.IsNullOrEmpty(name))
                     {
                         Notify.Error(CommonErrors.InvalidInput);
@@ -2116,7 +2116,7 @@ namespace vMenuClient
                             if (StorageManager.SaveJsonData("mp_ped_" + name, JsonConvert.SerializeObject(tmpCharacter), false))
                             {
                                 StorageManager.DeleteSavedStorageItem("mp_ped_" + selectedSavedCharacterManageName);
-                                Notify.Success($"Your character has been renamed to ~g~<C>{name}</C>~s~.");
+                                Notify.Success($"您的角色已重命名為 ~g~{name}~s~.");
                                 UpdateSavedPedsMenu();
                                 while (!MenuController.IsAnyMenuOpen())
                                 {
@@ -2126,36 +2126,36 @@ namespace vMenuClient
                             }
                             else
                             {
-                                Notify.Error("Something went wrong while renaming your character, your old character will NOT be deleted because of this.");
+                                Notify.Error("重命名您的角色時出了點問題，因此不會刪除您的舊角色.");
                             }
                         }
                     }
                 }
                 else if (item == delPed)
                 {
-                    if (delPed.Label == "Are you sure?")
+                    if (delPed.Label == "您確定嗎?")
                     {
                         delPed.Label = "";
                         DeleteResourceKvp("mp_ped_" + selectedSavedCharacterManageName);
-                        Notify.Success("Your saved character has been deleted.");
+                        Notify.Success("您保存的角色已被刪除.");
                         manageSavedCharacterMenu.GoBack();
                         UpdateSavedPedsMenu();
                         manageSavedCharacterMenu.RefreshIndex();
                     }
                     else
                     {
-                        delPed.Label = "Are you sure?";
+                        delPed.Label = "您確定嗎?";
                     }
                 }
                 else if (item == setAsDefaultPed)
                 {
-                    Notify.Success($"Your character <C>{selectedSavedCharacterManageName}</C> will now be used as your default character whenever you (re)spawn.");
+                    Notify.Success($"您的角色 {selectedSavedCharacterManageName} 將以該角色當為預設.");
                     SetResourceKvp("vmenu_default_character", "mp_ped_" + selectedSavedCharacterManageName);
                 }
 
                 if (item != delPed)
                 {
-                    if (delPed.Label == "Are you sure?")
+                    if (delPed.Label == "您確定嗎?")
                     {
                         delPed.Label = "";
                     }
@@ -2206,14 +2206,14 @@ namespace vMenuClient
                 foreach (string item in names)
                 {
                     var tmpData = StorageManager.GetSavedMpCharacterData("mp_ped_" + item);
-                    MenuItem btn = new MenuItem(item, "Click to spawn, edit, clone, rename or delete this saved character.")
+                    MenuItem btn = new MenuItem(item, "單擊以生成，編輯，複製，重命名或刪除此保存的角色.")
                     {
                         Label = $"({(tmpData.IsMale ? "M" : "F")}) →→→"
                     };
                     if (defaultChar == "mp_ped_" + item)
                     {
                         btn.LeftIcon = MenuItem.Icon.TICK;
-                        btn.Description += " ~g~This character is currently set as your default character and will be used whenever you (re)spawn.";
+                        btn.Description += " ~g~當前已將此角色設置為您的默認角色，並在您重生時使用.";
                     }
                     savedCharactersMenu.AddMenuItem(btn);
                     MenuController.BindMenuItem(savedCharactersMenu, manageSavedCharacterMenu, btn);

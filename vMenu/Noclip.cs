@@ -23,14 +23,14 @@ namespace vMenuClient
 
         private List<string> speeds = new List<string>()
         {
-            "Very Slow",
-            "Slow",
-            "Normal",
-            "Fast",
-            "Very Fast",
-            "Extremely Fast",
-            "Extremely Fast v2.0",
-            "Max Speed"
+            "非常慢",
+            "慢",
+            "正常",
+            "快",
+            "非常快",
+            "超級快",
+            "超級無敵快",
+            "最大速度"
         };
 
         public NoClip()
@@ -80,43 +80,43 @@ namespace vMenuClient
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(0);
                     PushScaleformMovieMethodParameterString("~INPUT_SPRINT~");
-                    PushScaleformMovieMethodParameterString($"Change Speed ({speeds[MovingSpeed]})");
+                    PushScaleformMovieMethodParameterString($"改變速度 ({speeds[MovingSpeed]})");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(1);
                     PushScaleformMovieMethodParameterString("~INPUT_MOVE_LR~");
-                    PushScaleformMovieMethodParameterString($"Turn Left/Right");
+                    PushScaleformMovieMethodParameterString($"轉方向 左/右");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(2);
                     PushScaleformMovieMethodParameterString("~INPUT_MOVE_UD~");
-                    PushScaleformMovieMethodParameterString($"Move");
+                    PushScaleformMovieMethodParameterString($"移動");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(3);
                     PushScaleformMovieMethodParameterString("~INPUT_MULTIPLAYER_INFO~");
-                    PushScaleformMovieMethodParameterString($"Down");
+                    PushScaleformMovieMethodParameterString($"往下");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(4);
                     PushScaleformMovieMethodParameterString("~INPUT_COVER~");
-                    PushScaleformMovieMethodParameterString($"Up");
+                    PushScaleformMovieMethodParameterString($"往上");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(5);
                     PushScaleformMovieMethodParameterString("~INPUT_VEH_HEADLIGHT~");
-                    PushScaleformMovieMethodParameterString($"Cam Mode");
+                    PushScaleformMovieMethodParameterString($"鏡頭模式");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(6);
                     PushScaleformMovieMethodParameterString(GetControlInstructionalButton(0, (int)MainMenu.NoClipKey, 1));
-                    PushScaleformMovieMethodParameterString($"Toggle NoClip");
+                    PushScaleformMovieMethodParameterString($"切換NoClip");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "DRAW_INSTRUCTIONAL_BUTTONS");

@@ -175,7 +175,7 @@ namespace vMenuClient
 
             Log("Sending alert now after the hud is confirmed to be enabled.");
 
-            Notify.Error("vMenu is outdated. Please update as soon as possible!", true, true);
+            Notify.Error("vMenu已過時。 請盡快更新!", true, true);
             Notify.Custom(message, true, true);
         }
 
@@ -443,7 +443,7 @@ namespace vMenuClient
         /// </summary>
         private void KillMe(string sourceName)
         {
-            Notify.Alert($"You have been killed by <C>{GetSafePlayerName(sourceName)}</C>~s~ using the ~r~Kill Player~s~ option in vMenu.");
+            Notify.Alert($"您被 {GetSafePlayerName(sourceName)}~s~ 殺了");
             SetEntityHealth(Game.PlayerPed.Handle, 0);
         }
 
@@ -489,7 +489,7 @@ namespace vMenuClient
                     {
                         if (!vehicle.IsStopped)
                         {
-                            Notify.Alert("The owner of this vehicle is reclaiming their personal vehicle. You will be kicked from this vehicle in about 10 seconds. Stop the vehicle now to avoid taking damage.", false, true);
+                            Notify.Alert("該車輛的擁有者正在找回他們的私人車輛。 您將在大約10秒鐘內被踢出這輛車。 立即停車，以免造成車子損壞.", false, true);
                         }
 
                         // Wait for the vehicle to come to a stop, or 10 seconds, whichever is faster.
@@ -509,7 +509,7 @@ namespace vMenuClient
                             // Make the ped jump out because the car isn't stopped yet.
                             if (!vehicle.IsStopped)
                             {
-                                Notify.Info("You were warned, now you'll have to suffer the consequences!");
+                                Notify.Info("警告，現在您必須承受後果!");
                                 TaskLeaveVehicle(Game.PlayerPed.Handle, vehicle.Handle, 4160);
                             }
                             // Make the ped exit gently.

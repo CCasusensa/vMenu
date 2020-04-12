@@ -147,7 +147,7 @@ namespace vMenuClient
                         if (args[0].ToString().ToLower() == "debug")
                         {
                             DebugMode = !DebugMode;
-                            Notify.Custom($"Debug mode is now set to: {DebugMode}.");
+                            Notify.Custom($"調試模式: {DebugMode}.");
                             // Set discord rich precense once, allowing it to be overruled by other resources once those load.
                             if (DebugMode)
                             {
@@ -165,7 +165,7 @@ namespace vMenuClient
                         }
                         else if (args[0].ToString().ToLower() == "dump")
                         {
-                            Notify.Info("A full config dump will be made to the console. Check the log file. This can cause lag!");
+                            Notify.Info("將向控制台進行完整的配置轉儲。 檢查日誌文件。 這可能會導致卡頓!");
                             Debug.WriteLine("\n\n\n########################### vMenu ###########################");
                             Debug.WriteLine($"Running vMenu Version: {Version}, Experimental features: {EnableExperimentalFeatures}, Debug mode: {DebugMode}.");
                             Debug.WriteLine("\nDumping a list of all KVPs:");
@@ -385,10 +385,10 @@ namespace vMenuClient
                     }
 
                     // Create the main menu.
-                    Menu = new Menu(Game.Player.Name, "Main Menu");
-                    PlayerSubmenu = new Menu(Game.Player.Name, "Player Related Options");
-                    VehicleSubmenu = new Menu(Game.Player.Name, "Vehicle Related Options");
-                    WorldSubmenu = new Menu(Game.Player.Name, "World Options");
+                    Menu = new Menu(Game.Player.Name, "主選單");
+                    PlayerSubmenu = new Menu(Game.Player.Name, "玩家相關選項");
+                    VehicleSubmenu = new Menu(Game.Player.Name, "載具相關選項");
+                    WorldSubmenu = new Menu(Game.Player.Name, "世界選項");
 
                     // Add the main menu to the menu pool.
                     MenuController.AddMenu(Menu);
@@ -471,7 +471,7 @@ namespace vMenuClient
                 if (Game.IsDisabledControlJustReleased(0, Control.PhoneCancel) && MpPedCustomization.DisableBackButton)
                 {
                     await Delay(0);
-                    Notify.Alert("You must save your ped first before exiting, or click the ~r~Exit Without Saving~s~ button.");
+                    Notify.Alert("退出之前，您必須先保存人物模型，或點擊~r~退出而不保存的按鈕。");
                 }
 
                 if (Game.CurrentInputMode == InputMode.MouseAndKeyboard)
@@ -488,7 +488,7 @@ namespace vMenuClient
                             else
                             {
                                 NoClipEnabled = false;
-                                Notify.Error("This vehicle does not exist (somehow) or you need to be the driver of this vehicle to enable noclip!");
+                                Notify.Error("該載具不存在(以某種方式)，或者您需要成為該載具的駕駛員才能啟用noclip!");
                             }
                         }
                         else
@@ -532,7 +532,7 @@ namespace vMenuClient
             {
                 OnlinePlayersMenu = new OnlinePlayers();
                 Menu menu = OnlinePlayersMenu.GetMenu();
-                MenuItem button = new MenuItem("Online Players", "All currently connected players.")
+                MenuItem button = new MenuItem("線上玩家列表", "當前在伺服器的所有玩家")
                 {
                     Label = "→→→"
                 };
@@ -550,7 +550,7 @@ namespace vMenuClient
             {
                 BannedPlayersMenu = new BannedPlayers();
                 Menu menu = BannedPlayersMenu.GetMenu();
-                MenuItem button = new MenuItem("Banned Players", "View and manage all banned players in this menu.")
+                MenuItem button = new MenuItem("封鎖玩家列表", "當前在伺服器被封鎖的玩家名單")
                 {
                     Label = "→→→"
                 };
@@ -565,7 +565,7 @@ namespace vMenuClient
                 };
             }
 
-            MenuItem playerSubmenuBtn = new MenuItem("Player Related Options", "Open this submenu for player related subcategories.") { Label = "→→→" };
+            MenuItem playerSubmenuBtn = new MenuItem("玩家相關選項", "查看與玩家相關的功能") { Label = "→→→" };
             Menu.AddMenuItem(playerSubmenuBtn);
 
             // Add the player options menu.
@@ -573,21 +573,21 @@ namespace vMenuClient
             {
                 PlayerOptionsMenu = new PlayerOptions();
                 Menu menu = PlayerOptionsMenu.GetMenu();
-                MenuItem button = new MenuItem("Player Options", "Common player options can be accessed here.")
+                MenuItem button = new MenuItem("玩家選項", "可以查看常見的玩家功能.")
                 {
                     Label = "→→→"
                 };
                 AddMenu(PlayerSubmenu, menu, button);
             }
 
-            MenuItem vehicleSubmenuBtn = new MenuItem("Vehicle Related Options", "Open this submenu for vehicle related subcategories.") { Label = "→→→" };
+            MenuItem vehicleSubmenuBtn = new MenuItem("載具相關選項", "打開此子選單以獲取與載具相關的子類別.") { Label = "→→→" };
             Menu.AddMenuItem(vehicleSubmenuBtn);
             // Add the vehicle options Menu.
             if (IsAllowed(Permission.VOMenu))
             {
                 VehicleOptionsMenu = new VehicleOptions();
                 Menu menu = VehicleOptionsMenu.GetMenu();
-                MenuItem button = new MenuItem("Vehicle Options", "Here you can change common vehicle options, as well as tune & style your vehicle.")
+                MenuItem button = new MenuItem("載具相關選項", "您可以更改常用的載具選項，以及調整和样式化您的載具.")
                 {
                     Label = "→→→"
                 };
@@ -599,7 +599,7 @@ namespace vMenuClient
             {
                 VehicleSpawnerMenu = new VehicleSpawner();
                 Menu menu = VehicleSpawnerMenu.GetMenu();
-                MenuItem button = new MenuItem("Vehicle Spawner", "Spawn a vehicle by name or choose one from a specific category.")
+                MenuItem button = new MenuItem("載具召喚", "召喚出任何一台載具.")
                 {
                     Label = "→→→"
                 };
@@ -611,7 +611,7 @@ namespace vMenuClient
             {
                 SavedVehiclesMenu = new SavedVehicles();
                 Menu menu = SavedVehiclesMenu.GetMenu();
-                MenuItem button = new MenuItem("Saved Vehicles", "Save new vehicles, or spawn or delete already saved vehicles.")
+                MenuItem button = new MenuItem("載具管理", "可以用來管你的載具.")
                 {
                     Label = "→→→"
                 };
@@ -630,7 +630,7 @@ namespace vMenuClient
             {
                 PersonalVehicleMenu = new PersonalVehicle();
                 Menu menu = PersonalVehicleMenu.GetMenu();
-                MenuItem button = new MenuItem("Personal Vehicle", "Set a vehicle as your personal vehicle, and control some things about that vehicle when you're not inside.")
+                MenuItem button = new MenuItem("私人車輛", "將一輛車設置為私人車輛，不再室內時還可以對該車輛進行某些操作.")
                 {
                     Label = "→→→"
                 };
@@ -642,7 +642,7 @@ namespace vMenuClient
             {
                 PlayerAppearanceMenu = new PlayerAppearance();
                 Menu menu = PlayerAppearanceMenu.GetMenu();
-                MenuItem button = new MenuItem("Player Appearance", "Choose a ped model, customize it and save & load your customized characters.")
+                MenuItem button = new MenuItem("玩家容貌", "選擇一個PED模型，對其進行自定義，儲存加載角色.")
                 {
                     Label = "→→→"
                 };
@@ -650,14 +650,14 @@ namespace vMenuClient
 
                 MpPedCustomizationMenu = new MpPedCustomization();
                 Menu menu2 = MpPedCustomizationMenu.GetMenu();
-                MenuItem button2 = new MenuItem("MP Ped Customization", "Create, edit, save and load multiplayer peds. ~r~Note, you can only save peds created in this submenu. vMenu can NOT detect peds created outside of this submenu. Simply due to GTA limitations.")
+                MenuItem button2 = new MenuItem("人物外觀選項", "創建、編輯、保存和加載外觀。 ~r~注意，您只能保存在此子選單中創建的外觀。 vMenu無法檢測到在此子選單之外創建的外觀。完全是由於GTA限制.")
                 {
                     Label = "→→→"
                 };
                 AddMenu(PlayerSubmenu, menu2, button2);
             }
 
-            MenuItem worldSubmenuBtn = new MenuItem("World Related Options", "Open this submenu for world related subcategories.") { Label = "→→→" };
+            MenuItem worldSubmenuBtn = new MenuItem("世界相關選項", "打開與世界相關的子類別的子選單.") { Label = "→→→" };
             Menu.AddMenuItem(worldSubmenuBtn);
 
             // Add the time options menu.
@@ -666,7 +666,7 @@ namespace vMenuClient
             {
                 TimeOptionsMenu = new TimeOptions();
                 Menu menu = TimeOptionsMenu.GetMenu();
-                MenuItem button = new MenuItem("Time Options", "Change the time, and edit other time related options.")
+                MenuItem button = new MenuItem("時間選項", "更改時間，並編輯其他與時間相關的選項.")
                 {
                     Label = "→→→"
                 };
@@ -679,7 +679,7 @@ namespace vMenuClient
             {
                 WeatherOptionsMenu = new WeatherOptions();
                 Menu menu = WeatherOptionsMenu.GetMenu();
-                MenuItem button = new MenuItem("Weather Options", "Change all weather related options here.")
+                MenuItem button = new MenuItem("天氣選項", "在此處更改所有與天氣相關的選項.")
                 {
                     Label = "→→→"
                 };
@@ -691,7 +691,7 @@ namespace vMenuClient
             {
                 WeaponOptionsMenu = new WeaponOptions();
                 Menu menu = WeaponOptionsMenu.GetMenu();
-                MenuItem button = new MenuItem("Weapon Options", "Add/remove weapons, modify weapons and set ammo options.")
+                MenuItem button = new MenuItem("武器選項", "添加/刪除武器，修改武器並設置彈藥選項.")
                 {
                     Label = "→→→"
                 };
@@ -703,7 +703,7 @@ namespace vMenuClient
             {
                 WeaponLoadoutsMenu = new WeaponLoadouts();
                 Menu menu = WeaponLoadoutsMenu.GetMenu();
-                MenuItem button = new MenuItem("Weapon Loadouts", "Mange, and spawn saved weapon loadouts.")
+                MenuItem button = new MenuItem("武器裝載量", "管理，並生成節省的武器裝載.")
                 {
                     Label = "→→→"
                 };
@@ -712,7 +712,7 @@ namespace vMenuClient
 
             if (IsAllowed(Permission.NoClip))
             {
-                MenuItem toggleNoclip = new MenuItem("Toggle NoClip", "Toggle NoClip on or off.");
+                MenuItem toggleNoclip = new MenuItem("切換 NoClip", "切換 NoClip 啟用或停用.");
                 PlayerSubmenu.AddMenuItem(toggleNoclip);
                 PlayerSubmenu.OnItemSelect += (sender, item, index) =>
                 {
@@ -728,7 +728,7 @@ namespace vMenuClient
             {
                 VoiceChatSettingsMenu = new VoiceChat();
                 Menu menu = VoiceChatSettingsMenu.GetMenu();
-                MenuItem button = new MenuItem("Voice Chat Settings", "Change Voice Chat options here.")
+                MenuItem button = new MenuItem("語音聊天設置", "在此處更改語音聊天選項.")
                 {
                     Label = "→→→"
                 };
@@ -738,7 +738,7 @@ namespace vMenuClient
             {
                 RecordingMenu = new Recording();
                 Menu menu = RecordingMenu.GetMenu();
-                MenuItem button = new MenuItem("Recording Options", "In-game recording options.")
+                MenuItem button = new MenuItem("錄影選項", "遊戲中的錄製選項.")
                 {
                     Label = "→→→"
                 };
@@ -749,7 +749,7 @@ namespace vMenuClient
             {
                 MiscSettingsMenu = new MiscSettings();
                 Menu menu = MiscSettingsMenu.GetMenu();
-                MenuItem button = new MenuItem("Misc Settings", "Miscellaneous vMenu options/settings can be configured here. You can also save your settings in this menu.")
+                MenuItem button = new MenuItem("其他設定", "可以在此處配置其他vMenu選項/設置。您也可以在此選單中保存設置.")
                 {
                     Label = "→→→"
                 };
@@ -759,7 +759,7 @@ namespace vMenuClient
             // Add About Menu.
             AboutMenu = new About();
             Menu sub = AboutMenu.GetMenu();
-            MenuItem btn = new MenuItem("About vMenu", "Information about vMenu.")
+            MenuItem btn = new MenuItem("關於vMenu", "介紹 vMenu.")
             {
                 Label = "→→→"
             };
@@ -770,7 +770,7 @@ namespace vMenuClient
 
             if (!GetSettingsBool(Setting.vmenu_use_permissions))
             {
-                Notify.Alert("vMenu is set up to ignore permissions, default permissions will be used.");
+                Notify.Alert("vMenu設置為忽略權限，將使用預設權限.");
             }
 
             if (PlayerSubmenu.Size > 0)

@@ -21,11 +21,11 @@ namespace vMenuClient
         private Menu savedPedsMenu;
         private Menu spawnPedsMenu;
         private Menu addonPedsMenu;
-        private Menu mainPedsMenu = new Menu("Main Peds", "Spawn A Ped");
-        private Menu animalsPedsMenu = new Menu("Animals", "Spawn A Ped");
-        private Menu malePedsMenu = new Menu("Male Peds", "Spawn A Ped");
-        private Menu femalePedsMenu = new Menu("Female Peds", "Spawn A Ped");
-        private Menu otherPedsMenu = new Menu("Other Peds", "Spawn A Ped");
+        private Menu mainPedsMenu = new Menu("主要人物", "產生外觀d");
+        private Menu animalsPedsMenu = new Menu("動物", "產生外觀");
+        private Menu malePedsMenu = new Menu("男性", "產生外觀");
+        private Menu femalePedsMenu = new Menu("女性", "產生外觀");
+        private Menu otherPedsMenu = new Menu("其他", "產生外觀");
 
         public static Dictionary<string, uint> AddonPeds;
 
@@ -41,11 +41,11 @@ namespace vMenuClient
         private void CreateMenu()
         {
             // Create the menu.
-            menu = new Menu(Game.Player.Name, "Player Appearance");
-            savedPedsMenu = new Menu(Game.Player.Name, "Saved Peds");
-            pedCustomizationMenu = new Menu(Game.Player.Name, "Customize Saved Ped");
-            spawnPedsMenu = new Menu(Game.Player.Name, "Spawn Ped");
-            addonPedsMenu = new Menu(Game.Player.Name, "Addon Peds");
+            menu = new Menu(Game.Player.Name, "玩家外觀");
+            savedPedsMenu = new Menu(Game.Player.Name, "保存外觀");
+            pedCustomizationMenu = new Menu(Game.Player.Name, "自定義保存外觀");
+            spawnPedsMenu = new Menu(Game.Player.Name, "產生外觀");
+            addonPedsMenu = new Menu(Game.Player.Name, "添加外觀");
 
 
             // Add the (submenus) to the menu pool.
@@ -60,26 +60,25 @@ namespace vMenuClient
             MenuController.AddSubmenu(spawnPedsMenu, otherPedsMenu);
 
             // Create the menu items.
-            MenuItem pedCustomization = new MenuItem("Ped Customization", "Modify your ped's appearance.") { Label = "→→→" };
-            MenuItem saveCurrentPed = new MenuItem("Save Ped", "Save your current ped. Note for the MP Male/Female peds this won't save most of their customization, just because that's impossible. Create those characters in the MP Character creator instead.");
-            MenuItem savedPedsBtn = new MenuItem("Saved Peds", "Edit, rename, clone, spawn or delete saved peds.") { Label = "→→→" };
-            MenuItem spawnPedsBtn = new MenuItem("Spawn Peds", "Change ped model by selecting one from the list or by selecting an addon ped from the list.") { Label = "→→→" };
+            MenuItem pedCustomization = new MenuItem("自訂模型外觀", "修改模型外觀的外觀.") { Label = "→→→" };
+            MenuItem saveCurrentPed = new MenuItem("儲存目前模型外觀", "保存當前的模型。請注意，對於男/女模型，這不會保存大多數自定義設置.");
+            MenuItem savedPedsBtn = new MenuItem("儲存模型外觀", "編輯，重命名，複製，產生或刪除已保存的模型.") { Label = "→→→" };
+            MenuItem spawnPedsBtn = new MenuItem("產生模型外觀", "通過從列表中選擇一個或從列表中選擇一個插件來更改模型.") { Label = "→→→" };
 
 
-            MenuItem spawnByNameBtn = new MenuItem("Spawn By Name", "Spawn a ped by entering it's name manually.");
-            MenuItem addonPedsBtn = new MenuItem("Addon Peds", "Spawn a ped from the addon peds list.") { Label = "→→→" };
-            MenuItem mainPedsBtn = new MenuItem("Main Peds", "Select a new ped from the main player-peds list.") { Label = "→→→" };
-            MenuItem animalPedsBtn = new MenuItem("Animals", "Become an animal. ~r~Note this may crash your own or other players' game if you die as an animal, godmode can NOT prevent this.") { Label = "→→→" };
-            MenuItem malePedsBtn = new MenuItem("Male Peds", "Select a male ped.") { Label = "→→→" };
-            MenuItem femalePedsBtn = new MenuItem("Female Peds", "Select a female ped.") { Label = "→→→" };
-            MenuItem otherPedsBtn = new MenuItem("Other Peds", "Select a ped.") { Label = "→→→" };
+            MenuItem spawnByNameBtn = new MenuItem("產出模型名稱", "手動輸入模型外觀即可生成.");
+            MenuItem addonPedsBtn = new MenuItem("添加模型外觀", "從插件模型列表中生成外觀.") { Label = "→→→" };
+            MenuItem mainPedsBtn = new MenuItem("主要模型外觀", "從主要玩家列表中選擇一個新模型.") { Label = "→→→" };
+            MenuItem animalPedsBtn = new MenuItem("動物模型外觀", "成為動物. ~r~請注意，如果您死為動物，這可能會使您自己的遊戲或其他玩家的遊戲崩潰，Godmode無法阻止這種情況.") { Label = "→→→" };
+            MenuItem malePedsBtn = new MenuItem("男性模型外觀", "選擇男性模型外觀.") { Label = "→→→" };
+            MenuItem femalePedsBtn = new MenuItem("女性模型外觀", "選擇女性模型外觀.") { Label = "→→→" };
+            MenuItem otherPedsBtn = new MenuItem("其他模型外觀", "選擇其他模型外觀.") { Label = "→→→" };
 
             List<string> walkstyles = new List<string>() { "Normal", "Injured", "Tough Guy", "Femme", "Gangster", "Posh", "Sexy", "Business", "Drunk", "Hipster" };
-            MenuListItem walkingStyle = new MenuListItem("Walking Style", walkstyles, 0, "Change the walking style of your current ped. " +
-                "You need to re-apply this each time you change player model or load a saved ped.");
+            MenuListItem walkingStyle = new MenuListItem("走路風格", walkstyles, 0, "更改當前模型的步行方式 每次更改模型或加載已保存的模型外觀時，都需要重新應用此功能");
 
             List<string> clothingGlowAnimations = new List<string>() { "On", "Off", "Fade", "Flash" };
-            MenuListItem clothingGlowType = new MenuListItem("Illuminated Clothing Style", clothingGlowAnimations, ClothingAnimationType, "Set the style of the animation used on your player's illuminated clothing items.");
+            MenuListItem clothingGlowType = new MenuListItem("發光的服裝風格", clothingGlowAnimations, ClothingAnimationType, "設置在玩家的發光衣服上使用的樣式.");
 
             // Add items to the menu.
             menu.AddMenuItem(pedCustomization);
@@ -103,19 +102,19 @@ namespace vMenuClient
             MenuController.BindMenuItem(menu, savedPedsMenu, savedPedsBtn);
             MenuController.BindMenuItem(menu, spawnPedsMenu, spawnPedsBtn);
 
-            Menu selectedSavedPedMenu = new Menu("Saved Ped", "renameme");
+            Menu selectedSavedPedMenu = new Menu("儲存模型外觀", "重新命名");
             MenuController.AddSubmenu(savedPedsMenu, selectedSavedPedMenu);
-            MenuItem spawnSavedPed = new MenuItem("Spawn Saved Ped", "Spawn this saved ped.");
-            MenuItem cloneSavedPed = new MenuItem("Clone Saved Ped", "Clone this saved ped.");
-            MenuItem renameSavedPed = new MenuItem("Rename Saved Ped", "Rename this saved ped.") { LeftIcon = MenuItem.Icon.WARNING };
-            MenuItem replaceSavedPed = new MenuItem("~r~Replace Saved Ped", "Repalce this saved ped with your current ped. Note this can not be undone!") { LeftIcon = MenuItem.Icon.WARNING };
-            MenuItem deleteSavedPed = new MenuItem("~r~Delete Saved Ped", "Delete this saved ped. Note this can not be undone!") { LeftIcon = MenuItem.Icon.WARNING };
+            MenuItem spawnSavedPed = new MenuItem("產生已儲存的模型外觀", "產生已儲存的模型外觀.");
+            MenuItem cloneSavedPed = new MenuItem("複製已儲存的模型外觀", "複製已儲存的模型外觀.");
+            MenuItem renameSavedPed = new MenuItem("重新命名已儲存的模型外觀", "重新命名已儲存的模型外觀.") { LeftIcon = MenuItem.Icon.WARNING };
+            MenuItem replaceSavedPed = new MenuItem("~r~取代已儲存的模型外觀", "取代原模型外觀 請注意，此操作無法撤消！") { LeftIcon = MenuItem.Icon.WARNING };
+            MenuItem deleteSavedPed = new MenuItem("~r~刪除已儲存的模型外觀", "刪除此模型外觀 請注意，此操作無法撤消！") { LeftIcon = MenuItem.Icon.WARNING };
 
             if (!IsAllowed(Permission.PASpawnSaved))
             {
                 spawnSavedPed.Enabled = false;
                 spawnSavedPed.RightIcon = MenuItem.Icon.LOCK;
-                spawnSavedPed.Description = "You are not allowed to spawn saved peds.";
+                spawnSavedPed.Description = "您沒有權限產生已儲存的模型外觀.";
             }
 
             selectedSavedPedMenu.AddMenuItem(spawnSavedPed);
@@ -134,7 +133,7 @@ namespace vMenuClient
                 }
                 else if (item == cloneSavedPed)
                 {
-                    string name = await GetUserInput($"Enter a clone name ({savedPed.Key.Substring(4)})", savedPed.Key.Substring(4), 30);
+                    string name = await GetUserInput($"輸入一個要複製的名字 ({savedPed.Key.Substring(4)})", savedPed.Key.Substring(4), 30);
                     if (string.IsNullOrEmpty(name))
                     {
                         Notify.Error(CommonErrors.InvalidSaveName);
@@ -149,18 +148,18 @@ namespace vMenuClient
                         {
                             if (StorageManager.SavePedInfo("ped_" + name, savedPed.Value, false))
                             {
-                                Notify.Success($"Saved Ped has successfully been cloned. Clone name: ~g~<C>{name}</C>~s~.");
+                                Notify.Success($"保存模型外觀已成功複製。 複製名稱: ~g~<{name}~s~.");
                             }
                             else
                             {
-                                Notify.Error(CommonErrors.UnknownError, placeholderValue: " Could not save your cloned ped. Don't worry, your original ped is unharmed.");
+                                Notify.Error(CommonErrors.UnknownError, placeholderValue: " 無法保存您複製的模型外觀。 別擔心，您的原始模型外觀沒有受到損壞.");
                             }
                         }
                     }
                 }
                 else if (item == renameSavedPed)
                 {
-                    string name = await GetUserInput($"Enter a new name for: {savedPed.Key.Substring(4)}", savedPed.Key.Substring(4), 30);
+                    string name = await GetUserInput($"輸入一個新名字: {savedPed.Key.Substring(4)}", savedPed.Key.Substring(4), 30);
                     if (string.IsNullOrEmpty(name))
                     {
                         Notify.Error(CommonErrors.InvalidSaveName);
@@ -169,12 +168,12 @@ namespace vMenuClient
                     {
                         if ("ped_" + name == savedPed.Key)
                         {
-                            Notify.Error("You need to choose a different name, you can't use the same name as your existing ped.");
+                            Notify.Error("您需要選擇其他名稱，不能使用與現有模型外觀相同的名稱.");
                             return;
                         }
                         if (StorageManager.SavePedInfo("ped_" + name, savedPed.Value, false))
                         {
-                            Notify.Success($"Saved Ped has successfully been renamed. New ped name: ~g~<C>{name}</C>~s~.");
+                            Notify.Success($"保存模型外觀成功 新的模型外觀名稱: ~g~<{name}~s~.");
                             DeleteResourceKvp(savedPed.Key);
                             selectedSavedPedMenu.MenuSubtitle = name;
                             savedPed = new KeyValuePair<string, PedInfo>("ped_" + name, savedPed.Value);
@@ -187,36 +186,36 @@ namespace vMenuClient
                 }
                 else if (item == replaceSavedPed)
                 {
-                    if (item.Label == "Are you sure?")
+                    if (item.Label == "您確定嗎?")
                     {
                         item.Label = "";
                         bool success = await SavePed(savedPed.Key.Substring(4), overrideExistingPed: true);
                         if (!success)
                         {
-                            Notify.Error(CommonErrors.UnknownError, placeholderValue: " Could not save your replaced ped. Don't worry, your original ped is unharmed.");
+                            Notify.Error(CommonErrors.UnknownError, placeholderValue: " 無法保存您覆蓋的模型外觀。 別擔心，您的原始模型外觀沒有受到損壞.");
                         }
                         else
                         {
-                            Notify.Success("Your saved ped has successfully been replaced.");
+                            Notify.Success("您已經成功覆蓋魔形外觀.");
                             savedPed = new KeyValuePair<string, PedInfo>(savedPed.Key, StorageManager.GetSavedPedInfo(savedPed.Key));
                         }
                     }
                     else
                     {
-                        item.Label = "Are you sure?";
+                        item.Label = "您確定嗎?";
                     }
                 }
                 else if (item == deleteSavedPed)
                 {
-                    if (item.Label == "Are you sure?")
+                    if (item.Label == "您確定嗎?")
                     {
                         DeleteResourceKvp(savedPed.Key);
-                        Notify.Success("Your saved ped has been deleted.");
+                        Notify.Success("您已經成功刪除模型外觀");
                         selectedSavedPedMenu.GoBack();
                     }
                     else
                     {
-                        item.Label = "Are you sure?";
+                        item.Label = "您確定嗎?";
                     }
                 }
             };
@@ -247,7 +246,7 @@ namespace vMenuClient
                 {
                     if (size < 1 || !savedPedsMenu.GetMenuItems().Any(e => ped.Key == e.ItemData.Key))
                     {
-                        MenuItem btn = new MenuItem(ped.Key.Substring(4), "Click to manage this saved ped.") { Label = "→→→", ItemData = ped };
+                        MenuItem btn = new MenuItem(ped.Key.Substring(4), "點擊管理此已保存的模型外觀.") { Label = "→→→", ItemData = ped };
                         savedPedsMenu.AddMenuItem(btn);
                         MenuController.BindMenuItem(savedPedsMenu, selectedSavedPedMenu, btn);
                     }
@@ -313,13 +312,13 @@ namespace vMenuClient
                         name = ped.Key;
                     }
 
-                    MenuItem pedBtn = new MenuItem(ped.Key, "Click to spawn this model.") { Label = $"({name})" };
+                    MenuItem pedBtn = new MenuItem(ped.Key, "點擊來召喚這個模型外觀.") { Label = $"({name})" };
 
                     if (!IsModelInCdimage(ped.Value) || !IsModelAPed(ped.Value))
                     {
                         pedBtn.Enabled = false;
                         pedBtn.LeftIcon = MenuItem.Icon.LOCK;
-                        pedBtn.Description = "This ped is not (correctly) streamed. If you are the server owner, please ensure that the ped name and model are valid!";
+                        pedBtn.Description = "這個模型外觀不是 (correctly) 資料. 如果您是服務器所有者，請確保ped名稱和型號有效!";
                     }
 
                     addonPedsMenu.AddMenuItem(pedBtn);
@@ -348,7 +347,7 @@ namespace vMenuClient
                 else
                 {
                     animalPedsBtn.Enabled = false;
-                    animalPedsBtn.Description = "This is disabled by the server owner, probably for a good reason because animals quite often crash the game.";
+                    animalPedsBtn.Description = "伺服器服主禁用了此功能，這可能是有充分原因的，因為動物經常會導致遊戲崩潰.";
                     animalPedsBtn.LeftIcon = MenuItem.Icon.LOCK;
                 }
 
@@ -358,46 +357,46 @@ namespace vMenuClient
 
                 foreach (var animal in animalModels)
                 {
-                    MenuItem animalBtn = new MenuItem(animal.Key, "Click to spawn this animal.") { Label = $"({animal.Value})" };
+                    MenuItem animalBtn = new MenuItem(animal.Key, "點擊來召喚這個動物模型外觀.") { Label = $"({animal.Value})" };
                     animalsPedsMenu.AddMenuItem(animalBtn);
                 }
 
                 foreach (var ped in mainModels)
                 {
-                    MenuItem pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
+                    MenuItem pedBtn = new MenuItem(ped.Key, "點擊來召喚這個模型外觀.") { Label = $"({ped.Value})" };
                     mainPedsMenu.AddMenuItem(pedBtn);
                 }
 
                 foreach (var ped in maleModels)
                 {
-                    MenuItem pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
+                    MenuItem pedBtn = new MenuItem(ped.Key, "點擊來召喚這個模型外觀.") { Label = $"({ped.Value})" };
                     malePedsMenu.AddMenuItem(pedBtn);
                 }
 
                 foreach (var ped in femaleModels)
                 {
-                    MenuItem pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
+                    MenuItem pedBtn = new MenuItem(ped.Key, "點擊來召喚這個模型外觀.") { Label = $"({ped.Value})" };
                     femalePedsMenu.AddMenuItem(pedBtn);
                 }
 
                 foreach (var ped in otherPeds)
                 {
-                    MenuItem pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
+                    MenuItem pedBtn = new MenuItem(ped.Key, "點擊來召喚這個模型外觀.") { Label = $"({ped.Value})" };
                     otherPedsMenu.AddMenuItem(pedBtn);
                 }
 
                 async void FilterMenu(Menu m, Control c)
                 {
-                    string input = await GetUserInput("Filter by ped model name, leave this empty to reset the filter");
+                    string input = await GetUserInput("按造模型外觀型號名稱過濾，將該字段留空以重置過濾器");
                     if (!string.IsNullOrEmpty(input))
                     {
                         m.FilterMenuItems((mb) => mb.Label.ToLower().Contains(input.ToLower()) || mb.Text.ToLower().Contains(input.ToLower()));
-                        Subtitle.Custom("Filter applied.");
+                        Subtitle.Custom("過濾已經套用");
                     }
                     else
                     {
                         m.ResetFilter();
-                        Subtitle.Custom("Filter cleared.");
+                        Subtitle.Custom("過濾已經清除.");
                     }
                 }
 
@@ -434,7 +433,7 @@ namespace vMenuClient
                             case "a_c_killerwhale":
                             case "a_c_sharkhammer":
                             case "a_c_sharktiger":
-                                Notify.Error("This animal can only be spawned when you are in water, otherwise you will die immediately.");
+                                Notify.Error("該動物只能在水中時召喚，否則會立即死亡.");
                                 return;
                             default: break;
                         }
@@ -476,7 +475,7 @@ namespace vMenuClient
                 {
                     if (item == spawnByNameBtn)
                     {
-                        string model = await GetUserInput("Ped Model Name", 30);
+                        string model = await GetUserInput("模型外觀名稱", 30);
                         if (!string.IsNullOrEmpty(model))
                         {
                             await SetPlayerSkin(model, new PedInfo() { version = -1 }, true);
@@ -515,11 +514,11 @@ namespace vMenuClient
                 {
                     if (await SavePed())
                     {
-                        Notify.Success("Successfully saved your new ped.");
+                        Notify.Success("成功儲存新的模型外觀.");
                     }
                     else
                     {
-                        Notify.Error("Could not save your current ped, does that save name already exist?");
+                        Notify.Error("無法保存新的模型外觀，可能已經存在?");
                     }
                 }
             };
@@ -556,8 +555,8 @@ namespace vMenuClient
                             if (!IsHelpMessageBeingDisplayed())
                             {
                                 BeginTextCommandDisplayHelp("TWOSTRINGS");
-                                AddTextComponentSubstringPlayerName("Hold ~INPUT_SWITCH_VISOR~ to flip your helmet visor open or closed");
-                                AddTextComponentSubstringPlayerName("when on foot or on a motorcycle and when vMenu is closed.");
+                                AddTextComponentSubstringPlayerName("按住 ~INPUT_SWITCH_VISOR~ 打開或關閉頭盔遮陽板");
+                                AddTextComponentSubstringPlayerName("步行或騎摩托車且vMenu關閉時.");
                                 EndTextCommandDisplayHelp(0, false, true, 6000);
                             }
                         }
@@ -641,7 +640,7 @@ namespace vMenuClient
                         drawableTexturesList.Add($"Drawable #{i + 1} (of {maxVariations})");
                     }
 
-                    MenuListItem drawableTextures = new MenuListItem($"{textureNames[drawable]}", drawableTexturesList, currentDrawable, $"Use ← & → to select a ~o~{textureNames[drawable]} Variation~s~, press ~r~enter~s~ to cycle through the available textures.");
+                    MenuListItem drawableTextures = new MenuListItem($"{textureNames[drawable]}", drawableTexturesList, currentDrawable, $"使用按鍵 ← & → 來選擇一個 ~o~{textureNames[drawable]} 變異~s~, 按下 ~r~enter~s~ 循環瀏覽可用的紋理.");
                     drawablesMenuListItems.Add(drawableTextures, drawable);
                     pedCustomizationMenu.AddMenuItem(drawableTextures);
                 }
@@ -667,7 +666,7 @@ namespace vMenuClient
                     }
 
 
-                    MenuListItem propTextures = new MenuListItem($"{propNames[tmpProp]}", propTexturesList, currentProp + 1, $"Use ← & → to select a ~o~{propNames[tmpProp]} Variation~s~, press ~r~enter~s~ to cycle through the available textures.");
+                    MenuListItem propTextures = new MenuListItem($"{propNames[tmpProp]}", propTexturesList, currentProp + 1, $"使用 ← & → 來選擇一個 ~o~{propNames[tmpProp]} 變異~s~, 按下 ~r~enter~s~ 循環瀏覽可用的紋理.");
                     propsMenuListItems.Add(propTextures, realProp);
                     pedCustomizationMenu.AddMenuItem(propTextures);
 
@@ -680,27 +679,27 @@ namespace vMenuClient
         #region Textures & Props
         private readonly List<string> textureNames = new List<string>()
         {
-            "Head",
-            "Mask / Facial Hair",
-            "Hair Style / Color",
-            "Hands / Upper Body",
-            "Legs / Pants",
-            "Bags / Parachutes",
-            "Shoes",
-            "Neck / Scarfs",
-            "Shirt / Accessory",
-            "Body Armor / Accessory 2",
-            "Badges / Logos",
-            "Shirt Overlay / Jackets",
+            "臉",
+            "面具 / 鬍子",
+            "髮型 / 髮色",
+            "手部 / 服裝",
+            "腿 / 褲子",
+            "背包 / 降落傘",
+            "鞋子",
+            "頸部 / 圍巾",
+            "襯衫 / 附件",
+            "防彈衣 / 附件 2",
+            "徽章 / 標誌",
+            "襯衫覆蓋 / 外套",
         };
 
         private readonly List<string> propNames = new List<string>()
         {
-            "Hats / Helmets", // id 0
-            "Glasses", // id 1
-            "Misc", // id 2
-            "Watches", // id 6
-            "Bracelets", // id 7
+            "帽子 / 頭盔", // id 0
+            "眼鏡", // id 1
+            "雜項", // id 2
+            "手錶", // id 6
+            "手鍊", // id 7
         };
         #endregion
         #endregion
