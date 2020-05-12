@@ -1585,7 +1585,7 @@ namespace vMenuClient
         {
             // Create the window title string.
             var spacer = "\t";
-            AddTextEntry($"{GetCurrentResourceName().ToUpper()}_WINDOW_TITLE", $"{windowTitle ?? "Enter"}:{spacer}(最大 {maxInputLength.ToString()} 字元)");
+            AddTextEntry($"{GetCurrentResourceName().ToUpper()}_WINDOW_TITLE", $"{windowTitle ?? "Enter"}:{spacer}(最大 {maxInputLength} 字元)");
 
             // Display the input box.
             DisplayOnscreenKeyboard(1, $"{GetCurrentResourceName().ToUpper()}_WINDOW_TITLE", "", defaultText ?? "", "", "", "", maxInputLength);
@@ -1671,11 +1671,11 @@ namespace vMenuClient
                 {
                     if (prevUpper)
                     {
-                        outputString += $"{c.ToString()}";
+                        outputString += $"{c}";
                     }
                     else
                     {
-                        outputString += $" {c.ToString()}";
+                        outputString += $" {c}";
                     }
                     prevUpper = true;
                 }
@@ -2422,7 +2422,7 @@ namespace vMenuClient
                 }
                 else
                 {
-                    Notify.Error($"這個 ({inputName.ToString()}) 不是有效的武器模型名稱或模型hash ({model.ToString()}) 在遊戲文件中找不到.");
+                    Notify.Error($"這個 ({inputName}) 不是有效的武器模型名稱或模型hash ({model}) 在遊戲文件中找不到.");
                 }
             }
             else
