@@ -967,7 +967,7 @@ namespace vMenuClient
             MenuListItem wheelColorsList = new MenuListItem("輪胎顏色", wheelColors, 0);
             MenuListItem dashColorList = new MenuListItem("儀表板顏色", classic, 0);
             MenuListItem intColorList = new MenuListItem("內部 / 修剪顏色", classic, 0);
-            MenuSliderItem vehicleEnveffScale = new MenuSliderItem("這僅適用於某些車輛，例如besra。它褪色某些塗料層。", 0, 20, 10, true);
+            MenuSliderItem vehicleEnveffScale = new MenuSliderItem("車輛塗裝", "這僅適用於某些車輛，例如besra。它褪色某些塗料層。", 0, 20, 10, true);
 
             MenuItem chrome = new MenuItem("鉻和金");
             VehicleColorsMenu.AddMenuItem(chrome);
@@ -1748,9 +1748,12 @@ namespace vMenuClient
                 #region more variables and setup
                 veh = GetVehicle();
                 // Create the wheel types list & listitem and add it to the menu.
-                List<string> wheelTypes = new List<string>() { "Sports", "Muscle", "Lowrider", "SUV", "Offroad", "Tuner", "Bike Wheels", "High End" };
-                MenuListItem vehicleWheelType = new MenuListItem("輪胎", wheelTypes, GetVehicleWheelType(veh.Handle), $"為您的載具選擇 ~y~輪胎~s~");
-                VehicleModMenu.AddMenuItem(vehicleWheelType);
+                List<string> wheelTypes = new List<string>() { "Sports", "Muscle", "Lowrider", "SUV", "Offroad", "Tuner", "Bike Wheels", "High End", "Benny's (1)", "Benny's (2)" };
+                MenuListItem vehicleWheelType = new MenuListItem("輪胎型態", wheelTypes, MathUtil.Clamp(GetVehicleWheelType(veh.Handle), 0, 9), $"為您的載具選擇 ~y~輪胎~s~");
+                if (!veh.Model.IsBoat && !veh.Model.IsHelicopter && !veh.Model.IsPlane && !veh.Model.IsBicycle && !veh.Model.IsTrain)
+                {
+                    VehicleModMenu.AddMenuItem(vehicleWheelType);
+                }
 
                 // Create the checkboxes for some options.
                 MenuCheckboxItem toggleCustomWheels = new MenuCheckboxItem("自定義輪胎", "可以對您的載具管理 ~y~自定義輪胎~s~.", GetVehicleModVariation(veh.Handle, 23));
@@ -1941,33 +1944,46 @@ namespace vMenuClient
                     // Wheel types
                     else if (item2 == vehicleWheelType)
                     {
-                        // Set the wheel type.
-                        int nindex = newIndex;
-                        if (newIndex >= item2.ItemsCount)
+                        // 6 should be used for bikes only.
+                        if ((newIndex == 6 && veh.Model.IsBike) || (newIndex != 6 && !veh.Model.IsBike))
                         {
-                            nindex = 0;
+                            // Set the wheel type
+                            SetVehicleWheelType(veh.Handle, newIndex);
+
+                            bool customWheels = GetVehicleModVariation(veh.Handle, 23);
+
+                            // Reset the wheel mod index for front wheels
+                            SetVehicleMod(veh.Handle, 23, -1, customWheels);
+
+                            // If the model is a bike, do the same thing for the rear wheels.
+                            if (veh.Model.IsBike)
+                            {
+                                SetVehicleMod(veh.Handle, 24, -1, customWheels);
+                            }
+
+                            // Refresh the menu with the item index so that the view doesn't change
+                            UpdateMods(selectedIndex: itemIndex);
                         }
-                        else if (newIndex < 0)
+                        else
                         {
-                            nindex = item2.ItemsCount - 1;
+                            // Go past the index if it's not a bike.
+                            if (!veh.Model.IsBike)
+                            {
+                                if (newIndex > oldIndex)
+                                {
+                                    item2.ListIndex++;
+                                }
+                                else
+                                {
+                                    item2.ListIndex--;
+                                }
+                            }
+                            // Reset the index to 6 if it is a bike
+                            else
+                            {
+                                item2.ListIndex = 6;
+                            }
                         }
-
-                        // set the wheel type
-                        SetVehicleWheelType(veh.Handle, nindex);
-
-                        bool customWheels = GetVehicleModVariation(veh.Handle, 23);
-
-                        // reset the wheel mod index for front wheels
-                        SetVehicleMod(veh.Handle, 23, -1, customWheels);
-
-                        // if the model is a bike, do the same thing for the rear wheels.
-                        if (veh.Model.IsBike)
-                        {
-                            SetVehicleMod(veh.Handle, 24, -1, customWheels);
-                        }
-
-                        // Refresh the menu with the item index so that the view doesn't change
-                        UpdateMods(selectedIndex: itemIndex);
                     }
                     // Tire smoke
                     else if (item2 == tireSmoke)
@@ -2050,7 +2066,6 @@ namespace vMenuClient
 
         internal static void _SetHeadlightsColorOnVehicle(Vehicle veh, int newIndex)
         {
-
             if (veh != null && veh.Exists() && veh.Driver == Game.PlayerPed)
             {
                 if (newIndex > -1 && newIndex < 13)
@@ -2059,7 +2074,7 @@ namespace vMenuClient
                 }
                 else
                 {
-                    SetVehicleHeadlightsColour(veh.Handle, -1);
+                    SetVehicleHeadlightsColour(veh.Handle, newIndex);
                 }
             }
         }
