@@ -967,9 +967,11 @@ namespace vMenuClient
             MenuListItem wheelColorsList = new MenuListItem("輪胎顏色", wheelColors, 0);
             MenuListItem dashColorList = new MenuListItem("儀表板顏色", classic, 0);
             MenuListItem intColorList = new MenuListItem("內部 / 修剪顏色", classic, 0);
+            MenuSliderItem vehicleEnveffScale = new MenuSliderItem("這僅適用於某些車輛，例如besra。它褪色某些塗料層。", 0, 20, 10, true);
 
             MenuItem chrome = new MenuItem("鉻和金");
             VehicleColorsMenu.AddMenuItem(chrome);
+            VehicleColorsMenu.AddMenuItem(vehicleEnveffScale);
 
             VehicleColorsMenu.OnItemSelect += (sender, item, index) =>
             {
@@ -983,7 +985,22 @@ namespace vMenuClient
                 }
                 else
                 {
-                    Notify.Error("您需要成為載具的駕駛員才能更改載具的顏色.");
+                    Notify.Error("您必須是要載具的駕駛才能對此進行更改。");
+                }
+            };
+            VehicleColorsMenu.OnSliderPositionChange += (m, sliderItem, oldPosition, newPosition, itemIndex) =>
+            {
+                Vehicle veh = GetVehicle();
+                if (veh != null && veh.Driver == Game.PlayerPed && !veh.IsDead)
+                {
+                    if (sliderItem == vehicleEnveffScale)
+                    {
+                        SetVehicleEnveffScale(veh.Handle, newPosition / 20f);
+                    }
+                }
+                else
+                {
+                    Notify.Error("您必須是要載具的駕駛才能對此進行更改。");
                 }
             };
 
@@ -1744,7 +1761,7 @@ namespace vMenuClient
                 // Add the checkboxes to the menu.
                 VehicleModMenu.AddMenuItem(toggleCustomWheels);
                 VehicleModMenu.AddMenuItem(xenonHeadlights);
-                int currentHeadlightColor = _GET_VEHICLE_HEADLIGHTS_COLOR(veh);
+                int currentHeadlightColor = _GetHeadlightsColorFromVehicle(veh);
                 if (currentHeadlightColor < 0 || currentHeadlightColor > 12)
                 {
                     currentHeadlightColor = 13;
@@ -2004,11 +2021,11 @@ namespace vMenuClient
                     {
                         if (newIndex == 13) // default
                         {
-                            _SET_VEHICLE_HEADLIGHTS_COLOR(veh, 255);
+                            _SetHeadlightsColorOnVehicle(veh, 255);
                         }
                         else if (newIndex > -1 && newIndex < 13)
                         {
-                            _SET_VEHICLE_HEADLIGHTS_COLOR(veh, newIndex);
+                            _SetHeadlightsColorOnVehicle(veh, newIndex);
                         }
                     }
                     #endregion
@@ -2031,28 +2048,29 @@ namespace vMenuClient
             //VehicleModMenu.CurrentIndex = selectedIndex;
         }
 
-        internal static void _SET_VEHICLE_HEADLIGHTS_COLOR(Vehicle veh, int newIndex)
+        internal static void _SetHeadlightsColorOnVehicle(Vehicle veh, int newIndex)
         {
+
             if (veh != null && veh.Exists() && veh.Driver == Game.PlayerPed)
             {
                 if (newIndex > -1 && newIndex < 13)
                 {
-                    CitizenFX.Core.Native.Function.Call((CitizenFX.Core.Native.Hash)0xE41033B25D003A07, veh.Handle, newIndex);
+                    SetVehicleHeadlightsColour(veh.Handle, newIndex);
                 }
                 else
                 {
-                    CitizenFX.Core.Native.Function.Call((CitizenFX.Core.Native.Hash)0xE41033B25D003A07, veh.Handle, -1);
+                    SetVehicleHeadlightsColour(veh.Handle, -1);
                 }
             }
         }
 
-        internal static int _GET_VEHICLE_HEADLIGHTS_COLOR(Vehicle vehicle)
+        internal static int _GetHeadlightsColorFromVehicle(Vehicle vehicle)
         {
             if (vehicle != null && vehicle.Exists())
             {
                 if (IsToggleModOn(vehicle.Handle, 22))
                 {
-                    int val = CitizenFX.Core.Native.Function.Call<int>((CitizenFX.Core.Native.Hash)0x3DFF319A831E0CDB, vehicle.Handle);
+                    int val = GetVehicleHeadlightsColour(vehicle.Handle);
                     if (val > -1 && val < 13)
                     {
                         return val;
